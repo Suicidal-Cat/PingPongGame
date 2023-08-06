@@ -1,7 +1,7 @@
-package Game;
+package game;
 
 public enum GameMode {
 	Classic,
-	Advance,
+	Advanced,
 	Powers
 }

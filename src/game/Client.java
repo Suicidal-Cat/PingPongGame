@@ -1,3 +1,4 @@
+package game;
 /*package Game;
 
 import java.awt.*;

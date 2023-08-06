@@ -1,10 +1,10 @@
-package GameModeClassic;
+package gameModeClassic;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
-import Game.GamePanel;
+import game.GamePanel;
 public class GameClassic extends GamePanel{
 
 }

@@ -1,4 +1,4 @@
-package Game;
+package game;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedReader;
@@ -15,7 +15,8 @@ public class PongGame{
 	
 
 	public static void main(String[] args) {
-		GameMode mode=GameMode.Classic;
+//		GameMode mode=GameMode.Classic;
+		GameMode mode=GameMode.Advanced;
 		GameFrame frame=new GameFrame(mode);
 		//new Thread(new Client()).start();		
 		

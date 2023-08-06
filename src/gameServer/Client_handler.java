@@ -1,4 +1,4 @@
-package GameServer;
+package gameServer;
 
 import java.io.BufferedReader;
 import java.io.IOException;

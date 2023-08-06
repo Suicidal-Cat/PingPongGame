@@ -1,4 +1,4 @@
-package Game;
+package game;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -6,8 +6,8 @@ import javax.swing.*;
 
 public class GamePanel extends JPanel implements Runnable {
 
-	static final int GAME_WIDTH = 1100;
-	static final int GAME_HEIGHT = (int) (GAME_WIDTH * (0.5555));
+	protected static final int GAME_WIDTH = 1100;
+	protected static final int GAME_HEIGHT = (int) (GAME_WIDTH * (0.5555));
 	static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH, GAME_HEIGHT);
 	static final int BALL_DIAMETER = 20;
 	static final int PADDLE_WIDTH = 25;
@@ -18,7 +18,7 @@ public class GamePanel extends JPanel implements Runnable {
 	Random random;
 	public Paddle paddle1;
 	public Paddle paddle2;
-	Ball ball;
+	protected Ball ball;
 	Score score;
 
 	public GamePanel() {
@@ -72,33 +72,33 @@ public class GamePanel extends JPanel implements Runnable {
 
 		// ball bouncing of edges
 		if (ball.y <= 0) {
-			ball.setYDirection(-ball.yVelocity);
+			ball.setYDirection(-ball.getYVelocity());
 		}
 		if (ball.y >= GAME_HEIGHT - BALL_DIAMETER) {
-			ball.setYDirection(-ball.yVelocity);
+			ball.setYDirection(-ball.getYVelocity());
 		}
 		// bounces ball off paddles ovaj deo moze bolje
 		if (ball.intersects(paddle1)) {
-			ball.xVelocity = Math.abs(ball.xVelocity);
-			ball.xVelocity++;// ubrzanje nakon udarca
-			if (ball.yVelocity > 0) {
-				ball.yVelocity++;// ubrzanje nakon udarca
+			ball.setXVelocity(Math.abs(ball.getXVelocity()));
+			ball.setXVelocity(ball.getXVelocity() + 1);// ubrzanje nakon udarca
+			if (ball.getYVelocity() > 0) {
+				ball.setYVelocity(ball.getYVelocity() + 1);// ubrzanje nakon udarca
 			} 
-			else ball.yVelocity--;
+			else ball.setYVelocity(ball.getYVelocity() - 1);
 
-			ball.setXDirection(ball.xVelocity);
-			ball.setYDirection(ball.yVelocity);
+			ball.setXDirection(ball.getXVelocity());
+			ball.setYDirection(ball.getYVelocity());
 		}
 		if (ball.intersects(paddle2)) {
-			ball.xVelocity = Math.abs(ball.xVelocity);
-			ball.xVelocity++;// ubrzanje nakon udarca
-			if (ball.yVelocity > 0) {
-				ball.yVelocity++;// ubrzanje nakon udarca
+			ball.setXVelocity(Math.abs(ball.getXVelocity()));
+			ball.setXVelocity(ball.getXVelocity() + 1);// ubrzanje nakon udarca
+			if (ball.getYVelocity() > 0) {
+				ball.setYVelocity(ball.getYVelocity() + 1);// ubrzanje nakon udarca
 			} 
-			else ball.yVelocity--;
+			else ball.setYVelocity(ball.getYVelocity() - 1);
 
-			ball.setXDirection(-ball.xVelocity);
-			ball.setYDirection(ball.yVelocity);
+			ball.setXDirection(-ball.getXVelocity());
+			ball.setYDirection(ball.getYVelocity());
 		}
 
 		// paddle in the edges
