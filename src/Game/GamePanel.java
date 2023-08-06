@@ -21,11 +21,11 @@ public class GamePanel extends JPanel implements Runnable {
 	Ball ball;
 	Score score;
 
-	GamePanel() {
+	public GamePanel() {
 		newPaddles();
 		newBall();
 		score = new Score(GAME_WIDTH, GAME_HEIGHT);
-		this.setFocusable(true);// nije neophodno
+		this.setFocusable(true);
 		this.addKeyListener(new AL());
 		this.setPreferredSize(SCREEN_SIZE);
 
@@ -49,14 +49,14 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void paint(Graphics g) {
 		image = createImage(getWidth(), getHeight());// vraca sirinu i visinu panela
-		graphics = image.getGraphics();// da crtamo preko slike
+		graphics = image.getGraphics();
 		draw(graphics);
 		g.drawImage(image, 0, 0, this);
 
 	}
 
 	public void draw(Graphics g) {
-		paddle1.draw(g);// draw iz paddle
+		paddle1.draw(g);
 		paddle2.draw(g);
 		ball.draw(g);
 		score.draw(g);
@@ -83,8 +83,9 @@ public class GamePanel extends JPanel implements Runnable {
 			ball.xVelocity++;// ubrzanje nakon udarca
 			if (ball.yVelocity > 0) {
 				ball.yVelocity++;// ubrzanje nakon udarca
-			} else
-				ball.yVelocity--;
+			} 
+			else ball.yVelocity--;
+
 			ball.setXDirection(ball.xVelocity);
 			ball.setYDirection(ball.yVelocity);
 		}
@@ -93,8 +94,9 @@ public class GamePanel extends JPanel implements Runnable {
 			ball.xVelocity++;// ubrzanje nakon udarca
 			if (ball.yVelocity > 0) {
 				ball.yVelocity++;// ubrzanje nakon udarca
-			} else
-				ball.yVelocity--;
+			} 
+			else ball.yVelocity--;
+
 			ball.setXDirection(-ball.xVelocity);
 			ball.setYDirection(ball.yVelocity);
 		}
@@ -122,7 +124,7 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 
-	public void run() {// override
+	public void run() {
 		// game loop
 		long lastTime = System.nanoTime();
 		double amountofTicks = 60.0;
@@ -141,7 +143,7 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 
-	public class AL extends KeyAdapter {// i ovaj deo jel moze bolje, zasto ne bismo odmha if
+	public class AL extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 			paddle1.keyPressed(e);
 			paddle2.keyPressed(e);

@@ -15,16 +15,10 @@ public class PongGame{
 	
 
 	public static void main(String[] args) {
-		GameFrame frame=new GameFrame();
+		GameMode mode=GameMode.Classic;
+		GameFrame frame=new GameFrame(mode);
 		//new Thread(new Client()).start();		
 		
 	}
-
-		
-	/*
-	 * 
-	 *
-	 * 	
-	 */
 }
 
