@@ -23,6 +23,9 @@ public class GameFrame extends JFrame {
 		this.pack();
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
+		
+		ImageIcon image=new ImageIcon("src/images/arcade1.png");
+		this.setIconImage(image.getImage());
 
 	}
 	private GamePanel getMode(GameMode mode) {

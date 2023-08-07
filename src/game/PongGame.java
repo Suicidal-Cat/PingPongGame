@@ -18,11 +18,11 @@ public class PongGame{
 
 	public static void main(String[] args) {
 //		GameMode mode=GameMode.Classic;
-		//GameMode mode=GameMode.Advanced;
-		//GameFrame frame=new GameFrame(mode);
+		GameMode mode=GameMode.Advanced;
+		GameFrame frame=new GameFrame(mode);
 		//new Thread(new Client()).start();		
 		
-		FirstFrame frame=new FirstFrame();
+		//FirstFrame frame=new FirstFrame();
 	}
 }
 
