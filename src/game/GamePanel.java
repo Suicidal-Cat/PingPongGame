@@ -9,9 +9,9 @@ public class GamePanel extends JPanel implements Runnable {
 	protected static final int GAME_WIDTH = 1100;
 	protected static final int GAME_HEIGHT = (int) (GAME_WIDTH * (0.5555));
 	static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH, GAME_HEIGHT);
-	static final int BALL_DIAMETER = 20;
-	static final int PADDLE_WIDTH = 25;
-	static final int PADDLE_HEIGHT = 100;
+	protected static final int BALL_DIAMETER = 20;
+	protected static final int PADDLE_WIDTH = 25;
+	protected static final int PADDLE_HEIGHT = 100;
 	Thread gameThread;
 	Image image;
 	Graphics graphics;

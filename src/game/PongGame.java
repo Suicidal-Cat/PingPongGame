@@ -23,8 +23,8 @@ public class PongGame{
 		GameFrame frame=new GameFrame(mode);
 		//new Thread(new Client()).start();		
 		
-		//FirstFrame frame=new FirstFrame();
-		//Intro intro=new Intro();
+//		FirstFrame frame=new FirstFrame();
+//		Intro intro=new Intro();
 	}
 }
 
