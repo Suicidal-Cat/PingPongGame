@@ -1,7 +1,11 @@
 package game;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -48,11 +52,14 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void paint(Graphics g) {
-		image = createImage(getWidth(), getHeight());// vraca sirinu i visinu panela
-		graphics = image.getGraphics();
-		draw(graphics);
-		g.drawImage(image, 0, 0, this);
-
+		try {
+			image = ImageIO.read(new File("src/resources/images/pozadinaIgrice.jpg"));
+			graphics = image.getGraphics();
+			draw(graphics);
+			g.drawImage(image, 0, 0, this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void draw(Graphics g) {

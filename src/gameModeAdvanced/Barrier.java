@@ -27,7 +27,7 @@ public class Barrier extends Rectangle {
 	}
 	
 	public void draw(Graphics g) {
-		g.setColor(Color.GRAY);
+		g.setColor(Color.WHITE);
 		g.fillRect(x,y,width,height);
 	}
 

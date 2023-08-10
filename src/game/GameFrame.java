@@ -24,7 +24,7 @@ public class GameFrame extends JFrame {
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 		
-		ImageIcon image=new ImageIcon("src/images/arcade1.png");
+		ImageIcon image=new ImageIcon("src/resources/images/arcade1.png");
 		this.setIconImage(image.getImage());
 
 	}
