@@ -16,10 +16,6 @@ public class GameAdvanced extends GamePanel{
 	Barrier barrier;
 	Barrier barrier1;
 	Barrier barrier2;
-	Coin coin;
-	PaddleResizeCoin prcoin;
-	QuestionMarkCoin qmcoin;
-	BallSpeedCoin bscoin;
 	BuffEffect effect;
 	boolean flag = false;
 	static final int BARRIER_WIDTH = 30;
@@ -44,11 +40,10 @@ public class GameAdvanced extends GamePanel{
 	
 	public void newBarrier() {
 		random = new Random();
-		barrier = new Barrier(GAME_WIDTH/2 - BARRIER_WIDTH/2, random.nextInt(GAME_HEIGHT - BARRIER_HEIGHT), BARRIER_WIDTH, BARRIER_HEIGHT, 0);
+		barrier = new Barrier(GAME_WIDTH/2 - BARRIER_WIDTH/2, random.nextInt(GAME_HEIGHT - BARRIER_HEIGHT), BARRIER_WIDTH, BARRIER_HEIGHT);
 
 	}
 
-	
 	//generate random effect
 	public BuffEffect newEffect() {
 		random=new Random();
@@ -78,8 +73,8 @@ public class GameAdvanced extends GamePanel{
 		barrier=null;
 		flag=true;
 		
-		barrier1 = new Barrier(GAME_WIDTH/2 - BARRIER_WIDTH/2 - BARRIER_WIDTH, 0, BARRIER_WIDTH, BARRIER_HEIGHT, 1);
-		barrier2 = new Barrier(GAME_WIDTH/2 - BARRIER_WIDTH/2 + BARRIER_WIDTH, GAME_HEIGHT-BARRIER_HEIGHT, BARRIER_WIDTH, BARRIER_HEIGHT, -1);
+		barrier1 = new Barrier(GAME_WIDTH/2 - BARRIER_WIDTH/2 - BARRIER_WIDTH, 0, BARRIER_WIDTH, BARRIER_HEIGHT);
+		barrier2 = new Barrier(GAME_WIDTH/2 - BARRIER_WIDTH/2 + BARRIER_WIDTH, GAME_HEIGHT-BARRIER_HEIGHT, BARRIER_WIDTH, BARRIER_HEIGHT);
 		
 	}
 	
@@ -131,9 +126,6 @@ public class GameAdvanced extends GamePanel{
 				barrier2.yVelocity=-barrier2.yVelocity;
 		}
 		
-		
-		
-
 		//collect coin
 		if(effect!=null && paddle1.intersects(effect))
 			effectCollision(paddle1, paddle2);
@@ -174,7 +166,6 @@ public class GameAdvanced extends GamePanel{
 	//Apply effects
 	public void effectCollision(Paddle p1, Paddle p2) {
 		
-		Random r=new Random();
 		int randomEffect=-1;
 		
 		while(effect!=null) {
@@ -183,8 +174,8 @@ public class GameAdvanced extends GamePanel{
 			if(effect instanceof PaddleResizeCoin || randomEffect==0) {
 				//mogu da se dodaju neke animacije za tranzicije
 				
-				Random r1=new Random();
-				int paddleUpOrDown=r1.nextInt(2);
+				random=new Random();
+				int paddleUpOrDown=random.nextInt(2);
 				
 				if(paddleUpOrDown==0) {
 					//onome ko je pokupio coin se prosiri paddle
@@ -223,8 +214,8 @@ public class GameAdvanced extends GamePanel{
 				int xVelocity=ball.getXVelocity();
 				int yVelocity=ball.getYVelocity();
 				
-				Random r1 = new Random();
-				int speedUpOrDown = r1.nextInt(2);
+				random=new Random();
+				int speedUpOrDown = random.nextInt(2);
 				
 				if(speedUpOrDown==0) {
 					//loptica se ubrzava
@@ -275,16 +266,16 @@ public class GameAdvanced extends GamePanel{
 		        timer.start();
 				
 				effect=null;
-				//ubaci return ako treba
 			}
 			
 			//QuestionMarkCoin can represent any of these coins
 			if(effect instanceof QuestionMarkCoin) {
+				random=new Random();
 				
 				if(barrier==null) 
-					randomEffect = r.nextInt(2);
+					randomEffect = random.nextInt(2);
 				else
-					randomEffect = r.nextInt(3);
+					randomEffect = random.nextInt(3);
 				
 				continue;
 			}
