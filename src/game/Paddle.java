@@ -5,9 +5,14 @@ import java.util.*;
 import javax.swing.*;
 
 public class Paddle extends Rectangle {
-	int id;
-	int yVelocity;// brzina pomeranja pravougaonika
-	int speed = 8;
+	 protected int id;
+	 protected int yVelocity;// brzina pomeranja pravougaonika
+	 protected int speed = 8;
+	 public boolean powerPush=false;
+	 public boolean powerSpeed=false;
+	 public boolean powerBlock=false;
+	 
+	 
 
 	public Paddle(int x, int y, int PADDLE_WIDTH, int PADDLE_HEIGHT, int id) {
 		super(x, y, PADDLE_WIDTH, PADDLE_HEIGHT);
