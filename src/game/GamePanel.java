@@ -1,7 +1,12 @@
 package game;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -20,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public Paddle paddle2;
 	protected Ball ball;
 	protected Score score;
+	int brojac1,brojac2;
 
 	public GamePanel() {
 		newPaddles();
@@ -48,11 +54,14 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void paint(Graphics g) {
-		image = createImage(getWidth(), getHeight());// vraca sirinu i visinu panela
-		graphics = image.getGraphics();
-		draw(graphics);
-		g.drawImage(image, 0, 0, this);
-
+		try {
+			image = ImageIO.read(new File("src/resources/images/pozadinaIgrice.jpg"));
+			graphics = image.getGraphics();
+			draw(graphics);
+			g.drawImage(image, 0, 0, this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void draw(Graphics g) {
@@ -67,7 +76,27 @@ public class GamePanel extends JPanel implements Runnable {
 		paddle2.move();
 		ball.move();
 	}
-
+	public void addGif() {
+	    Icon icon = new ImageIcon("src/resources/images/minions.gif");
+	    JLabel label = new JLabel(icon);
+	 
+	    JFrame f = new JFrame("Animation");
+	    f.getContentPane().add(label);
+	  	f.setUndecorated(true);
+	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    f.pack();
+	    f.setLocationRelativeTo(null);
+	    f.setVisible(true);
+	    //f.setTitle("Ostvarili ste bonus +1");
+	    ImageIcon image=new ImageIcon("src/resources/images/arcade1.png");
+	  	//f.setIconImage(image.getImage());
+	    try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	    f.dispose();
+	}
 	public void checkCollision() {
 
 		// ball bouncing of edges
@@ -112,16 +141,48 @@ public class GamePanel extends JPanel implements Runnable {
 			paddle2.y = GAME_HEIGHT - paddle2.height;
 
 		// scoring system
-		if (ball.x <= 0) {
+		
+		if(ball.x <= 0) {
+		if (brojac2<2) {
 			score.player2++;
+			brojac2++;
 			newPaddles();
 			newBall();
+		
+		}else {
+			score.player2=score.player2+2;
+			newPaddles();
+			newBall();
+			brojac2=0;
+			addGif();
+			//kad da treci za redom(bez da ga drugi prekine dobice +2 umesto +1 
+			
 		}
+		}else if (brojac1>0)brojac2=0;
+		
+		
+		
 		if (ball.x >= GAME_WIDTH - BALL_DIAMETER) {
+
+			if(brojac1<2) {
 			score.player1++;
 			newPaddles();
 			newBall();
-		}
+			brojac1++;
+
+			}else {
+				score.player1=score.player1+2;
+				newPaddles();
+				newBall();
+				brojac1=0;
+				addGif();
+
+			}
+		}else if (brojac2>0)brojac1=0;
+
+		
+		
+		
 	}
 
 	public void run() {

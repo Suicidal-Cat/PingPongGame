@@ -30,12 +30,12 @@ public class FirstFrame extends JFrame implements ActionListener{
 	
 	 public FirstFrame() {
 	
-		 pozadinaArcade=new ImageIcon("src/images/arcadePozadina1.jpg");
+		 pozadinaArcade=new ImageIcon("src/resources/images/arcadePozadina1.jpg");
 			myLabel=new JLabel(pozadinaArcade);
 			myLabel.setSize(getMaximumSize());
-		    Icon icon1 = new ImageIcon("src/images/gamepad.png");
-		    Icon icon2 = new ImageIcon("src/images/arcade.png");
-		    Icon icon3 = new ImageIcon("src/images/magic-wand.png");
+		    Icon icon1 = new ImageIcon("src/resources/images/gamepad.png");
+		    Icon icon2 = new ImageIcon("src/resources/images/arcade.png");
+		    Icon icon3 = new ImageIcon("src/resources/images/magic-wand.png");
 		    
 
 			
@@ -74,7 +74,7 @@ public class FirstFrame extends JFrame implements ActionListener{
 			button3=new JButton(icon3);
 			button3.setBounds(425,425,250,50);
 			button3.addActionListener(this);
-			button3.setText("MAGIC");
+			button3.setText("POWERS");
 			button3.setFocusable(false);//sklanja one isprekidane linije oko teksta
 			button3.setBackground(Color.decode("#6C74C6"));
 			button3.setHorizontalTextPosition(SwingConstants.LEFT);
@@ -91,7 +91,7 @@ public class FirstFrame extends JFrame implements ActionListener{
 			myLabel.add(button3);
 			
 			
-			ImageIcon image=new ImageIcon("src/images/arcade1.png");
+			ImageIcon image=new ImageIcon("src/resources/images/arcade1.png");
 			this.setIconImage(image.getImage());
 		
 	
@@ -111,10 +111,14 @@ public class FirstFrame extends JFrame implements ActionListener{
 			dispose();//brise trenutni frame
 		}
 		if (e.getSource()==button2) {
-			
+			GameFrame gf=new GameFrame(GameMode.Advanced);
+			gf.show();
+			dispose();
 		}
 		if (e.getSource()==button3) {
-			
+			GameFrame gf=new GameFrame(GameMode.Powers);
+			gf.show();
+			dispose();
 		}
 	}
 
