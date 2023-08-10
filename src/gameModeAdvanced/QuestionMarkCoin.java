@@ -3,7 +3,7 @@ package gameModeAdvanced;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class QuestionMarkCoin extends Coin{
+public class QuestionMarkCoin extends BuffEffect {
 
 	public QuestionMarkCoin(int x, int y, int COIN_WIDTH, int COIN_HEIGHT) {
 		super(x, y, COIN_WIDTH, COIN_HEIGHT);
