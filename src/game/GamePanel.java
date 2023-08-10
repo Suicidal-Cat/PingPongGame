@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public Paddle paddle2;
 	protected Ball ball;
 	protected Score score;
-	int brojac1,brojac2;
+	protected int brojac1,brojac2;
 
 	public GamePanel() {
 		newPaddles();
