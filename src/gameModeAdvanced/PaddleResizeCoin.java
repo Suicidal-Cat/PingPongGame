@@ -3,7 +3,7 @@ package gameModeAdvanced;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class PaddleResizeCoin extends Coin{
+public class PaddleResizeCoin extends BuffEffect {
 
 	public PaddleResizeCoin(int x, int y, int COIN_WIDTH, int COIN_HEIGHT) {
 		super(x, y, COIN_WIDTH, COIN_HEIGHT);

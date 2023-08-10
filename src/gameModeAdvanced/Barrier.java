@@ -10,16 +10,18 @@ public class Barrier extends Rectangle {
 	int speed = 4;
 	
 	public Barrier(int x, int y, int BARRIER_WIDTH, int BARRIER_HEIGHT){
+		
 		super(x,y,BARRIER_WIDTH,BARRIER_HEIGHT);
+		
 		random = new Random();
 		
 		int randomYDirection = random.nextInt();
 		if(randomYDirection%2==0)
-			yVelocity=-speed;
+			yVelocity=-speed; //up
 		else
-			yVelocity=speed;
+			yVelocity=speed; //down
+		
 	}
-	
 	
 	
 	public void move() {

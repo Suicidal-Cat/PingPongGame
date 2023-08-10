@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public Paddle paddle2;
 	protected Ball ball;
 	protected Score score;
-	protected int brojac1,brojac2;
+	int brojac1,brojac2;
 
 	public GamePanel() {
 		newPaddles();
@@ -133,12 +133,12 @@ public class GamePanel extends JPanel implements Runnable {
 		// paddle in the edges
 		if (paddle1.y <= 0)
 			paddle1.y = 0;
-		if (paddle1.y >= (GAME_HEIGHT - PADDLE_HEIGHT))
-			paddle1.y = GAME_HEIGHT - PADDLE_HEIGHT;
+		if (paddle1.y >= (GAME_HEIGHT - paddle1.height))
+			paddle1.y = GAME_HEIGHT - paddle1.height;
 		if (paddle2.y <= 0)
 			paddle2.y = 0;
-		if (paddle2.y >= (GAME_HEIGHT - PADDLE_HEIGHT))
-			paddle2.y = GAME_HEIGHT - PADDLE_HEIGHT;
+		if (paddle2.y >= (GAME_HEIGHT - paddle2.height))
+			paddle2.y = GAME_HEIGHT - paddle2.height;
 
 		// scoring system
 		

@@ -8,302 +8,279 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 
 import game.GamePanel;
+import game.Paddle;
+
 public class GameAdvanced extends GamePanel{
 	
 	Random random;
 	Barrier barrier;
-	Coin coin;
-	PaddleResizeCoin prcoin;
-	QuestionMarkCoin qmcoin;
+	Barrier barrier1;
+	Barrier barrier2;
+	BuffEffect effect;
 	boolean flag = false;
-	boolean prflag = false;
-	boolean qmflag = false;
 	static final int BARRIER_WIDTH = 30;
 	static final int BARRIER_HEIGHT = 160;
-	static final int COIN_WIDTH = 15;
-	static final int COIN_HEIGHT = 15;
+	static final int EFFECT_SIZE=15;
 	
 	public GameAdvanced(){
 		super();
 		newBarrier();
-		releaseCoin();
-		releasePaddleResizeCoin();
-		releaseQuestionMarkCoin();
 		
-		//treba nekako uskladiti pojavljivanje coina, ili prorediti, jer ovako nailaze maltene stalno
-		
+		ActionListener taskPerformer = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+            	effect = newEffect();
+            }
+        };
+        javax.swing.Timer timer = new javax.swing.Timer(5000, taskPerformer);
+        timer.setRepeats(true);
+        timer.start();
+        timer.setDelay(10000);
+
 	}
 	
 	public void newBarrier() {
 		random = new Random();
 		barrier = new Barrier(GAME_WIDTH/2 - BARRIER_WIDTH/2, random.nextInt(GAME_HEIGHT - BARRIER_HEIGHT), BARRIER_WIDTH, BARRIER_HEIGHT);
+
+	}
+
+	//generate random effect
+	public BuffEffect newEffect() {
+		random=new Random();
+		int effectType;
+		
+		if(barrier==null)
+			effectType=random.nextInt(3);
+		else
+			effectType=random.nextInt(4);
+			
+		switch(effectType) {
+		case 0:
+			return new QuestionMarkCoin(GAME_WIDTH/2 - EFFECT_SIZE/2, random.nextInt(GAME_HEIGHT-EFFECT_SIZE), EFFECT_SIZE, EFFECT_SIZE);
+		case 1:
+			return new PaddleResizeCoin(GAME_WIDTH/2 - EFFECT_SIZE/2, random.nextInt(GAME_HEIGHT-EFFECT_SIZE), EFFECT_SIZE , EFFECT_SIZE);
+		case 2:
+			return new BallSpeedCoin(GAME_WIDTH/2 - EFFECT_SIZE/2, random.nextInt(GAME_HEIGHT-EFFECT_SIZE), EFFECT_SIZE, EFFECT_SIZE);
+		case 3:
+			return new Coin(GAME_WIDTH/2 - EFFECT_SIZE/2, random.nextInt(GAME_HEIGHT-EFFECT_SIZE), EFFECT_SIZE, EFFECT_SIZE);
+		default: 
+			return null;
+		}
 	}
 	
-	public void newCoin() {
-		random = new Random();
-		coin = new Coin(GAME_WIDTH/2 - COIN_WIDTH/2, random.nextInt(GAME_HEIGHT-COIN_HEIGHT), COIN_WIDTH, COIN_HEIGHT);
-	}
-	
-	public void releaseCoin() {
-		ActionListener taskPerformer = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                //...Perform a task...
-            	newCoin();
-            }
-        };
-        javax.swing.Timer timer = new javax.swing.Timer(7000, taskPerformer);
-        timer.setRepeats(true);
-        timer.start();
-        timer.setDelay(15000);
-        
-	}
-	
-	public void newPaddleResizeCoin() {
-		random = new Random();
-		prcoin = new PaddleResizeCoin(GAME_WIDTH/2 - COIN_WIDTH/2, random.nextInt(GAME_HEIGHT-COIN_HEIGHT), COIN_WIDTH, COIN_HEIGHT);
-	}
-	
-	public void releasePaddleResizeCoin() {
-		ActionListener taskPerformer = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                //...Perform a task...
-            	newPaddleResizeCoin();
-                prflag=false;
-            }
-        };
-        javax.swing.Timer timer = new javax.swing.Timer(8000, taskPerformer);
-        timer.setRepeats(true);
-        timer.start();
-        timer.setDelay(17000);
-        
-	}
-	
-	public void newQuestionMarkCoin() {
-		random = new Random();
-		qmcoin = new QuestionMarkCoin(GAME_WIDTH/2 - COIN_WIDTH/2, random.nextInt(GAME_HEIGHT-COIN_HEIGHT), COIN_WIDTH, COIN_HEIGHT);
-	}
-	
-	public void releaseQuestionMarkCoin() {
-		ActionListener taskPerformer = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                //...Perform a task...
-            	newQuestionMarkCoin();
-            	qmflag = false;
-            }
-        };
-        javax.swing.Timer timer = new javax.swing.Timer(9000, taskPerformer);
-        timer.setRepeats(true);
-        timer.start();
-        timer.setDelay(13000);
-        
-	}
-	
-	public void resetPaddles() {
-		ActionListener taskPerformer = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                //...Perform a task...
-            	paddle1.setBounds(paddle1.x, paddle1.y, PADDLE_WIDTH, PADDLE_HEIGHT);
-            	paddle2.setBounds(paddle2.x, paddle2.y, PADDLE_WIDTH, PADDLE_HEIGHT);
-            }
-        };
-        javax.swing.Timer timer = new javax.swing.Timer(8000, taskPerformer);
-        timer.setRepeats(false);
-        timer.start();
+	public void switchTerrain() {
+		
+		barrier=null;
+		flag=true;
+		
+		barrier1 = new Barrier(GAME_WIDTH/2 - BARRIER_WIDTH/2 - BARRIER_WIDTH, 0, BARRIER_WIDTH, BARRIER_HEIGHT);
+		barrier2 = new Barrier(GAME_WIDTH/2 - BARRIER_WIDTH/2 + BARRIER_WIDTH, GAME_HEIGHT-BARRIER_HEIGHT, BARRIER_WIDTH, BARRIER_HEIGHT);
+		
 	}
 	
 	@Override
 	public void draw(Graphics g) {
 		super.draw(g);
-		barrier.draw(g);
-		if(coin!=null)
-			coin.draw(g);
-		if(prcoin!=null)
-			prcoin.draw(g);
-		if(qmcoin!=null)
-			qmcoin.draw(g);
+		if(barrier!=null)
+			barrier.draw(g);
+		if(effect!=null)
+			effect.draw(g);
+		if(barrier1!=null && barrier2!=null) {
+			barrier1.draw(g);
+			barrier2.draw(g);
+		}
 	}
 	@Override
 	public void move() {
 		super.move();
 		if(!flag)
 			barrier.move();
-		if(coin!=null)
-			coin.move();
-		if(prcoin!=null)
-			prcoin.move();
-		if(qmcoin!=null)
-			qmcoin.move();
+		if(effect!=null)
+			effect.move();
+		if(barrier1!=null && barrier2!=null) {
+			barrier1.move();
+			barrier2.move();
+		}
 	}
 	@Override
 	public void checkCollision() {
+		
+		if(barrier!=null) {
+			// ball bouncing off barrier
+			barrierCollision(barrier, GAME_WIDTH/2 - BARRIER_WIDTH/2);
+			//barrier changing direction
+			if(barrier.y <= 0 || barrier.y >= GAME_HEIGHT - BARRIER_HEIGHT)
+				barrier.yVelocity=-barrier.yVelocity;
+		}
+		else {
+			// ball bouncing off barrier
+			barrierCollision(barrier1,barrier1.x);
+			//barrier1 changing direction
+			if(barrier1.y < 0 || barrier1.y >= GAME_HEIGHT - BARRIER_HEIGHT)
+				barrier1.yVelocity=-barrier1.yVelocity;
+			
+			// ball bouncing off barrier
+			barrierCollision(barrier2,barrier2.x);
+			//barrier2 changing direction
+			if(barrier2.y <= 0 || barrier2.y > GAME_HEIGHT - BARRIER_HEIGHT)
+				barrier2.yVelocity=-barrier2.yVelocity;
+		}
+		
+		//collect coin
+		if(effect!=null && paddle1.intersects(effect))
+			effectCollision(paddle1, paddle2);
+		if(effect!=null && paddle2.intersects(effect))
+			effectCollision(paddle2, paddle1);
+		
+		if (ball.x <= 0 || ball.x >= GAME_WIDTH - BALL_DIAMETER) {
+            effect=null;
+        }
+		
+		if(score.getPlayer1()>=3 || score.getPlayer2()>=3) {
+			if(barrier!=null)
+				switchTerrain();
+		}
+        
 		super.checkCollision();
 		
-		if (ball.intersects(barrier) && ball.x >GAME_WIDTH/2 - BARRIER_WIDTH/2) {
-			ball.setXVelocity(Math.abs(ball.getXVelocity()));
-			ball.setXDirection(ball.getXVelocity());
-			ball.setYDirection(ball.getYVelocity());
-		}
-		if (ball.intersects(barrier) && ball.x <GAME_WIDTH/2 - BARRIER_WIDTH/2) {
-			ball.setXVelocity(Math.abs(ball.getXVelocity()));
-			ball.setXDirection(-ball.getXVelocity());
-			ball.setYDirection(ball.getYVelocity());
-		}
-		
-		// barrier changing direction
-		if (barrier.y <= 0 || barrier.y >= GAME_HEIGHT - BARRIER_HEIGHT) {
-			barrier.yVelocity=-barrier.yVelocity;
-		}
-		
-		// collect coin
-		if(coin!=null && paddle1.intersects(coin)) {
-			//barijera treba da se poveca na celu visinu
-			
-			barrier = new Barrier(GAME_WIDTH/2 - BARRIER_WIDTH/2, 0, BARRIER_WIDTH, GAME_HEIGHT);
-			flag = true;
-			//sa ovim flagom radi, ali tranzicija kad se vraca na staro nije bas najsrecnija
-			//seljacki al ok
-			
-			new Timer().schedule( 
-			        new TimerTask() {
-			            @Override
-			            public void run() {
-			            	barrier = new Barrier(GAME_WIDTH/2 - BARRIER_WIDTH/2, random.nextInt(GAME_HEIGHT - BARRIER_HEIGHT), BARRIER_WIDTH, BARRIER_HEIGHT);
-			            	//vracamo na staro
-			            	flag = false;
-			            }
-			        }, 
-			        5000 
-			);
-			
-			
-		}
-		if(coin!=null && paddle2.intersects(coin)) {
-			//barijera treba da se poveca na celu visinu
-			barrier = new Barrier(GAME_WIDTH/2 - BARRIER_WIDTH/2, 0, BARRIER_WIDTH, GAME_HEIGHT);
-			flag = true;
+	}
+	
+	public void barrierCollision(Barrier b, int limit) {
 
-			new Timer().schedule( 
-			        new TimerTask() {
-			            @Override
-			            public void run() {
-			            	barrier = new Barrier(GAME_WIDTH/2 - BARRIER_WIDTH/2, random.nextInt(GAME_HEIGHT - BARRIER_HEIGHT), BARRIER_WIDTH, BARRIER_HEIGHT);
-			            	flag=false;
-			            }
-			        }, 
-			        5000 
-			);
-			
-		}
-		
-		//collect PaddleResizeCoin
-		
-		if(prcoin!=null && paddle1.intersects(prcoin)) {
-			
-			Random r = new Random();
-			int pom = r.nextInt(32);
-			
-			if(!prflag) {
-				if(pom%2==0) {
-					//slucaj 1 - njemu se prosiri paddle - POBOLJSAJ TRANZICIJU
-					paddle1.setBounds(paddle1.x, paddle1.y-PADDLE_HEIGHT/2, PADDLE_WIDTH, PADDLE_HEIGHT*2);
-					prflag=true;
-					resetPaddles();
-				}
-				else {
-					//slucaj 2 - protivniku se suzi paddle
-					paddle2.setBounds(paddle2.x, paddle2.y+PADDLE_HEIGHT/4, PADDLE_WIDTH, PADDLE_HEIGHT/2);
-					prflag=true;
-					resetPaddles();
-				}
+		// ball bouncing of barrier
+		if(ball.intersects(b)){
+			if(ball.x>=limit) {
+				ball.setXVelocity(Math.abs(ball.getXVelocity()));
+				ball.setXDirection(ball.getXVelocity());
+				ball.setYDirection(ball.getYVelocity());
 			}
-			
-		}
-		
-		if(prcoin!=null && paddle2.intersects(prcoin)) {
-			
-			Random r = new Random();
-			int pom = r.nextInt(32);
-			
-			if(!prflag) {
-				if(pom%2==0) {
-					//slucaj 1 - njemu se prosiri paddle - POBOLJSAJ TRANZICIJU
-					paddle2.setBounds(paddle2.x, paddle2.y-PADDLE_HEIGHT/2, PADDLE_WIDTH, PADDLE_HEIGHT*2);
-					prflag=true;
-					resetPaddles();
-				}
-				else {
-					//slucaj 2 - protivniku se suzi paddle
-					paddle1.setBounds(paddle1.x, paddle1.y+PADDLE_HEIGHT/4, PADDLE_WIDTH, PADDLE_HEIGHT/2);
-					prflag=true;
-					resetPaddles();
-				}
+			else {
+				ball.setXVelocity(Math.abs(ball.getXVelocity()));
+				ball.setXDirection(-ball.getXVelocity());
+				ball.setYDirection(ball.getYVelocity());
 			}
-			
 		}
 		
-		// collect QuestionMarkCoin
+	}
+	
+	//Apply effects
+	public void effectCollision(Paddle p1, Paddle p2) {
 		
-		if(qmcoin!=null && (paddle1.intersects(qmcoin) || paddle2.intersects(qmcoin))) {
-			//loptica se ubrzava ili usporava
+		int randomEffect=-1;
+		
+		while(effect!=null) {
 			
-			Random r = new Random();
-			int pom = r.nextInt(32);
 			
-			int ballXVelocity = ball.getXVelocity();
-			int ballYVelocity = ball.getYVelocity();
-			
-			//treba ovo malo popraviti da bude vise osetno i efikasnije
-			if(!qmflag) {
-				if(pom%2==0) {
-					//slucaj 1 - loptica se uspori
-					if(ballXVelocity>1) {
-						ball.setXVelocity(ballXVelocity--);
-					}
-					if(ballXVelocity<1) {
-						ball.setXVelocity(ballXVelocity++);
-					}
-					if(ballYVelocity>1) {
-						ball.setYVelocity(ballYVelocity--);
-					}
-					if(ballYVelocity<1) {
-						ball.setYVelocity(ballYVelocity++);
-					}
+			if(effect instanceof PaddleResizeCoin || randomEffect==0) {
+				//mogu da se dodaju neke animacije za tranzicije
+				
+				random=new Random();
+				int paddleUpOrDown=random.nextInt(2);
+				
+				if(paddleUpOrDown==0) {
+					//onome ko je pokupio coin se prosiri paddle
+					p1.height=PADDLE_HEIGHT*2;
+					p1.y-=PADDLE_HEIGHT/2;
 					
-					ball.setXDirection(ball.getXVelocity());
-					ball.setYDirection(ball.getYVelocity());
-					
-					qmflag=true;
 				}
 				else {
-					//slucaj 2 - loptica se ubrza
-					ball.setXVelocity(Math.abs(ball.getXVelocity()));
-					ball.setXVelocity(ball.getXVelocity() + 1);
-					if (ball.getYVelocity() > 0) {
-						ball.setYVelocity(ball.getYVelocity() + 1);
-					} 
-					else ball.setYVelocity(ball.getYVelocity() - 1);
+					//protivniku se smanji paddle
+					p2.height=PADDLE_HEIGHT/2;
+					p2.y+=PADDLE_HEIGHT/4;
+				}
+				
+				//posle 5 sekundi se vracamo na staro
+				ActionListener taskPerformer = new ActionListener() {
+		            public void actionPerformed(ActionEvent evt) {
+		            	p1.height=PADDLE_HEIGHT;
+		            	p2.height=PADDLE_HEIGHT;
+		            	
+		            	if(paddleUpOrDown==0)
+		            		p1.y+=PADDLE_HEIGHT/2;
+		            	else
+		            		p2.y-=PADDLE_HEIGHT/4;
+		            }
+		        };
+		        javax.swing.Timer timer = new javax.swing.Timer(5000, taskPerformer);
+		        timer.setRepeats(false);
+		        timer.start();
+				
 
-					ball.setXDirection(ball.getXVelocity());
-					ball.setYDirection(ball.getYVelocity());
-					
-					qmflag=true;
-				}
+				effect=null;
 			}
 			
+			if(effect instanceof BallSpeedCoin || randomEffect==1) {
+				
+				int xVelocity=ball.getXVelocity();
+				int yVelocity=ball.getYVelocity();
+				
+				random=new Random();
+				int speedUpOrDown = random.nextInt(2);
+				
+				if(speedUpOrDown==0) {
+					//loptica se ubrzava
+					if(xVelocity>0)
+						ball.setXVelocity(xVelocity+1);
+					else 
+						ball.setXVelocity(xVelocity-1);
+					
+					if(yVelocity>0)
+						ball.setYVelocity(yVelocity+1);
+					else 
+						ball.setYVelocity(yVelocity-1);
+
+				}
+				else {
+					//loptica se usporava
+					if(xVelocity>0)
+						ball.setXVelocity(xVelocity-1);
+					else 
+						ball.setXVelocity(xVelocity+1);
+					
+					if(yVelocity>0)
+						ball.setYVelocity(yVelocity-1);
+					else 
+						ball.setYVelocity(yVelocity+1);
+				}
+				
+				
+				effect=null;
+			}
+			
+			if(effect instanceof Coin || randomEffect==2) {
+				
+				barrier.y=0;
+				barrier.height=GAME_HEIGHT;
+				flag = true;
+				
+				//posle 5 sekundi se vracamo na staro
+				ActionListener taskPerformer = new ActionListener() {
+		            public void actionPerformed(ActionEvent evt) {
+		            	barrier.y=GAME_HEIGHT/2-BARRIER_HEIGHT/2;
+						barrier.height=BARRIER_HEIGHT;
+						flag = false;
+		            }
+		        };
+		        javax.swing.Timer timer = new javax.swing.Timer(5000, taskPerformer);
+		        timer.setRepeats(false);
+		        timer.start();
+				
+				effect=null;
+			}
+			
+			//QuestionMarkCoin can represent any of these coins
+			if(effect instanceof QuestionMarkCoin) {
+				random=new Random();
+				
+				if(barrier==null) 
+					randomEffect = random.nextInt(2);
+				else
+					randomEffect = random.nextInt(3);
+				
+				continue;
+			}
 			
 		}
-		
-		//ball is out of bounds, reset coins
-		if (ball.x <= 0 || ball.x >= GAME_WIDTH - BALL_DIAMETER) {
-			
-			releaseCoin();
-			releasePaddleResizeCoin();
-			releaseQuestionMarkCoin();
-			
-			//poenta je da ako je coin krenuo dok lopta jos nije pala, kad se igrica resetuje na pocetak i score se promeni, onaj coin koji je krenuo i dalje ide,
-			//treba nekako da se obrise ali ovo ne radi, ono samo resetuje ponovo onaj tajmer i to, treba taj pocetni coin nekako da se obrise (ne radi sa repaint();)
-		}
-		
 		
 	}
 	
