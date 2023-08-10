@@ -82,13 +82,14 @@ public class GamePanel extends JPanel implements Runnable {
 	 
 	    JFrame f = new JFrame("Animation");
 	    f.getContentPane().add(label);
+	  	f.setUndecorated(true);
 	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    f.pack();
 	    f.setLocationRelativeTo(null);
 	    f.setVisible(true);
-	    f.setTitle("Ostvarili ste bonus +1");
+	    //f.setTitle("Ostvarili ste bonus +1");
 	    ImageIcon image=new ImageIcon("src/resources/images/arcade1.png");
-	  	f.setIconImage(image.getImage());
+	  	//f.setIconImage(image.getImage());
 	    try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
