@@ -98,7 +98,6 @@ public class GamePanel extends JPanel implements Runnable {
 	    f.dispose();
 	}
 	public void checkCollision() {
-
 		// ball bouncing of edges
 		if (ball.y <= 0) {
 			ball.setYDirection(-ball.getYVelocity());

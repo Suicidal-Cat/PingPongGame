@@ -8,9 +8,8 @@ public class Paddle extends Rectangle {
 	 protected int id;
 	 protected int yVelocity;// brzina pomeranja pravougaonika
 	 protected int speed = 8;
-	 public boolean powerPush=false;
-	 public boolean powerSpeed=false;
-	 public boolean powerBlock=false;
+	 public boolean powerPush;
+	 public boolean powerBlock;
 	 
 	 
 
@@ -76,4 +75,5 @@ public class Paddle extends Rectangle {
 			g.setColor(new Color(180, 125, 232));
 		g.fillRect(x, y, width, height);
 	}
+	public void resetPowers() {};
 }
