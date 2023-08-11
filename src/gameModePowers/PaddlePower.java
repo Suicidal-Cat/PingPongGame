@@ -47,10 +47,10 @@ public class PaddlePower extends Paddle{
 			if(!cdPush && e.getKeyCode() == KeyEvent.VK_J) {
 				powerPush();
 			}
-			if(!cdSpeed && e.getKeyCode() == KeyEvent.VK_K) {
+			if(!cdSpeed && !powerBlock && e.getKeyCode() == KeyEvent.VK_K) {
 				powerSpeed(speed);
 			}
-			if(e.getKeyCode() == KeyEvent.VK_L) {
+			if(!cdBlock && e.getKeyCode() == KeyEvent.VK_L) {
 				powerBlock();
 			}
 			break;
@@ -64,10 +64,10 @@ public class PaddlePower extends Paddle{
 			if(!cdPush && e.getKeyCode() == KeyEvent.VK_Z) {
 				powerPush();
 			}
-			if(!cdSpeed && e.getKeyCode() == KeyEvent.VK_X) {
+			if(!cdSpeed && !powerBlock && e.getKeyCode() == KeyEvent.VK_X) {
 				powerSpeed(speed);
 			}
-			if(e.getKeyCode() == KeyEvent.VK_C) {
+			if(!cdBlock && e.getKeyCode() == KeyEvent.VK_C) {
 				powerBlock();
 			}
 			break;
