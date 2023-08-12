@@ -128,12 +128,16 @@ public class GamePowers extends GamePanel{
 			score.player1++;
 			newPaddles();
 			newBall();
+			paddle1.resetPowers();
+			paddle2.resetPowers();
 			brojac1++;
 
 			}else {
 				score.player1=score.player1+2;
 				newPaddles();
 				newBall();
+				paddle1.resetPowers();
+				paddle2.resetPowers();
 				brojac1=0;
 				addGif();
 

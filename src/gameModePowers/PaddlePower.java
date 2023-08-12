@@ -34,6 +34,7 @@ public class PaddlePower extends Paddle{
 	public PaddlePower(int x, int y, int PADDLE_WIDTH, int PADDLE_HEIGHT, int id) {
 		super(x, y, PADDLE_WIDTH, PADDLE_HEIGHT, id);
 		initImages();
+		speed=10;
 	}
 	public void keyPressed(KeyEvent e) {
 		switch (id) {
@@ -99,8 +100,6 @@ public class PaddlePower extends Paddle{
 			int counter=0;
             public void actionPerformed(ActionEvent evt) {
             	counter++;
-            /*	if(counter==3)powerPush=false;
-            	else */
             	if(counter==10) {
                 	cdPush=false;
             		timer.stop();
@@ -111,8 +110,8 @@ public class PaddlePower extends Paddle{
         timer.start();
 	}
 	private void powerSpeed(int ogSpeed) {
-		speed=14;
-		height+=50;
+		speed=15;
+		height=150;
 		cdSpeed=true;
         Timer timer = new Timer(1000, null);
 		ActionListener taskPerformer = new ActionListener() {
@@ -142,10 +141,6 @@ public class PaddlePower extends Paddle{
 			int counter=0;
             public void actionPerformed(ActionEvent evt) {
             	counter++;
-            	/*if(counter==3) {
-            		powerBlock=false;
-            		//moraju i dimenzije onda
-            	}*/
             	if(counter==10) {
                 	cdBlock=false;
             		timer.stop();
