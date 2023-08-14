@@ -21,7 +21,7 @@ public class PongGame{
 	
 	public static void main(String[] args) throws InterruptedException {
 //		GameMode mode=GameMode.Classic;
-//		GameMode mode = GameMode.Advanced;
+	//	GameMode mode = GameMode.Advanced;
 		GameMode mode=GameMode.Powers;
 		GameFrame frame=new GameFrame(mode);
 		//new Thread(new Client()).start();		

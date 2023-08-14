@@ -1,6 +1,8 @@
 /game/
+/gameModeAdvanced/
+/gameModeClassic/
+/gameModePowers/
+/gameServer/
 /gameInterface/
 /gameSound/
-/gameModeAdvanced/
-/gameModePowers/
 /resources/

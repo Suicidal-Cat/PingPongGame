@@ -29,6 +29,19 @@ public class GamePowers extends GamePanel{
 		super.draw(g);
 	}
 	@Override
+	public void paint(Graphics g) {
+		try {
+			image = ImageIO.read(new File("src/resources/images/pozadinaPowers5.jpg"));
+			graphics = image.getGraphics();
+			draw(graphics);
+			g.drawImage(image, 0, 0, this);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
 	public void checkCollision() {
 
 		// ball bouncing of edges

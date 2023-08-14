@@ -85,7 +85,7 @@ public class PaddlePower extends Paddle{
 		if (id == 1) {
 			g.setColor(new Color(122, 183, 255));
 		} else
-			g.setColor(new Color(180, 125, 232));
+			g.setColor(new Color(148, 87, 235));
 		g.fillRect(x, y, width, height);
 		if(powerPush) {
 			g.setColor(Color.RED);
@@ -196,12 +196,12 @@ public class PaddlePower extends Paddle{
 			else g.drawImage(blockC,POWER_POSITIONX,POWER_POSITIONY+160,POWER_SIZE,POWER_SIZE,null);
 		}
 		else {
-			if(!cdPush)g.drawImage(pushShow,GAME_WIDTH-POWER_POSITIONX-50,POWER_POSITIONY,POWER_SIZE,POWER_SIZE,null);
-			else g.drawImage(pushC,GAME_WIDTH-POWER_POSITIONX-50,POWER_POSITIONY,POWER_SIZE,POWER_SIZE,null);
-			if(!cdSpeed)g.drawImage(speedShow,GAME_WIDTH-POWER_POSITIONX-50,POWER_POSITIONY+80,POWER_SIZE,POWER_SIZE,null);
-			else g.drawImage(speedC,GAME_WIDTH-POWER_POSITIONX-50,POWER_POSITIONY+80,POWER_SIZE,POWER_SIZE,null);	
-			if(!cdBlock)g.drawImage(blockShow,GAME_WIDTH-POWER_POSITIONX-50,POWER_POSITIONY+160,POWER_SIZE,POWER_SIZE,null);
-			else g.drawImage(blockC,GAME_WIDTH-POWER_POSITIONX-50,POWER_POSITIONY+160,POWER_SIZE,POWER_SIZE,null);
+			if(!cdPush)g.drawImage(pushShow,GAME_WIDTH-POWER_POSITIONX-POWER_SIZE,POWER_POSITIONY,POWER_SIZE,POWER_SIZE,null);
+			else g.drawImage(pushC,GAME_WIDTH-POWER_POSITIONX-POWER_SIZE,POWER_POSITIONY,POWER_SIZE,POWER_SIZE,null);
+			if(!cdSpeed)g.drawImage(speedShow,GAME_WIDTH-POWER_POSITIONX-POWER_SIZE,POWER_POSITIONY+80,POWER_SIZE,POWER_SIZE,null);
+			else g.drawImage(speedC,GAME_WIDTH-POWER_POSITIONX-POWER_SIZE,POWER_POSITIONY+80,POWER_SIZE,POWER_SIZE,null);	
+			if(!cdBlock)g.drawImage(blockShow,GAME_WIDTH-POWER_POSITIONX-POWER_SIZE,POWER_POSITIONY+160,POWER_SIZE,POWER_SIZE,null);
+			else g.drawImage(blockC,GAME_WIDTH-POWER_POSITIONX-POWER_SIZE,POWER_POSITIONY+160,POWER_SIZE,POWER_SIZE,null);
 		}
 		
 	}
