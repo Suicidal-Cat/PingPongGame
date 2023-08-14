@@ -21,7 +21,7 @@ public class GameAdvanced extends GamePanel{
 	boolean flag = false;
 	static final int BARRIER_WIDTH = 30;
 	static final int BARRIER_HEIGHT = 160;
-	static final int EFFECT_SIZE=15;
+	static final int EFFECT_SIZE=30;
 	Sound claimSound = new Sound("claim.wav");
 	
 	public GameAdvanced(){

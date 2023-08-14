@@ -166,19 +166,19 @@ public class PaddlePower extends Paddle{
 	private void initImages() {
 		 try {
 			 if(id==1) {
-				 pushShow=ImageIO.read(new File("src/resources/images/4329547.png"));
-				 speedShow=ImageIO.read(new File("src/resources/images/4329547.png"));
-				 blockShow=ImageIO.read(new File("src/resources/images/4329547.png"));
-				 pushC=ImageIO.read(new File("src/resources/images/nopower.png"));
-				 speedC=ImageIO.read(new File("src/resources/images/nopower.png"));
-				 blockC=ImageIO.read(new File("src/resources/images/nopower.png"));
+				 pushShow=ImageIO.read(new File("src/resources/images/90.png"));
+				 speedShow=ImageIO.read(new File("src/resources/images/shield.png"));
+				 blockShow=ImageIO.read(new File("src/resources/images/wall.png"));
+				 pushC=ImageIO.read(new File("src/resources/images/90On.png"));
+				 speedC=ImageIO.read(new File("src/resources/images/shieldOn.png"));
+				 blockC=ImageIO.read(new File("src/resources/images/wallOn.png"));
 			 }else {
-				 pushShow=ImageIO.read(new File("src/resources/images/4329547.png"));
-				 speedShow=ImageIO.read(new File("src/resources/images/4329547.png"));
-				 blockShow=ImageIO.read(new File("src/resources/images/4329547.png"));
-				 pushC=ImageIO.read(new File("src/resources/images/nopower.png"));
-				 speedC=ImageIO.read(new File("src/resources/images/nopower.png"));
-				 blockC=ImageIO.read(new File("src/resources/images/nopower.png"));
+				 pushShow=ImageIO.read(new File("src/resources/images/90.png"));
+				 speedShow=ImageIO.read(new File("src/resources/images/shield.png"));
+				 blockShow=ImageIO.read(new File("src/resources/images/wall.png"));
+				 pushC=ImageIO.read(new File("src/resources/images/90On.png"));
+				 speedC=ImageIO.read(new File("src/resources/images/shieldOn.png"));
+				 blockC=ImageIO.read(new File("src/resources/images/wallOn.png"));
 			 }
 
 		} catch (IOException e) {
