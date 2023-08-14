@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
 import game.Paddle;
+import gameSound.Sound;
 
 public class PaddlePower extends Paddle{
 	
@@ -30,6 +31,7 @@ public class PaddlePower extends Paddle{
 	static final int POWER_POSITIONX=5;
 	static final int POWER_POSITIONY=40;
 	private static final int GAME_WIDTH=1100;
+	Sound powerSound=new Sound("powerOn.wav");
 	
 	public PaddlePower(int x, int y, int PADDLE_WIDTH, int PADDLE_HEIGHT, int id) {
 		super(x, y, PADDLE_WIDTH, PADDLE_HEIGHT, id);
@@ -37,6 +39,7 @@ public class PaddlePower extends Paddle{
 		speed=10;
 	}
 	public void keyPressed(KeyEvent e) {
+		
 		switch (id) {
 		case 1:
 			if (e.getKeyCode() == KeyEvent.VK_W) {
@@ -93,6 +96,7 @@ public class PaddlePower extends Paddle{
 
 	}
 	private void powerPush() {
+		powerSound.audioStart();
 		powerPush=true;
 		cdPush=true;
 		Timer timer = new Timer(1000, null);
@@ -110,6 +114,7 @@ public class PaddlePower extends Paddle{
         timer.start();
 	}
 	private void powerSpeed(int ogSpeed) {
+		powerSound.audioStart();
 		speed=15;
 		height=150;
 		cdSpeed=true;
@@ -132,6 +137,7 @@ public class PaddlePower extends Paddle{
         timer.start();
 	}
 	private void powerBlock() {
+		powerSound.audioStart();
 		powerBlock=true;
 		y=0;
 		height=667;

@@ -8,6 +8,8 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.*;
+
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 
 import gameInterface.FirstFrame;
@@ -16,15 +18,16 @@ import gameInterface.Intro;
 
 public class PongGame{
 	
-
+	
 	public static void main(String[] args) throws InterruptedException {
 //		GameMode mode=GameMode.Classic;
-		GameMode mode=GameMode.Powers;
-		GameFrame frame=new GameFrame(mode);
+//		GameMode mode = GameMode.Advanced;
+//		GameMode mode=GameMode.Powers;
+//		GameFrame frame=new GameFrame(mode);
 		//new Thread(new Client()).start();		
 		
 //		FirstFrame frame=new FirstFrame();
-//		Intro intro=new Intro();
+		Intro intro=new Intro();
 	}
 }
 

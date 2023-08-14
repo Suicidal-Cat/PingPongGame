@@ -14,6 +14,7 @@ import game.Paddle;
 public class GamePowers extends GamePanel{
 		
 	public GamePowers(){
+		super();
 	}
 	@Override
 	public void newPaddles() {
@@ -38,6 +39,7 @@ public class GamePowers extends GamePanel{
 			ball.setYDirection(-ball.getYVelocity());
 		}
 		if (ball.intersects(paddle1)) {
+			hitSound.audioStart();
 			if(paddle1.powerPush) {
 				ball.setXDirection(ball.getXVelocity()*(-1)+4);
 				ball.setYDirection(0);
@@ -63,6 +65,7 @@ public class GamePowers extends GamePanel{
 			}
 			
 		if (ball.intersects(paddle2)) {
+			hitSound.audioStart();
 			if(paddle2.powerPush) {
 				ball.setXDirection(ball.getXVelocity()*(-1)-4);
 				ball.setYDirection(0);
@@ -99,6 +102,7 @@ public class GamePowers extends GamePanel{
 		// scoring system
 		
 		if(ball.x<=65) {
+			errorSound.audioStart();
 		if (brojac2<2) {
 			score.player2++;
 			brojac2++;
@@ -123,7 +127,8 @@ public class GamePowers extends GamePanel{
 		
 		
 		if (ball.x >= GAME_WIDTH - BALL_DIAMETER-65) {
-
+			errorSound.audioStart();
+			
 			if(brojac1<2) {
 			score.player1++;
 			newPaddles();

@@ -19,7 +19,10 @@ import javax.swing.SwingConstants;
 
 import game.GameFrame;
 import game.GameMode;
+import game.GamePanel;
 import gameModeClassic.GameClassic;
+import gameSound.Sound;
+import gameInterface.*;
 
 public class FirstFrame extends JFrame implements ActionListener{
 
@@ -27,6 +30,7 @@ public class FirstFrame extends JFrame implements ActionListener{
 	private ImageIcon pozadinaArcade;
 	private JLabel myLabel;
 	JButton button1,button2,button3;
+	Sound modeSound = new Sound("gameMode.wav");
 	
 	 public FirstFrame() {
 	
@@ -105,19 +109,25 @@ public class FirstFrame extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==button1) {
-			
+			modeSound.audioStart();
 			GameFrame gf=new GameFrame(GameMode.Classic);
 			gf.show();//prikazuje frame za classic
+			Intro.sound.audioStop();
 			dispose();//brise trenutni frame
+			
 		}
 		if (e.getSource()==button2) {
+			modeSound.audioStart();
 			GameFrame gf=new GameFrame(GameMode.Advanced);
 			gf.show();
+			Intro.sound.audioStop();
 			dispose();
 		}
 		if (e.getSource()==button3) {
+			modeSound.audioStart();
 			GameFrame gf=new GameFrame(GameMode.Powers);
 			gf.show();
+			Intro.sound.audioStop();
 			dispose();
 		}
 	}

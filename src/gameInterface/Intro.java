@@ -1,11 +1,19 @@
 package gameInterface;
 
+import java.io.IOException;
+
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import gameSound.*;
+
 public class Intro extends JFrame{
 	
+	static Sound sound;
 	
 	public Intro() throws InterruptedException{
 		ImageIcon imageIcon = new ImageIcon("src/resources/images/introResized.gif");
@@ -13,6 +21,9 @@ public class Intro extends JFrame{
 	  
 	  	ImageIcon image=new ImageIcon("src/resources/images/arcade1.png");
 	  	this.setIconImage(image.getImage());
+	  
+	  	sound=new Sound("Intro1.wav");
+	  	sound.audioStart();
 		
 		this.add(label);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
