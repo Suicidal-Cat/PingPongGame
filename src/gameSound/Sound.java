@@ -8,6 +8,7 @@ import javax.sound.sampled.*;
 public class Sound {
 
 	Clip clip;
+	boolean mute = false;
 	
 	public Sound(String name) {
 		
@@ -24,17 +25,33 @@ public class Sound {
 	}
 
 	public void audioStart() {
+//		clip.setFramePosition(0);
+		clip.start();
+		
+	}
+	
+	public void audioRestart() {
 		clip.setFramePosition(0);
 		clip.start();
 	}
 	
 	public void audioStop() {
 		clip.stop();
-		clip.close();
+//		clip.close();
 	}
 	
 	public void audioLoop() {
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
 	}
+
+	public boolean isMute() {
+		return mute;
+	}
+
+	public void setMute(boolean mute) {
+		this.mute = mute;
+	}
+	
+	
 	
 }

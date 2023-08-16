@@ -13,7 +13,7 @@ import gameSound.*;
 
 public class Intro extends JFrame{
 	
-	static Sound sound;
+	public static Sound sound;
 	
 	public Intro() throws InterruptedException{
 		ImageIcon imageIcon = new ImageIcon("src/resources/images/introResized.gif");
@@ -24,6 +24,7 @@ public class Intro extends JFrame{
 	  
 	  	sound=new Sound("Intro1.wav");
 	  	sound.audioStart();
+	  	sound.audioLoop();
 		
 		this.add(label);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

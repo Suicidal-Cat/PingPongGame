@@ -29,17 +29,22 @@ public class FirstFrame extends JFrame implements ActionListener{
 	
 	private ImageIcon pozadinaArcade;
 	private JLabel myLabel;
-	JButton button1,button2,button3;
+	JButton button1,button2,button3,button4;
 	Sound modeSound = new Sound("gameMode.wav");
+	Icon iconSoundOff = new ImageIcon("src/resources/images/sound-off.png");
+	Icon iconSound = new ImageIcon("src/resources/images/sound.png");
 	
 	 public FirstFrame() {
 	
+		 Intro.sound.audioLoop();
+		 
 		 pozadinaArcade=new ImageIcon("src/resources/images/arcadePozadina1.jpg");
 			myLabel=new JLabel(pozadinaArcade);
 			myLabel.setSize(getMaximumSize());
 		    Icon icon1 = new ImageIcon("src/resources/images/gamepad.png");
 		    Icon icon2 = new ImageIcon("src/resources/images/arcade.png");
 		    Icon icon3 = new ImageIcon("src/resources/images/magic-wand.png");
+		    
 		    
 
 			
@@ -86,13 +91,22 @@ public class FirstFrame extends JFrame implements ActionListener{
 			button3.setFont(new Font("Arial", Font.BOLD, 20));
 			
 			
-			
+			button4=new JButton(iconSoundOff);
+			button4.setBounds(50,50,55,55);
+			button4.addActionListener(this);
+//			button4.setText("MUTE");
+			button4.setFocusable(false);//sklanja one isprekidane linije oko teksta
+			button4.setBackground(Color.decode("#6C74C6"));
+			button4.setHorizontalTextPosition(JButton.LEFT);
+			button4.setBorder(BorderFactory.createEtchedBorder());
+			button4.setFont(new Font("Arial", Font.BOLD, 20));
 			
 
 			
 			myLabel.add(button1);
 			myLabel.add(button2);
 			myLabel.add(button3);
+			myLabel.add(button4);
 			
 			
 			ImageIcon image=new ImageIcon("src/resources/images/arcade1.png");
@@ -109,7 +123,7 @@ public class FirstFrame extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==button1) {
-			modeSound.audioStart();
+			if(!Intro.sound.isMute()) modeSound.audioRestart();
 			GameFrame gf=new GameFrame(GameMode.Classic);
 			gf.show();//prikazuje frame za classic
 			Intro.sound.audioStop();
@@ -117,18 +131,31 @@ public class FirstFrame extends JFrame implements ActionListener{
 			
 		}
 		if (e.getSource()==button2) {
-			modeSound.audioStart();
+			if(!Intro.sound.isMute()) modeSound.audioRestart();
 			GameFrame gf=new GameFrame(GameMode.Advanced);
 			gf.show();
 			Intro.sound.audioStop();
 			dispose();
 		}
 		if (e.getSource()==button3) {
-			modeSound.audioStart();
+			if(!Intro.sound.isMute()) modeSound.audioRestart();
 			GameFrame gf=new GameFrame(GameMode.Powers);
 			gf.show();
 			Intro.sound.audioStop();
 			dispose();
+		}
+		if(e.getSource()==button4) {
+			if(!Intro.sound.isMute()) {
+				Intro.sound.audioStop();
+				Intro.sound.setMute(true);
+				button4.setIcon(iconSound);
+			}
+			else {
+				Intro.sound.audioStart();
+				Intro.sound.setMute(false);
+				button4.setIcon(iconSoundOff);
+				modeSound.audioRestart();
+			}
 		}
 	}
 

@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
 import game.Paddle;
+import gameInterface.Intro;
 import gameSound.Sound;
 
 public class PaddlePower extends Paddle{
@@ -96,7 +97,7 @@ public class PaddlePower extends Paddle{
 
 	}
 	private void powerPush() {
-		powerSound.audioStart();
+		if(!Intro.sound.isMute()) powerSound.audioStart();
 		powerPush=true;
 		cdPush=true;
 		Timer timer = new Timer(1000, null);
@@ -114,7 +115,7 @@ public class PaddlePower extends Paddle{
         timer.start();
 	}
 	private void powerSpeed(int ogSpeed) {
-		powerSound.audioStart();
+		if(!Intro.sound.isMute()) powerSound.audioStart();
 		speed=15;
 		height=150;
 		cdSpeed=true;
@@ -137,7 +138,7 @@ public class PaddlePower extends Paddle{
         timer.start();
 	}
 	private void powerBlock() {
-		powerSound.audioStart();
+		if(!Intro.sound.isMute()) powerSound.audioStart();
 		powerBlock=true;
 		y=0;
 		height=667;

@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import game.GamePanel;
 import game.Paddle;
+import gameInterface.Intro;
 import gameSound.Sound;
 
 public class GameAdvanced extends GamePanel{
@@ -151,7 +152,7 @@ public class GameAdvanced extends GamePanel{
 
 		// ball bouncing of barrier
 		if(ball.intersects(b)){
-			hitSound.audioStart();
+			if(!Intro.sound.isMute()) hitSound.audioStart();
 			if(ball.x>=limit) {
 				ball.setXVelocity(Math.abs(ball.getXVelocity()));
 				ball.setXDirection(ball.getXVelocity());
@@ -169,7 +170,7 @@ public class GameAdvanced extends GamePanel{
 	//Apply effects
 	public void effectCollision(Paddle p1, Paddle p2) {
 		
-		claimSound.audioStart();
+		if(!Intro.sound.isMute()) claimSound.audioStart();
 		int randomEffect=-1;
 		
 		while(effect!=null) {
