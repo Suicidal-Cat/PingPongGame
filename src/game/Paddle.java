@@ -4,12 +4,18 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
+import client.ClientControl;
+
 public class Paddle extends Rectangle {
-	 protected int id;
-	 protected int yVelocity;// brzina pomeranja pravougaonika
-	 protected int speed = 8;
-	 public boolean powerPush;
-	 public boolean powerBlock;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7673898929813484348L;
+	protected int id;
+	protected int yVelocity;// brzina pomeranja pravougaonika
+	protected int speed = 8;
+	public boolean powerPush;
+	public boolean powerBlock;
 	 
 	 
 
@@ -18,7 +24,7 @@ public class Paddle extends Rectangle {
 		this.id = id;
 	}
 
-	public void keyPressed(KeyEvent e) {
+	/*public void keyPressed(KeyEvent e) {
 		switch (id) {
 		case 1:
 			if (e.getKeyCode() == KeyEvent.VK_W) {
@@ -58,6 +64,12 @@ public class Paddle extends Rectangle {
 			}
 			break;
 		}
+	}*/
+	public void updatePaddle(ClientControl control) {
+		if(control==ClientControl.UP_PRESSED)setYDirection(-speed);
+		else if(control==ClientControl.DOWN_PRESSED)setYDirection(speed);
+		else if(control==ClientControl.UP_REALISED)setYDirection(0);
+		else if(control==ClientControl.DOWN_REALISED)setYDirection(0);
 	}
 
 	public void setYDirection(int yDirection) {
@@ -81,4 +93,10 @@ public class Paddle extends Rectangle {
 		
 	}
 	public void resetPowers() {};
+	public void updatePaddlePositon(Rectangle r) {
+		x=r.x;
+		y=r.y;
+		width=r.width;
+		height=r.height;	
+	}
 }

@@ -6,6 +6,10 @@ import javax.swing.*;
 
 public class Ball extends Rectangle {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4764021735703576751L;
 	Random random;
 	private int xVelocity;
 	private int yVelocity;

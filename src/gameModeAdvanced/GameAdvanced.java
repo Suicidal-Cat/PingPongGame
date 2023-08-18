@@ -10,10 +10,16 @@ import javax.swing.*;
 import game.GamePanel;
 import game.Paddle;
 import gameInterface.Intro;
+import gameServer.Client_handler;
 import gameSound.Sound;
+import packet.GameAdvancePacket;
 
 public class GameAdvanced extends GamePanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 931036142327098826L;
 	Random random;
 	Barrier barrier;
 	Barrier barrier1;
@@ -25,8 +31,8 @@ public class GameAdvanced extends GamePanel{
 	static final int EFFECT_SIZE=30;
 	Sound claimSound = new Sound("claim.wav");
 	
-	public GameAdvanced(){
-		super();
+	public GameAdvanced(Client_handler p1,Client_handler p2){
+		super(p1,p2);
 		newBarrier();
 		
 		ActionListener taskPerformer = new ActionListener() {
@@ -81,7 +87,7 @@ public class GameAdvanced extends GamePanel{
 		
 	}
 	
-	@Override
+/*	@Override
 	public void draw(Graphics g) {
 		super.draw(g);
 		if(barrier!=null)
@@ -92,7 +98,7 @@ public class GameAdvanced extends GamePanel{
 			barrier1.draw(g);
 			barrier2.draw(g);
 		}
-	}
+	}*/
 	@Override
 	public void move() {
 		super.move();
@@ -287,6 +293,56 @@ public class GameAdvanced extends GamePanel{
 			
 		}
 		
+	}
+	public void run() {
+		// game loop
+		long lastTime = System.nanoTime();
+		double amountofTicks = 60.0;
+		double ns = 1000000000 / amountofTicks;
+		double delta = 0;
+		while (true) {
+			long now = System.nanoTime();
+			delta += (now - lastTime) / ns;
+			lastTime = now;
+			if (delta >= 1) {
+				move();
+				checkCollision();
+			//	repaint();// poziva paint metodu
+				updateClient();
+				delta--;
+			}
+		}
+	
+	}
+	private void updateClient() {
+	//	Rectangle barr=null,barr1=null,barr2=null;
+	//	if(effect!=null)eff=new Rectangle(effect.x,effect.y,effect.width,effect.height);
+	//	if(barrier!=null)barr=new Rectangle(barrier.x,barrier.y,barrier.width,barrier.height);
+	//	if(barrier1!=null)barr=new Rectangle(barrier1.x,barrier1.y,barrier1.width,barrier1.height);
+	//	if(barrier2!=null)barr=new Rectangle(barrier2.x,barrier2.y,barrier2.width,barrier2.height);
+		int []XY= {0,0,0,0,0,0,0,0,0,0,0};
+		if(effect!=null) {
+			XY[0]=effect.x;
+			XY[1]=effect.y;
+		}
+		if(barrier!=null) {
+			XY[2]=barrier.x;
+			XY[3]=barrier.y;
+			XY[8]=barrier.width;
+			XY[9]=barrier.height;
+		}else {
+			XY[4]=barrier1.x;
+			XY[5]=barrier1.y;
+			XY[6]=barrier2.x;
+			XY[7]=barrier2.y;
+		}
+		GameAdvancePacket packet= new GameAdvancePacket(
+				new Rectangle(paddle1.x,paddle1.y,paddle1.width,paddle1.height),
+				new Rectangle(paddle2.x,paddle2.y,paddle2.width,paddle2.height),
+				ball.x,ball.y,
+				effect,barrier,barrier1,barrier2,XY,score.player1,score.player2);
+		player1.updatePlayer(packet);
+		player2.updatePlayer(packet);
 	}
 	
 }

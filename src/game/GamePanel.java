@@ -10,12 +10,18 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import gameInterface.Intro;
+import gameServer.Client_handler;
 import gameSound.Sound;
+import packet.GamePacket;
 
 import javax.sound.sampled.*;
 
 public class GamePanel extends JPanel implements Runnable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8477109583716358379L;
 	protected static final int GAME_WIDTH = 1100;
 	protected static final int GAME_HEIGHT = (int) (GAME_WIDTH * (0.5555));
 	static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH, GAME_HEIGHT);
@@ -31,30 +37,33 @@ public class GamePanel extends JPanel implements Runnable {
 	protected Ball ball;
 	protected Score score;
 	protected int brojac1,brojac2;
+	protected Client_handler player1,player2;
 	Sound sound;
 	protected Sound hitSound = new Sound("hit.wav");
 	protected Sound errorSound = new Sound("error.wav");
 
-	public GamePanel() {
+	public GamePanel(Client_handler p1,Client_handler p2) {
 		
 		if(!Intro.sound.isMute()) {
 		sound=new Sound("gamePlay.wav");
 		sound.audioStart();
 		sound.audioLoop();
 		}
-		
+		player1=p1;
+		player2=p2;
 		newPaddles();
 		newBall();
 		score = new Score(GAME_WIDTH, GAME_HEIGHT);
 		this.setFocusable(true);
-		this.addKeyListener(new AL());
-		this.setPreferredSize(SCREEN_SIZE);
-
-		gameThread = new Thread(this);
-		gameThread.start();
-		
+	//	this.addKeyListener(new AL());
+		this.setPreferredSize(SCREEN_SIZE);		
 	}
 	
+	public void startGame() {
+		gameThread = new Thread(this);
+		gameThread.start();
+
+	};
 
 	public void newBall() {
 		random = new Random();
@@ -70,7 +79,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	}
 
-	public void paint(Graphics g) {
+/*	public void paint(Graphics g) {
 		try {
 			image = ImageIO.read(new File("src/resources/images/pozadinaIgrice.jpg"));
 			graphics = image.getGraphics();
@@ -87,7 +96,7 @@ public class GamePanel extends JPanel implements Runnable {
 		paddle2.draw(g);
 		ball.draw(g);
 		score.draw(g);
-	}
+	}*/
 
 	public void move() {
 		paddle1.move();
@@ -216,13 +225,17 @@ public class GamePanel extends JPanel implements Runnable {
 			if (delta >= 1) {
 				move();
 				checkCollision();
-				repaint();// poziva paint metodu
+			//	repaint();// poziva paint metodu
+				GamePacket packet=new GamePacket(paddle1.x,paddle1.y, paddle2.x,paddle2.y,
+						ball.x,ball.y, score.player1,score.player2);
+				player1.updatePlayer(packet);
+				player2.updatePlayer(packet);
 				delta--;
 			}
 		}
 	}
 
-	public class AL extends KeyAdapter {
+/*	public class AL extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 			paddle1.keyPressed(e);
 			paddle2.keyPressed(e);
@@ -232,6 +245,6 @@ public class GamePanel extends JPanel implements Runnable {
 			paddle1.keyReleased(e);
 			paddle2.keyReleased(e);
 		}
-	}
+	}*/
 
 }

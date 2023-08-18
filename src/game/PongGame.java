@@ -12,8 +12,10 @@ import java.util.*;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 
+import client.Client;
 import gameInterface.FirstFrame;
 import gameInterface.Intro;
+import gameServer.Server;
 
 
 public class PongGame{
@@ -27,7 +29,10 @@ public class PongGame{
 		//new Thread(new Client()).start();		
 		
 //		FirstFrame frame=new FirstFrame();
-		Intro intro=new Intro();
+//		Intro intro=new Intro();
+		
+//		new Thread(new Server()).start();
+//	    new Thread(new Client(GameMode.Classic));
 	}
 }
 

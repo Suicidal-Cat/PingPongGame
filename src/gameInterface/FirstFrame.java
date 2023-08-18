@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import client.Client;
 import game.GameFrame;
 import game.GameMode;
 import game.GamePanel;
@@ -124,23 +125,26 @@ public class FirstFrame extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==button1) {
 			if(!Intro.sound.isMute()) modeSound.audioRestart();
-			GameFrame gf=new GameFrame(GameMode.Classic);
-			gf.show();//prikazuje frame za classic
+		//	GameFrame gf=new GameFrame(GameMode.Classic);
+		//	gf.show();//prikazuje frame za classic
+			new Thread(new Client(GameMode.Classic));
 			Intro.sound.audioStop();
 			dispose();//brise trenutni frame
 			
 		}
 		if (e.getSource()==button2) {
 			if(!Intro.sound.isMute()) modeSound.audioRestart();
-			GameFrame gf=new GameFrame(GameMode.Advanced);
-			gf.show();
+		//	GameFrame gf=new GameFrame(GameMode.Advanced);
+		//	gf.show();
+			new Thread(new Client(GameMode.Advanced));
 			Intro.sound.audioStop();
 			dispose();
 		}
 		if (e.getSource()==button3) {
 			if(!Intro.sound.isMute()) modeSound.audioRestart();
-			GameFrame gf=new GameFrame(GameMode.Powers);
-			gf.show();
+		//	GameFrame gf=new GameFrame(GameMode.Powers);
+		//	gf.show();
+			new Thread(new Client(GameMode.Powers));
 			Intro.sound.audioStop();
 			dispose();
 		}

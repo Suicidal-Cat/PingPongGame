@@ -1,32 +1,43 @@
 package gameServer;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.LinkedList;
+
+import game.GameFrame;
+import game.GameMode;
+import game.GamePanel;
+import gameInterface.Intro;
+import gameSound.Sound;
+import packet.GameAdvancePacket;
+import packet.GamePacket;
 
 
-public class Server {
+public class Server implements Runnable{
 	
-	public static void main(String[] args) {
-		int port = 9521;
-		ServerSocket serverSoket;
-		Socket player1;
-		Socket player2;
+	int port = 9521;
+	ServerSocket serverSoket;
+	Socket player;
+	
+	public static LinkedList<Client_handler>players=new LinkedList<>();
+		
+		
+	@Override
+	public void run() {
+		Intro.sound=new Sound("Intro1.wav");
 		try {
 			serverSoket = new ServerSocket(port);
 			while (true) {
-				System.out.println("Waiting for conncetion...");
-				player1 = serverSoket.accept();
-				player2 = serverSoket.accept();
-				System.out.println("Connected!!!");
-
-				Client_handler klijent1 = new Client_handler(player1,player2,1);
-				Client_handler klijent2 = new Client_handler(player2,player1,2);
-				klijent1.start();
-				klijent2.start();
+				System.out.println("Cekam na igrace...");
+				player=serverSoket.accept();
+				System.out.println("Povezan igrac!");
+				new Client_handler(player);
 			}
 		} catch (IOException e) {
-			System.out.println("Server startup error");
+			System.out.println("Greska pri pokretanju servera!");
 		}
+		
 	}
 }

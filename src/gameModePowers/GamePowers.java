@@ -12,10 +12,11 @@ import javax.swing.Timer;
 import game.GamePanel;
 import game.Paddle;
 import gameInterface.Intro;
+import gameServer.Client_handler;
 public class GamePowers extends GamePanel{
 		
-	public GamePowers(){
-		super();
+	public GamePowers(Client_handler p1,Client_handler p2){
+		super(p1,p2);
 	}
 	@Override
 	public void newPaddles() {
@@ -25,7 +26,7 @@ public class GamePowers extends GamePanel{
 
 	}
 	
-	@Override
+	/*@Override
 	public void draw(Graphics g) {
 		super.draw(g);
 	}
@@ -40,7 +41,7 @@ public class GamePowers extends GamePanel{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	@Override
 	public void checkCollision() {
@@ -163,7 +164,7 @@ public class GamePowers extends GamePanel{
 			}
 		}else if (brojac2>0)brojac1=0;
 	}
-	public class AL extends KeyAdapter {
+/*	public class AL extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 			paddle1.keyPressed(e);
 			paddle2.keyPressed(e);
@@ -173,5 +174,5 @@ public class GamePowers extends GamePanel{
 			paddle1.keyReleased(e);
 			paddle2.keyReleased(e);
 		}
-	}
+	}*/
 }

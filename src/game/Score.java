@@ -6,6 +6,10 @@ import javax.swing.*;
 
 public class Score extends Rectangle {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6333426561279369866L;
 	static int GAME_WIDTH;
 	static int GAME_HEIGHT;
 	public int player1;
