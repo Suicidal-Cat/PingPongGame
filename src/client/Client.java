@@ -45,55 +45,47 @@ public class Client extends KeyAdapter implements Runnable{
 	
 	@Override
 	public void run() {	
-		receiveInitPacket();
-		System.out.println("Krenuo klijent");
-		//	frame.panel.image=Toolkit.getDefaultToolkit().createImage(packet.data);
-		frame=new ClientFrame(mode);
-		frame.panel.addKeyListener(new ClientInput());
-		isRunning=true;
 		try {
-			while(isRunning) {
-				Object packet=serverInput.readObject();
-				frame.panel.updateComponents(packet);
-			}
-			communicationSocket.close();
+			receiveInitPacket();
+			//	frame.panel.image=Toolkit.getDefaultToolkit().createImage(packet.data);
+			frame=new ClientFrame(mode);
+			frame.panel.addKeyListener(new ClientInput());
+			isRunning=true;
+				while(isRunning) {
+					Object packet=serverInput.readObject();
+					frame.panel.updateComponents(packet);
+				}
+				communicationSocket.close();
 		}catch (ClassNotFoundException e) {
 			System.out.println("Pogresan paket!");
 		}catch (IOException e) {
 			System.out.println("KRAJ IGRE");
 			isRunning=false;
-			frame.dispose();
+			if(frame!=null)frame.dispose();
 		}
 	}
 		
-	private void sendInitPacket() {
-		try {
+	private void sendInitPacket() throws IOException{
 			serverOutput.writeObject(new InitPacket(mode));
-			System.out.println("Poslao sam");
 			serverOutput.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 	}
 	
-	private void receiveInitPacket() {
+	private void receiveInitPacket() throws IOException{
 		try {
-			System.out.println("CEKAM DA KRENE");
+			System.out.println("Cekam na protivnika");
 			InitPacket packet = (InitPacket)serverInput.readObject();
-			System.out.println("Primio od servera!!"+packet.playerId);
+			System.out.println(packet.playerId);
 			playerNumber=packet.playerId;
 		} catch (ClassNotFoundException e) {
 			System.out.println("Pogresan paket od servera!");
-			e.printStackTrace();
-		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
 
 	//client inputs			
-	public class ClientInput extends KeyAdapter {
+	class ClientInput extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 			try {
 				if(e.getKeyCode()==KeyEvent.VK_UP)

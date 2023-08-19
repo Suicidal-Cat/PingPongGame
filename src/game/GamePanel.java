@@ -228,8 +228,13 @@ public class GamePanel extends JPanel implements Runnable {
 			//	repaint();// poziva paint metodu
 				GamePacket packet=new GamePacket(paddle1.x,paddle1.y, paddle2.x,paddle2.y,
 						ball.x,ball.y, score.player1,score.player2);
-				player1.updatePlayer(packet);
-				player2.updatePlayer(packet);
+				try {
+					player1.updatePlayer(packet);
+					player2.updatePlayer(packet);
+				}catch(IOException e) {
+					break;
+				}
+
 				if(score.player1>=6 || score.player2>=6)break;
 				delta--;
 			}

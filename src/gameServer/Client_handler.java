@@ -21,6 +21,7 @@ public class Client_handler extends Thread{
 	private Socket player;
 	private ObjectInputStream clientInput;
 	private ObjectOutputStream clientOutput;
+	public Client_handler opponent;
 	public GameFrame game;
 	public GamePanel panel;
 	public GameMode mode;
@@ -32,23 +33,22 @@ public class Client_handler extends Thread{
 		try {
 		player=p1;
 		foundGame=false;
-		isRunning=true;
 		clientOutput=new ObjectOutputStream(player.getOutputStream());
 		clientInput=new ObjectInputStream(player.getInputStream());
 		recieveInitPacket();
 		Server.players.add(this);
 		findGame();
 		}catch(IOException e) {
-			e.printStackTrace();
+			isRunning=false;
+			Server.players.remove(this);
 		}
 	}
 	
 	@Override //reading packet for Client
 	public void run() {	
 		try {
-			System.out.println("Krenuo sam"+playerNumber);
+			isRunning=true;
 			sendInitPacket();
-			System.out.println("Poslao sam"+playerNumber);
 		
 			if(playerNumber==1)panel.startGame();
 			while(isRunning) {
@@ -65,10 +65,17 @@ public class Client_handler extends Thread{
 		catch(ClassNotFoundException e) {
 			System.out.println("Pogresan paket!");
 		}
-		catch(IOException e){
+		catch(IOException e) {
 			System.out.println("KRAJ IGRE");
+			opponent.isRunning=false;
 			isRunning=false;
-			if(game!=null)game.dispose();
+			if(game!=null) {
+				game.dispose();
+			}
+			try {
+				opponent.player.close();
+			} catch (IOException e1) {
+			}
 		}
 					
 	}
@@ -84,69 +91,48 @@ public class Client_handler extends Thread{
 				player.panel=game.panel;
 				playerNumber=1;
 				player.playerNumber=2;
+				opponent=player;
+				player.opponent=this;
 				player.foundGame=true;
 				foundGame=true;
 				this.start();
 				player.start();
-				System.out.println("Nasao sam "+playerNumber);
 			}
 		}
 	}
 	
-	private void recieveInitPacket() {
+	private void recieveInitPacket() throws IOException{
 		try {
 			InitPacket packet=(InitPacket)clientInput.readObject();
 			mode=packet.mode;	
-			System.out.println("dobio init od klijenta"+mode.toString());
+			System.out.println("Dobio init od klijenta "+mode.toString());
 		} 
 		catch (ClassNotFoundException e) {
 			System.out.println("Pogresan paket od klijenta!");
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 	
-	private void sendInitPacket() {
-		try {
+	private void sendInitPacket() throws IOException{
 			clientOutput.writeObject(new InitPacket(playerNumber));
 			clientOutput.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
-	public void sendGamePacket(GamePacket p) {
-		try {
+	public void sendGamePacket(GamePacket p) throws IOException{
 			clientOutput.writeObject(p);
 			clientOutput.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
-	public void sendGamePacket(GameAdvancePacket p) {
-		try {
+	public void sendGamePacket(GameAdvancePacket p) throws IOException{
 			clientOutput.writeObject(p);
 			clientOutput.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
-	public void updatePlayer(GamePacket packet){
-		try {
+	public void updatePlayer(GamePacket packet) throws IOException{
 			clientOutput.writeObject(packet);
 			clientOutput.flush();
-		} catch (IOException e) {			
-			e.printStackTrace();
-		}
 	}
-	public void updatePlayer(GameAdvancePacket packet) {
-		try {
+	public void updatePlayer(GameAdvancePacket packet) throws IOException{
 			clientOutput.writeObject(packet);
 			clientOutput.flush();
-		} catch (IOException e) {			
-			e.printStackTrace();
-		}
 	}
 
 }

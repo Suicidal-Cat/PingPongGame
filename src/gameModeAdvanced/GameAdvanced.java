@@ -1,6 +1,7 @@
 package gameModeAdvanced;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.*;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
@@ -308,14 +309,19 @@ public class GameAdvanced extends GamePanel{
 				move();
 				checkCollision();
 			//	repaint();// poziva paint metodu
-				updateClient();
+				try {
+					updateClient();
+				}catch(IOException e) {
+					break;
+				}
+
 				if(score.player1>=6 || score.player2>=6)break;
 				delta--;
 			}
 		}
 	
 	}
-	private void updateClient() {
+	private void updateClient() throws IOException{
 	//	Rectangle barr=null,barr1=null,barr2=null;
 	//	if(effect!=null)eff=new Rectangle(effect.x,effect.y,effect.width,effect.height);
 	//	if(barrier!=null)barr=new Rectangle(barrier.x,barrier.y,barrier.width,barrier.height);
@@ -342,8 +348,8 @@ public class GameAdvanced extends GamePanel{
 				new Rectangle(paddle2.x,paddle2.y,paddle2.width,paddle2.height),
 				ball.x,ball.y,
 				effect,barrier,barrier1,barrier2,XY,score.player1,score.player2);
-		player1.updatePlayer(packet);
-		player2.updatePlayer(packet);
+			player1.updatePlayer(packet);
+			player2.updatePlayer(packet);
 	}
 	
 }
