@@ -51,17 +51,24 @@ public class Client_handler extends Thread{
 			System.out.println("Poslao sam"+playerNumber);
 		
 			if(playerNumber==1)panel.startGame();
-			while(true) {
+			while(isRunning) {
 				ClientPacket packet=(ClientPacket)clientInput.readObject();
 				if(packet.playerNumber==1)panel.paddle1.updatePaddle(packet.control);
 				else panel.paddle2.updatePaddle(packet.control);
 			}
+
+			//update database	
+			Server.players.remove(this);
+			player.close();
+			
 		}
 		catch(ClassNotFoundException e) {
 			System.out.println("Pogresan paket!");
 		}
 		catch(IOException e){
-			e.printStackTrace();
+			System.out.println("KRAJ IGRE");
+			isRunning=false;
+			if(game!=null)game.dispose();
 		}
 					
 	}

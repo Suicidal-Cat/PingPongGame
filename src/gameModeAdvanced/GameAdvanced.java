@@ -309,6 +309,7 @@ public class GameAdvanced extends GamePanel{
 				checkCollision();
 			//	repaint();// poziva paint metodu
 				updateClient();
+				if(score.player1>=6 || score.player2>=6)break;
 				delta--;
 			}
 		}

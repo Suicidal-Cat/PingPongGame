@@ -24,6 +24,7 @@ public class Client extends KeyAdapter implements Runnable{
 	ClientFrame frame;
 	GameMode mode;
 	Thread client;
+	boolean isRunning;
 	
 	public Client(GameMode mode) {
 		try {
@@ -49,15 +50,19 @@ public class Client extends KeyAdapter implements Runnable{
 		//	frame.panel.image=Toolkit.getDefaultToolkit().createImage(packet.data);
 		frame=new ClientFrame(mode);
 		frame.panel.addKeyListener(new ClientInput());
+		isRunning=true;
 		try {
-			while(true) {
+			while(isRunning) {
 				Object packet=serverInput.readObject();
 				frame.panel.updateComponents(packet);
 			}
+			communicationSocket.close();
 		}catch (ClassNotFoundException e) {
 			System.out.println("Pogresan paket!");
 		}catch (IOException e) {
-			System.out.println("Greska pri komunikaciji sa serverom");
+			System.out.println("KRAJ IGRE");
+			isRunning=false;
+			frame.dispose();
 		}
 	}
 		

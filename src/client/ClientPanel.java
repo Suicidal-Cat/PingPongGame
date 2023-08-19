@@ -63,7 +63,7 @@ public class ClientPanel extends JPanel{
 		ball.draw(g);
 		score.draw(g);
 	}
-	public void updateComponents(Object packet1) {
+	public void updateComponents(Object packet1) throws IOException {
 		GamePacket packet=(GamePacket)packet1;
 		paddle1.x=packet.xp1;
 		paddle1.y=packet.yp1;
@@ -75,6 +75,7 @@ public class ClientPanel extends JPanel{
 		score.player2=packet.p2Score;
 		checkCollision();
 		repaint();
+		if(packet.p1Score>=6 || packet.p2Score>=6)throw new IOException("Kraj igre");
 	}
 	public void checkCollision() {
 		

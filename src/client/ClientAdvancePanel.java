@@ -1,6 +1,7 @@
 package client;
 
 import java.awt.Graphics;
+import java.io.IOException;
 
 import gameModeAdvanced.Barrier;
 import gameModeAdvanced.BuffEffect;
@@ -33,7 +34,7 @@ public class ClientAdvancePanel extends ClientPanel{
 		}
 		
 	}
-	public void updateComponents(Object packet1) {
+	public void updateComponents(Object packet1) throws IOException {
 		GameAdvancePacket packet=(GameAdvancePacket)packet1;
 		paddle1.updatePaddlePositon(packet.paddle1);
 		paddle2.updatePaddlePositon(packet.paddle2);
@@ -62,6 +63,7 @@ public class ClientAdvancePanel extends ClientPanel{
 		score.player2=packet.p2Score;
 		checkCollision();
 		repaint();
+		if(packet.p1Score>=6 || packet.p2Score>=6)throw new IOException("Kraj igre");
 	}
 	public void checkCollision() {
 		super.checkCollision();

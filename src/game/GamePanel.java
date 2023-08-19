@@ -230,6 +230,7 @@ public class GamePanel extends JPanel implements Runnable {
 						ball.x,ball.y, score.player1,score.player2);
 				player1.updatePlayer(packet);
 				player2.updatePlayer(packet);
+				if(score.player1>=6 || score.player2>=6)break;
 				delta--;
 			}
 		}
