@@ -26,7 +26,6 @@ public class Server implements Runnable{
 		
 	@Override
 	public void run() {
-		Intro.sound=new Sound("Intro1.wav");//OVO izbaci kada budes namestala zvuk
 		try {
 			serverSoket = new ServerSocket(port);
 			while (true) {

@@ -30,7 +30,6 @@ public class GameAdvanced extends GamePanel{
 	static final int BARRIER_WIDTH = 30;
 	static final int BARRIER_HEIGHT = 160;
 	static final int EFFECT_SIZE=30;
-	Sound claimSound = new Sound("claim.wav");
 	
 	public GameAdvanced(Client_handler p1,Client_handler p2){
 		super(p1,p2);
@@ -159,7 +158,7 @@ public class GameAdvanced extends GamePanel{
 
 		// ball bouncing of barrier
 		if(ball.intersects(b)){
-			if(!Intro.sound.isMute()) hitSound.audioStart();
+		//	if(!Intro.sound.isMute()) hitSound.audioStart();
 			if(ball.x>=limit) {
 				ball.setXVelocity(Math.abs(ball.getXVelocity()));
 				ball.setXDirection(ball.getXVelocity());
@@ -177,7 +176,7 @@ public class GameAdvanced extends GamePanel{
 	//Apply effects
 	public void effectCollision(Paddle p1, Paddle p2) {
 		
-		if(!Intro.sound.isMute()) claimSound.audioStart();
+		//if(!Intro.sound.isMute()) claimSound.audioStart();
 		int randomEffect=-1;
 		
 		while(effect!=null) {

@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import game.Ball;
 import game.Paddle;
 import game.Score;
+import gameInterface.Intro;
+import gameSound.Sound;
 import packet.GamePacket;
 
 public class ClientPanel extends JPanel{
@@ -33,8 +35,16 @@ public class ClientPanel extends JPanel{
 	public Paddle paddle2;
 	public Ball ball;
 	public Score score;
+	Sound sound;
+	protected Sound hitSound = new Sound("hit.wav");
+	protected Sound errorSound = new Sound("error.wav");
 	
 	public ClientPanel() {
+		if(!Intro.sound.isMute()) {
+			sound=new Sound("gamePlay.wav");
+			sound.audioStart();
+			sound.audioLoop();
+			}
 		this.setFocusable(true);
 		this.setPreferredSize(SCREEN_SIZE);
 		paddle1 = new Paddle(10, (GAME_HEIGHT / 2) - (PADDLE_HEIGHT / 2), PADDLE_WIDTH, PADDLE_HEIGHT, 1);
@@ -78,7 +88,18 @@ public class ClientPanel extends JPanel{
 		if(packet.p1Score>=6 || packet.p2Score>=6)throw new IOException("Kraj igre");
 	}
 	public void checkCollision() {
-		
+		if (ball.intersects(paddle1)) {
+			if(!Intro.sound.isMute()) hitSound.audioStart();
+		}
+		if (ball.intersects(paddle2)) {
+			if(!Intro.sound.isMute()) hitSound.audioStart();
+		}
+		if(ball.x <= 0) {
+			if(!Intro.sound.isMute()) errorSound.audioStart();
+		}
+		if (ball.x >= GAME_WIDTH - BALL_DIAMETER) {
+			if(!Intro.sound.isMute()) errorSound.audioStart();
+		}
 	}
 	
 }

@@ -3,8 +3,10 @@ package client;
 import java.awt.Graphics;
 import java.io.IOException;
 
+import gameInterface.Intro;
 import gameModeAdvanced.Barrier;
 import gameModeAdvanced.BuffEffect;
+import gameSound.Sound;
 import packet.GameAdvancePacket;
 
 public class ClientAdvancePanel extends ClientPanel{
@@ -17,6 +19,7 @@ public class ClientAdvancePanel extends ClientPanel{
 	Barrier barrier1;
 	Barrier barrier2;
 	BuffEffect effect;
+	Sound claimSound = new Sound("claim.wav");
 	
 	public ClientAdvancePanel() {
 		super();	
@@ -67,6 +70,17 @@ public class ClientAdvancePanel extends ClientPanel{
 	}
 	public void checkCollision() {
 		super.checkCollision();
-		
+		if(effect!=null && paddle1.intersects(effect)) {
+			if(!Intro.sound.isMute()) claimSound.audioStart();
+		}
+		if(effect!=null && paddle2.intersects(effect)) {
+			if(!Intro.sound.isMute()) claimSound.audioStart();
+		}
+		if(barrier!=null && ball.intersects(barrier)) {
+			if(!Intro.sound.isMute()) hitSound.audioStart();
+		}
+		if(barrier1!=null && (ball.intersects(barrier1) || ball.intersects(barrier2))) {
+			if(!Intro.sound.isMute()) hitSound.audioStart();
+		}
 	}
 }

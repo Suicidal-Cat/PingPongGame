@@ -32,7 +32,6 @@ public class PongGame{
 //		Intro intro=new Intro();
 		
 //		new Thread(new Server()).start();
-//	    new Thread(new Client(GameMode.Advanced));
 	}
 }
 
