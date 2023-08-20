@@ -39,6 +39,10 @@ public class PaddlePower extends Paddle{
 		initImages();
 		speed=10;
 	}
+	public void updatePaddle() {
+		super.updatePaddle(null);
+	}
+	
 	public void keyPressed(KeyEvent e) {
 		
 		switch (id) {

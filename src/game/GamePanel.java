@@ -38,17 +38,10 @@ public class GamePanel extends JPanel implements Runnable {
 	protected Score score;
 	protected int brojac1,brojac2;
 	protected Client_handler player1,player2;
-	Sound sound;
-	protected Sound hitSound = new Sound("hit.wav");
-	protected Sound errorSound = new Sound("error.wav");
+	
 
 	public GamePanel(Client_handler p1,Client_handler p2) {
-		
-		if(!Intro.sound.isMute()) {
-			sound=new Sound("gamePlay.wav");
-			sound.audioStart();
-			sound.audioLoop();
-		}
+
 		player1=p1;
 		player2=p2;
 		newPaddles();
@@ -134,7 +127,7 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 		// bounces ball off paddles ovaj deo moze bolje
 		if (ball.intersects(paddle1)) {
-			if(!Intro.sound.isMute()) hitSound.audioRestart();
+
 			
 			ball.setXVelocity(Math.abs(ball.getXVelocity()));
 			ball.setXVelocity(ball.getXVelocity() + 1);// ubrzanje nakon udarca
@@ -147,7 +140,7 @@ public class GamePanel extends JPanel implements Runnable {
 			ball.setYDirection(ball.getYVelocity());
 		}
 		if (ball.intersects(paddle2)) {
-			if(!Intro.sound.isMute()) hitSound.audioRestart();
+
 			ball.setXVelocity(Math.abs(ball.getXVelocity()));
 			ball.setXVelocity(ball.getXVelocity() + 1);// ubrzanje nakon udarca
 			if (ball.getYVelocity() > 0) {
@@ -172,7 +165,7 @@ public class GamePanel extends JPanel implements Runnable {
 		// scoring system
 		
 		if(ball.x <= 0) {
-			if(!Intro.sound.isMute()) errorSound.audioRestart();
+
 		if (brojac2<2) {
 			score.player2++;
 			brojac2++;
@@ -193,7 +186,7 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		
 		if (ball.x >= GAME_WIDTH - BALL_DIAMETER) {
-			if(!Intro.sound.isMute()) errorSound.audioRestart();
+
 			if(brojac1<2) {
 			score.player1++;
 			newPaddles();

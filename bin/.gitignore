@@ -3,8 +3,12 @@
 /packet/
 /client/
 /gameModeAdvanced/
+<<<<<<< HEAD
 /gameInterface/
 /gameModeClassic/
 /gameModePowers/
 /gameSound/
 /resources/
+=======
+/gameModePowers/
+>>>>>>> bbacba1e719dbcb723cd6adfafa384035d0e44dd
