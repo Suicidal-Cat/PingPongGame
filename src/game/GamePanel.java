@@ -168,8 +168,8 @@ public class GamePanel extends JPanel implements Runnable {
 //				ClientPanel.playSound("error.wav");
 //				System.out.println("error 1 zvuk");
 //			}//u ifu nece a ovako ispod hoce.....
-			ClientPanel.playSound("error.wav");
-			System.out.println("error 1 zvuk");
+//			ClientPanel.playSound("error.wav");
+//			System.out.println("error 1 zvuk");
 			
 			if (brojac2<2) {
 				score.player2++;
@@ -195,8 +195,8 @@ public class GamePanel extends JPanel implements Runnable {
 //				ClientPanel.playSound("error.wav");
 //				System.out.println("error 2 zvuk");
 //			}//u ifu nece a ovako ispod hoce.....
-			ClientPanel.playSound("error.wav");
-			System.out.println("error 1 zvuk");
+//			ClientPanel.playSound("error.wav");
+//			System.out.println("error 1 zvuk");
 			
 			
 		
@@ -230,7 +230,7 @@ public class GamePanel extends JPanel implements Runnable {
 			lastTime = now;
 			if (delta >= 1) {
 				move();
-				checkCollision();
+//				checkCollision();
 			//	repaint();// poziva paint metodu
 				GamePacket packet=new GamePacket(paddle1.x,paddle1.y, paddle2.x,paddle2.y,
 						ball.x,ball.y, score.player1,score.player2);
@@ -240,7 +240,7 @@ public class GamePanel extends JPanel implements Runnable {
 				}catch(IOException e) {
 					break;
 				}
-
+				checkCollision();
 				if(score.player1>=6 || score.player2>=6)break;
 				delta--;
 			}

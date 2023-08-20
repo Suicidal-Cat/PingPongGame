@@ -108,16 +108,16 @@ public class ClientPanel extends JPanel{
 		}
 		
 		
-//		if(ball.x <= 0) {
-//			System.out.println("radi error1");
-//			if(!Intro.sound.isMute()) errorSound.audioRestart();
-//			//ne radi
-//		}
-//		if (ball.x >= GAME_WIDTH - BALL_DIAMETER) {
-//			System.out.println("radi error2");
-//			if(!Intro.sound.isMute()) errorSound.audioRestart();
-//			//ne radi
-//		}
+		if(ball.x <= 0) {
+			System.out.println("radi error1");
+			if(!Intro.sound.isMute()) errorSound.audioRestart();
+			//radi
+		}
+		if (ball.x >= GAME_WIDTH - BALL_DIAMETER) {
+			System.out.println("radi error2");
+			if(!Intro.sound.isMute()) errorSound.audioRestart();
+			//radi
+		}
 	}
 	
 	//ZAKLJUCAK ------- sve mora da bude u okviru checkCollision ali ona mora da se pozove nekako ranije dok se u GamePanel.checkCollision() 
@@ -132,9 +132,9 @@ public class ClientPanel extends JPanel{
 //			sound1 = new Sound(name);
 //			sound1.audioRestart();
 //		}
-		System.out.println("ZVUK");
-		sound1 = new Sound(name);
-		sound1.audioRestart();
+//		System.out.println("ZVUK");
+//		sound1 = new Sound(name);
+//		sound1.audioRestart();
 	}
 	
 }

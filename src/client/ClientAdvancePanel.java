@@ -70,16 +70,16 @@ public class ClientAdvancePanel extends ClientPanel{
 	}
 	public void checkCollision() {
 		
-//		if(effect!=null && paddle1.intersects(effect)) {
-//			System.out.println("radi efekat1");
-//			if(!Intro.sound.isMute()) claimSound.audioRestart();
-//			//ne radi
-//		}
-//		if(effect!=null && paddle2.intersects(effect)) {
-//			System.out.println("radi efekat2");
-//			if(!Intro.sound.isMute()) claimSound.audioRestart();
-//			//ne radi
-//		}
+		if(effect!=null && paddle1.intersects(effect)) {
+			System.out.println("radi efekat1");
+			if(!Intro.sound.isMute()) claimSound.audioRestart();
+			//ne radi
+		}
+		if(effect!=null && paddle2.intersects(effect)) {
+			System.out.println("radi efekat2");
+			if(!Intro.sound.isMute()) claimSound.audioRestart();
+			//ne radi
+		}
 		if(barrier!=null && ball.intersects(barrier)) {
 			//radi
 			if(!Intro.sound.isMute()) {

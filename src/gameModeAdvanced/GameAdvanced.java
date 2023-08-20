@@ -182,8 +182,8 @@ public class GameAdvanced extends GamePanel{
 //			System.out.println("claim zvuk");
 //		} //NE RADI >
 	
-		ClientPanel.playSound("claim.wav");
-		System.out.println("claim zvuk ---");
+//		ClientPanel.playSound("claim.wav");
+//		System.out.println("claim zvuk ---");
 		
 		int randomEffect=-1;
 		
@@ -314,14 +314,14 @@ public class GameAdvanced extends GamePanel{
 			lastTime = now;
 			if (delta >= 1) {
 				move();
-				checkCollision();
+//				checkCollision();
 			//	repaint();// poziva paint metodu
 				try {
 					updateClient();
 				}catch(IOException e) {
 					break;
 				}
-
+				checkCollision();
 				if(score.player1>=6 || score.player2>=6)break;
 				delta--;
 			}
