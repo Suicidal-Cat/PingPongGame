@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import game.Ball;
 import game.Paddle;
 import game.Score;
+import gameInterface.Intro;
+import gameSound.Sound;
 import packet.GamePacket;
 
 public class ClientPanel extends JPanel{
@@ -35,6 +37,8 @@ public class ClientPanel extends JPanel{
 	public Score score;
 	
 	public ClientPanel() {
+		Intro.sound=new Sound("Intro1.wav");
+		
 		this.setFocusable(true);
 		this.setPreferredSize(SCREEN_SIZE);
 		paddle1 = new Paddle(10, (GAME_HEIGHT / 2) - (PADDLE_HEIGHT / 2), PADDLE_WIDTH, PADDLE_HEIGHT, 1);

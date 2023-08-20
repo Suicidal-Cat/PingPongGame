@@ -159,7 +159,7 @@ public class GameAdvanced extends GamePanel{
 
 		// ball bouncing of barrier
 		if(ball.intersects(b)){
-			if(!Intro.sound.isMute()) hitSound.audioStart();
+			if(!Intro.sound.isMute()) hitSound.audioRestart();
 			if(ball.x>=limit) {
 				ball.setXVelocity(Math.abs(ball.getXVelocity()));
 				ball.setXDirection(ball.getXVelocity());
@@ -177,7 +177,7 @@ public class GameAdvanced extends GamePanel{
 	//Apply effects
 	public void effectCollision(Paddle p1, Paddle p2) {
 		
-		if(!Intro.sound.isMute()) claimSound.audioStart();
+		if(!Intro.sound.isMute()) claimSound.audioRestart();
 		int randomEffect=-1;
 		
 		while(effect!=null) {
