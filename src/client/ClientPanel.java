@@ -38,6 +38,7 @@ public class ClientPanel extends JPanel{
 	Sound sound;
 	protected Sound hitSound = new Sound("hit.wav");
 	protected Sound errorSound = new Sound("error.wav");
+	static Sound sound1;
 	
 	public ClientPanel() {
 
@@ -45,7 +46,7 @@ public class ClientPanel extends JPanel{
 			sound=new Sound("gamePlay.wav");
 			sound.audioStart();
 			sound.audioLoop();
-			}
+		}
 
 		this.setFocusable(true);
 		this.setPreferredSize(SCREEN_SIZE);
@@ -90,18 +91,50 @@ public class ClientPanel extends JPanel{
 		if(packet.p1Score>=6 || packet.p2Score>=6)throw new IOException("Kraj igre");
 	}
 	public void checkCollision() {
+		//odavde radi Intro.sound.isMute() tj Intro.sound nije null
 		if (ball.intersects(paddle1)) {
-			if(!Intro.sound.isMute()) hitSound.audioRestart();
+			//radi
+			if(!Intro.sound.isMute()) {
+				System.out.println("hit --" + Intro.sound.isMute());
+				hitSound.audioRestart();
+			}
 		}
 		if (ball.intersects(paddle2)) {
-			if(!Intro.sound.isMute()) hitSound.audioRestart();
+			//radi
+			if(!Intro.sound.isMute()) {
+				System.out.println("hit --" + Intro.sound.isMute());
+				hitSound.audioRestart();
+			}
 		}
-		if(ball.x <= 0) {
-			if(!Intro.sound.isMute()) errorSound.audioRestart();
-		}
-		if (ball.x >= GAME_WIDTH - BALL_DIAMETER) {
-			if(!Intro.sound.isMute()) errorSound.audioRestart();
-		}
+		
+		
+//		if(ball.x <= 0) {
+//			System.out.println("radi error1");
+//			if(!Intro.sound.isMute()) errorSound.audioRestart();
+//			//ne radi
+//		}
+//		if (ball.x >= GAME_WIDTH - BALL_DIAMETER) {
+//			System.out.println("radi error2");
+//			if(!Intro.sound.isMute()) errorSound.audioRestart();
+//			//ne radi
+//		}
+	}
+	
+	//ZAKLJUCAK ------- sve mora da bude u okviru checkCollision ali ona mora da se pozove nekako ranije dok se u GamePanel.checkCollision() 
+	//ne napravi nova loptica ili postavi effect na null, ne moze static jer se onda ostatak buni
+	//najbolje da ide prvo checkCollision iz klijenta pa tek onda iz Game al ne znam gde je to
+	
+	public static void playSound(String name) {
+		//a odavde ne radi, Intro.sound je null ???????
+//		System.out.println("play s --" + Intro.sound.isMute());
+//		if(!Intro.sound.isMute()) {
+//			System.out.println("ZVUK");
+//			sound1 = new Sound(name);
+//			sound1.audioRestart();
+//		}
+		System.out.println("ZVUK");
+		sound1 = new Sound(name);
+		sound1.audioRestart();
 	}
 	
 }

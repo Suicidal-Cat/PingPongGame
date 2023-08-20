@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 
+import client.ClientPanel;
 import game.GamePanel;
 import game.Paddle;
 import gameInterface.Intro;
@@ -175,7 +176,15 @@ public class GameAdvanced extends GamePanel{
 	
 	//Apply effects
 	public void effectCollision(Paddle p1, Paddle p2) {
+		
+//		if(!Intro.sound.isMute()) {
+//			ClientPanel.playSound("claim.wav");
+//			System.out.println("claim zvuk");
+//		} //NE RADI >
 	
+		ClientPanel.playSound("claim.wav");
+		System.out.println("claim zvuk ---");
+		
 		int randomEffect=-1;
 		
 		while(effect!=null) {

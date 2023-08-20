@@ -69,18 +69,32 @@ public class ClientAdvancePanel extends ClientPanel{
 		if(packet.p1Score>=6 || packet.p2Score>=6)throw new IOException("Kraj igre");
 	}
 	public void checkCollision() {
-		super.checkCollision();
-		if(effect!=null && paddle1.intersects(effect)) {
-			if(!Intro.sound.isMute()) claimSound.audioRestart();
-		}
-		if(effect!=null && paddle2.intersects(effect)) {
-			if(!Intro.sound.isMute()) claimSound.audioRestart();
-		}
+		
+//		if(effect!=null && paddle1.intersects(effect)) {
+//			System.out.println("radi efekat1");
+//			if(!Intro.sound.isMute()) claimSound.audioRestart();
+//			//ne radi
+//		}
+//		if(effect!=null && paddle2.intersects(effect)) {
+//			System.out.println("radi efekat2");
+//			if(!Intro.sound.isMute()) claimSound.audioRestart();
+//			//ne radi
+//		}
 		if(barrier!=null && ball.intersects(barrier)) {
-			if(!Intro.sound.isMute()) hitSound.audioRestart();
+			//radi
+			if(!Intro.sound.isMute()) {
+				System.out.println("barijera");
+				hitSound.audioRestart();
+			}
 		}
 		if(barrier1!=null && (ball.intersects(barrier1) || ball.intersects(barrier2))) {
-			if(!Intro.sound.isMute()) hitSound.audioRestart();
+			//radi
+			if(!Intro.sound.isMute()) {
+				System.out.println("barijera");
+				hitSound.audioRestart();
+			}
 		}
+		super.checkCollision();
 	}
+	
 }

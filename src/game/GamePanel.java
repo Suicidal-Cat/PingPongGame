@@ -9,6 +9,7 @@ import java.util.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import client.ClientPanel;
 import gameInterface.Intro;
 import gameServer.Client_handler;
 import gameSound.Sound;
@@ -39,7 +40,6 @@ public class GamePanel extends JPanel implements Runnable {
 	protected int brojac1,brojac2;
 	protected Client_handler player1,player2;
 	
-
 	public GamePanel(Client_handler p1,Client_handler p2) {
 
 		player1=p1;
@@ -127,7 +127,6 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 		// bounces ball off paddles ovaj deo moze bolje
 		if (ball.intersects(paddle1)) {
-
 			
 			ball.setXVelocity(Math.abs(ball.getXVelocity()));
 			ball.setXVelocity(ball.getXVelocity() + 1);// ubrzanje nakon udarca
@@ -140,7 +139,7 @@ public class GamePanel extends JPanel implements Runnable {
 			ball.setYDirection(ball.getYVelocity());
 		}
 		if (ball.intersects(paddle2)) {
-
+			
 			ball.setXVelocity(Math.abs(ball.getXVelocity()));
 			ball.setXVelocity(ball.getXVelocity() + 1);// ubrzanje nakon udarca
 			if (ball.getYVelocity() > 0) {
@@ -165,33 +164,47 @@ public class GamePanel extends JPanel implements Runnable {
 		// scoring system
 		
 		if(ball.x <= 0) {
-
-		if (brojac2<2) {
-			score.player2++;
-			brojac2++;
-			newPaddles();
-			newBall();
-		
-		}else {
-			score.player2=score.player2+2;
-			newPaddles();
-			newBall();
-			brojac2=0;
-			addGif();
-			//kad da treci za redom(bez da ga drugi prekine dobice +2 umesto +1 
+//			if(!Intro.sound.isMute()) {
+//				ClientPanel.playSound("error.wav");
+//				System.out.println("error 1 zvuk");
+//			}//u ifu nece a ovako ispod hoce.....
+			ClientPanel.playSound("error.wav");
+			System.out.println("error 1 zvuk");
 			
-		}
+			if (brojac2<2) {
+				score.player2++;
+				brojac2++;
+				newPaddles();
+				newBall();
+		
+			}else {
+				score.player2=score.player2+2;
+				newPaddles();
+				newBall();
+				brojac2=0;
+				addGif();
+				//kad da treci za redom(bez da ga drugi prekine dobice +2 umesto +1 
+			
+			}
 		}else if (brojac1>0)brojac2=0;
 		
 		
 		
 		if (ball.x >= GAME_WIDTH - BALL_DIAMETER) {
-
+//			if(!Intro.sound.isMute()) {
+//				ClientPanel.playSound("error.wav");
+//				System.out.println("error 2 zvuk");
+//			}//u ifu nece a ovako ispod hoce.....
+			ClientPanel.playSound("error.wav");
+			System.out.println("error 1 zvuk");
+			
+			
+		
 			if(brojac1<2) {
-			score.player1++;
-			newPaddles();
-			newBall();
-			brojac1++;
+				score.player1++;
+				newPaddles();
+				newBall();
+				brojac1++;
 
 			}else {
 				score.player1=score.player1+2;
