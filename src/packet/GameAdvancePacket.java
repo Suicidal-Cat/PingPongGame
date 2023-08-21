@@ -18,10 +18,10 @@ public class GameAdvancePacket implements Serializable{
 	public BuffEffect effect;
 	public int ballx,bally,p1Score,p2Score;
 	public int []XYPostions;
-	public boolean gifFlag1, gifFlag2;
+	public boolean gifFlag;
 	
 	public GameAdvancePacket(Rectangle p1,Rectangle p2,int bx,int by,
-			BuffEffect eff,Barrier barr,Barrier barr1,Barrier barr2,int[]xy,int s1,int s2,boolean gif1,boolean gif2) {
+			BuffEffect eff,Barrier barr,Barrier barr1,Barrier barr2,int[]xy,int s1,int s2,boolean gif) {
 		paddle1=p1;
 		paddle2=p2;
 		ballx=bx;
@@ -33,7 +33,6 @@ public class GameAdvancePacket implements Serializable{
 		XYPostions=xy;
 		p1Score=s1;
 		p2Score=s2;
-		gifFlag1=gif1;
-		gifFlag2=gif2;
+		gifFlag=gif;
 	}
 }

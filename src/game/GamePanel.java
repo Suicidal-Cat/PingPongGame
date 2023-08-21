@@ -39,8 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public Score score;
 	protected int brojac1,brojac2;
 	protected Client_handler player1,player2;
-	boolean gifFlag1=false;
-	boolean gifFlag2=false;
+	boolean gifFlag=false;
 	
 	public GamePanel(Client_handler p1,Client_handler p2) {
 
@@ -186,7 +185,7 @@ public class GamePanel extends JPanel implements Runnable {
 				brojac2=0;
 //				addGif();
 //				ClientPanel.playGif=true;
-				gifFlag2=true;
+				gifFlag=true;
 				//kad da treci za redom(bez da ga drugi prekine dobice +2 umesto +1 
 			
 			}
@@ -217,7 +216,7 @@ public class GamePanel extends JPanel implements Runnable {
 				brojac1=0;
 //				addGif();
 //				ClientPanel.playGif=true;
-				gifFlag1=true;
+				gifFlag=true;
 
 			}
 		}else if (brojac2>0)brojac1=0;
@@ -239,13 +238,12 @@ public class GamePanel extends JPanel implements Runnable {
 //				checkCollision();
 			//	repaint();// poziva paint metodu
 				GamePacket packet=new GamePacket(paddle1.x,paddle1.y, paddle2.x,paddle2.y,
-						ball.x,ball.y, score.player1,score.player2,gifFlag1,gifFlag2);
+						ball.x,ball.y, score.player1,score.player2,gifFlag);
 				try {
 					player1.updatePlayer(packet);
 					player2.updatePlayer(packet);
 					////////////
-					gifFlag1=false;
-					gifFlag2=false;
+					gifFlag=false;
 				}catch(IOException e) {
 					break;
 				}

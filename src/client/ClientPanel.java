@@ -43,7 +43,7 @@ public class ClientPanel extends JPanel{
 	protected Sound hitSound = new Sound("hit.wav");
 	protected Sound errorSound = new Sound("error.wav");
 	static Sound sound1;
-	public boolean gif1, gif2;
+	public boolean gif;
 	
 	public ClientPanel() {
 
@@ -91,8 +91,7 @@ public class ClientPanel extends JPanel{
 		score.player1=packet.p1Score;
 		score.player2=packet.p2Score;
 		
-		gif1=packet.gifFlag1;
-		gif2=packet.gifFlag2;
+		gif=packet.gifFlag;
 		
 		checkCollision();
 		repaint();
@@ -120,7 +119,7 @@ public class ClientPanel extends JPanel{
 //			System.out.println("radi error1");
 			if(!Intro.sound.isMute()) errorSound.audioRestart();
 			//radi
-			System.out.println("1:gif1 = " + gif1 + ", gif2 = " + gif2);
+			
 			//treba da se proveri, ako je taj koji igra igrac2 onda se pusta gif  
 			
 			
@@ -129,15 +128,21 @@ public class ClientPanel extends JPanel{
 //			System.out.println("radi error2");
 			if(!Intro.sound.isMute()) errorSound.audioRestart();
 			//radi
-			System.out.println("2:gif1 = " + gif1 + ", gif2 = " + gif2);
+			
 			//treba da se proveri, ako je taj koji igra igrac1 onda se pusta gif  
 		}
+		
+//		System.out.println("2:gif = " + gif);
+		if(gif) {
+			addGif();
+		}
+		
 	}
 	
 	//ovo se prvo proverava pa onda u igrici checkCollision, mozda se ne okida onaj boolean za gif?
 	
-	public void addGif(String name) {
-	    Icon icon = new ImageIcon("src/resources/images/"+name);
+	public void addGif() {
+	    Icon icon = new ImageIcon("src/resources/images/minions.gif");
 	    JLabel label = new JLabel(icon);
 	 
 	    JFrame f = new JFrame("Animation");
