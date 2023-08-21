@@ -39,6 +39,8 @@ public class GamePanel extends JPanel implements Runnable {
 	public Score score;
 	protected int brojac1,brojac2;
 	protected Client_handler player1,player2;
+	boolean gifFlag1=false;
+	boolean gifFlag2=false;
 	
 	public GamePanel(Client_handler p1,Client_handler p2) {
 
@@ -96,27 +98,27 @@ public class GamePanel extends JPanel implements Runnable {
 		paddle2.move();
 		ball.move();
 	}
-	public void addGif() {
-	    Icon icon = new ImageIcon("src/resources/images/minions.gif");
-	    JLabel label = new JLabel(icon);
-	 
-	    JFrame f = new JFrame("Animation");
-	    f.getContentPane().add(label);
-	  	f.setUndecorated(true);
-	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    f.pack();
-	    f.setLocationRelativeTo(null);
-	    f.setVisible(true);
-	    //f.setTitle("Ostvarili ste bonus +1");
-	    ImageIcon image=new ImageIcon("src/resources/images/arcade1.png");
-	  	//f.setIconImage(image.getImage());
-	    try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	    f.dispose();
-	}
+//	public void addGif() {
+//	    Icon icon = new ImageIcon("src/resources/images/minions.gif");
+//	    JLabel label = new JLabel(icon);
+//	 
+//	    JFrame f = new JFrame("Animation");
+//	    f.getContentPane().add(label);
+//	  	f.setUndecorated(true);
+//	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//	    f.pack();
+//	    f.setLocationRelativeTo(null);
+//	    f.setVisible(true);
+//	    //f.setTitle("Ostvarili ste bonus +1");
+//	    ImageIcon image=new ImageIcon("src/resources/images/arcade1.png");
+//	  	//f.setIconImage(image.getImage());
+//	    try {
+//			Thread.sleep(2000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+//	    f.dispose();
+//	}
 	public void checkCollision() {
 		// ball bouncing of edges
 		if (ball.y <= 0) {
@@ -182,7 +184,9 @@ public class GamePanel extends JPanel implements Runnable {
 				newPaddles();
 				newBall();
 				brojac2=0;
-				addGif();
+//				addGif();
+//				ClientPanel.playGif=true;
+				gifFlag2=true;
 				//kad da treci za redom(bez da ga drugi prekine dobice +2 umesto +1 
 			
 			}
@@ -211,7 +215,9 @@ public class GamePanel extends JPanel implements Runnable {
 				newPaddles();
 				newBall();
 				brojac1=0;
-				addGif();
+//				addGif();
+//				ClientPanel.playGif=true;
+				gifFlag1=true;
 
 			}
 		}else if (brojac2>0)brojac1=0;
@@ -233,10 +239,13 @@ public class GamePanel extends JPanel implements Runnable {
 //				checkCollision();
 			//	repaint();// poziva paint metodu
 				GamePacket packet=new GamePacket(paddle1.x,paddle1.y, paddle2.x,paddle2.y,
-						ball.x,ball.y, score.player1,score.player2);
+						ball.x,ball.y, score.player1,score.player2,gifFlag1,gifFlag2);
 				try {
 					player1.updatePlayer(packet);
 					player2.updatePlayer(packet);
+					////////////
+					gifFlag1=false;
+					gifFlag2=false;
 				}catch(IOException e) {
 					break;
 				}

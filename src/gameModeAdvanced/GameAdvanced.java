@@ -31,6 +31,8 @@ public class GameAdvanced extends GamePanel{
 	static final int BARRIER_WIDTH = 30;
 	static final int BARRIER_HEIGHT = 160;
 	static final int EFFECT_SIZE=30;
+	boolean gifFlag1=false;
+	boolean gifFlag2=false;
 	
 	public GameAdvanced(Client_handler p1,Client_handler p2){
 		super(p1,p2);
@@ -354,7 +356,7 @@ public class GameAdvanced extends GamePanel{
 				new Rectangle(paddle1.x,paddle1.y,paddle1.width,paddle1.height),
 				new Rectangle(paddle2.x,paddle2.y,paddle2.width,paddle2.height),
 				ball.x,ball.y,
-				effect,barrier,barrier1,barrier2,XY,score.player1,score.player2);
+				effect,barrier,barrier1,barrier2,XY,score.player1,score.player2,gifFlag1,gifFlag2);
 			player1.updatePlayer(packet);
 			player2.updatePlayer(packet);
 	}

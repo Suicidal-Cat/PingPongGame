@@ -9,6 +9,10 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import game.Ball;
@@ -39,6 +43,7 @@ public class ClientPanel extends JPanel{
 	protected Sound hitSound = new Sound("hit.wav");
 	protected Sound errorSound = new Sound("error.wav");
 	static Sound sound1;
+	public boolean gif1, gif2;
 	
 	public ClientPanel() {
 
@@ -85,6 +90,10 @@ public class ClientPanel extends JPanel{
 		ball.y=packet.yBall;
 		score.player1=packet.p1Score;
 		score.player2=packet.p2Score;
+		
+		gif1=packet.gifFlag1;
+		gif2=packet.gifFlag2;
+		
 		checkCollision();
 		repaint();
 		if(packet.p1Score>=6 || packet.p2Score>=6)throw new IOException("Kraj igre");
@@ -94,29 +103,59 @@ public class ClientPanel extends JPanel{
 		if (ball.intersects(paddle1)) {
 			//radi
 			if(!Intro.sound.isMute()) {
-				System.out.println("hit --" + Intro.sound.isMute());
+//				System.out.println("hit --" + Intro.sound.isMute());
 				hitSound.audioRestart();
 			}
 		}
 		if (ball.intersects(paddle2)) {
 			//radi
 			if(!Intro.sound.isMute()) {
-				System.out.println("hit --" + Intro.sound.isMute());
+//				System.out.println("hit --" + Intro.sound.isMute());
 				hitSound.audioRestart();
 			}
 		}
 		
 		
 		if(ball.x <= 0) {
-			System.out.println("radi error1");
+//			System.out.println("radi error1");
 			if(!Intro.sound.isMute()) errorSound.audioRestart();
 			//radi
+			System.out.println("1:gif1 = " + gif1 + ", gif2 = " + gif2);
+			//treba da se proveri, ako je taj koji igra igrac2 onda se pusta gif  
+			
+			
 		}
 		if (ball.x >= GAME_WIDTH - BALL_DIAMETER) {
-			System.out.println("radi error2");
+//			System.out.println("radi error2");
 			if(!Intro.sound.isMute()) errorSound.audioRestart();
 			//radi
+			System.out.println("2:gif1 = " + gif1 + ", gif2 = " + gif2);
+			//treba da se proveri, ako je taj koji igra igrac1 onda se pusta gif  
 		}
+	}
+	
+	//ovo se prvo proverava pa onda u igrici checkCollision, mozda se ne okida onaj boolean za gif?
+	
+	public void addGif(String name) {
+	    Icon icon = new ImageIcon("src/resources/images/"+name);
+	    JLabel label = new JLabel(icon);
+	 
+	    JFrame f = new JFrame("Animation");
+	    f.getContentPane().add(label);
+	  	f.setUndecorated(true);
+	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    f.pack();
+	    f.setLocationRelativeTo(null);
+	    f.setVisible(true);
+	    //f.setTitle("Ostvarili ste bonus +1");
+	    ImageIcon image=new ImageIcon("src/resources/images/arcade1.png");
+	  	//f.setIconImage(image.getImage());
+	    try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	    f.dispose();
 	}
 	
 	//ZAKLJUCAK ------- sve mora da bude u okviru checkCollision ali ona mora da se pozove nekako ranije dok se u GamePanel.checkCollision() 

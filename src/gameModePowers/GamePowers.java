@@ -139,7 +139,7 @@ public class GamePowers extends GamePanel{
 			paddle1.resetPowers();
 			paddle2.resetPowers();
 			brojac2=0;
-			addGif();
+//			addGif();
 			//kad da treci za redom(bez da ga drugi prekine dobice +2 umesto +1 
 			
 		}
@@ -167,7 +167,7 @@ public class GamePowers extends GamePanel{
 				paddle1.resetPowers();
 				paddle2.resetPowers();
 				brojac1=0;
-				addGif();
+//				addGif();
 
 			}
 		}else if (brojac2>0)brojac1=0;
