@@ -321,8 +321,8 @@ public class GameAdvanced extends GamePanel{
 				}catch(IOException e) {
 					break;
 				}
-				checkCollision();
 				if(score.player1>=6 || score.player2>=6)break;
+				checkCollision();
 				delta--;
 			}
 		}

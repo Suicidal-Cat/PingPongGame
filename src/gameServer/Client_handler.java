@@ -26,6 +26,7 @@ public class Client_handler extends Thread{
 	public GamePanel panel;
 	public GameMode mode;
 	public int playerNumber;
+	public String username;
 	public boolean foundGame,isRunning;
 
 	
@@ -56,27 +57,40 @@ public class Client_handler extends Thread{
 				if(packet.playerNumber==1)panel.paddle1.updatePaddle(packet.control);
 				else panel.paddle2.updatePaddle(packet.control);
 			}
-
-			//update database	
-			Server.players.remove(this);
-			player.close();
-			
+		
 		}
 		catch(ClassNotFoundException e) {
 			System.out.println("Pogresan paket!");
 		}
 		catch(IOException e) {
-			System.out.println("KRAJ IGRE");
 			opponent.isRunning=false;
 			isRunning=false;
-			if(game!=null) {
-				game.dispose();
-			}
 			try {
 				opponent.player.close();
 			} catch (IOException e1) {
 			}
 		}
+		
+		
+		if(playerNumber==1) {
+			//update database
+			
+			if(game.panel.score.player1>=6 || game.panel.score.player2>=6) {
+			System.out.println("Username prvog: "+username+"\nUsername drugog "+opponent.username+
+					" \nRezultat prvog i drugog: "+game.panel.score.player1+": "
+					+game.panel.score.player2);
+			}
+			
+			System.out.println("KRAJ IGRE "+playerNumber);
+			Server.players.remove(this);
+			if(game!=null) {
+				game.dispose();
+			}
+			try {
+				player.close();
+			} catch (IOException e) {}
+		}
+
 					
 	}
 	
@@ -104,7 +118,8 @@ public class Client_handler extends Thread{
 	private void recieveInitPacket() throws IOException{
 		try {
 			InitPacket packet=(InitPacket)clientInput.readObject();
-			mode=packet.mode;	
+			mode=packet.mode;
+			username=packet.username;
 			System.out.println("Dobio init od klijenta "+mode.toString());
 		} 
 		catch (ClassNotFoundException e) {

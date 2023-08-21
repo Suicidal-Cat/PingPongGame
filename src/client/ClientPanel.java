@@ -60,7 +60,6 @@ public class ClientPanel extends JPanel{
 	
 	
 	public void paint(Graphics g) {
-		//g.drawImage(image, 0, 0, this);
 		try {
 		    image = ImageIO.read(new File("src/resources/images/pozadinaIgrice.jpg"));
 			graphics = image.getGraphics();

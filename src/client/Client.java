@@ -30,7 +30,7 @@ public class Client extends KeyAdapter implements Runnable{
 		try {
 			this.mode=mode;
 			communicationSocket = new Socket("127.0.0.1",port);
-			//2a06:5b00:f0d:d500:9523:7ecf:5671:d874
+			//2a06:5b00:f0d:d500:d991:4a48:9698:2bf0
 			serverInput=new ObjectInputStream(communicationSocket.getInputStream());
 			serverOutput=new ObjectOutputStream(communicationSocket.getOutputStream());
 			
@@ -55,7 +55,6 @@ public class Client extends KeyAdapter implements Runnable{
 					Object packet=serverInput.readObject();
 					frame.panel.updateComponents(packet);
 				}
-				communicationSocket.close();
 		}catch (ClassNotFoundException e) {
 			System.out.println("Pogresan paket!");
 		}catch (IOException e) {
@@ -63,10 +62,12 @@ public class Client extends KeyAdapter implements Runnable{
 			isRunning=false;
 			if(frame!=null)frame.dispose();
 		}
+		try {communicationSocket.close();}
+		catch (IOException e) {}
 	}
 		
 	private void sendInitPacket() throws IOException{
-			serverOutput.writeObject(new InitPacket(mode));
+			serverOutput.writeObject(new InitPacket(mode,"testuser"));
 			serverOutput.flush();
 
 	}

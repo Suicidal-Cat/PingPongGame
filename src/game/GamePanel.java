@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public Paddle paddle1;
 	public Paddle paddle2;
 	protected Ball ball;
-	protected Score score;
+	public Score score;
 	protected int brojac1,brojac2;
 	protected Client_handler player1,player2;
 	
@@ -240,8 +240,8 @@ public class GamePanel extends JPanel implements Runnable {
 				}catch(IOException e) {
 					break;
 				}
-				checkCollision();
 				if(score.player1>=6 || score.player2>=6)break;
+				checkCollision();
 				delta--;
 			}
 		}
