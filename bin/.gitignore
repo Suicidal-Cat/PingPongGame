@@ -1,14 +1,9 @@
-/gameServer/
-/game/
-/packet/
-/client/
-/gameModeAdvanced/
-<<<<<<< HEAD
-/gameInterface/
 /gameModeClassic/
 /gameModePowers/
+/gameServer/
 /gameSound/
-/resources/
-=======
-/gameModePowers/
->>>>>>> bbacba1e719dbcb723cd6adfafa384035d0e44dd
+/packet/
+/gameData/
+/gameInterface/
+/client/
+/game/

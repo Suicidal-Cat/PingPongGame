@@ -21,6 +21,8 @@ import client.Client;
 import game.GameFrame;
 import game.GameMode;
 import game.GamePanel;
+import gameData.Forma;
+import gameData.User;
 import gameModeClassic.GameClassic;
 import gameSound.Sound;
 import gameInterface.*;
@@ -30,10 +32,11 @@ public class FirstFrame extends JFrame implements ActionListener{
 	
 	private ImageIcon pozadinaArcade;
 	private JLabel myLabel;
-	JButton button1,button2,button3,button4;
+	JButton button1,button2,button3,button4,button5;
 	Sound modeSound = new Sound("gameMode.wav");
 	Icon iconSoundOff = new ImageIcon("src/resources/images/sound-off.png");
 	Icon iconSound = new ImageIcon("src/resources/images/sound.png");
+	public static User u;
 	
 	 public FirstFrame() {
 	
@@ -45,7 +48,8 @@ public class FirstFrame extends JFrame implements ActionListener{
 		    Icon icon1 = new ImageIcon("src/resources/images/gamepad.png");
 		    Icon icon2 = new ImageIcon("src/resources/images/arcade.png");
 		    Icon icon3 = new ImageIcon("src/resources/images/magic-wand.png");
-		    
+		    Icon forma = new ImageIcon("src/resources/images/user.png");
+
 		    
 
 			
@@ -102,12 +106,18 @@ public class FirstFrame extends JFrame implements ActionListener{
 			button4.setBorder(BorderFactory.createEtchedBorder());
 			button4.setFont(new Font("Arial", Font.BOLD, 20));
 			
-
+			button5=new JButton(forma);
+			button5.setBounds(40,500,50,50);
+			button5.addActionListener(this);
+			button5.setFocusable(false);//sklanja one isprekidane linije oko teksta
+			button5.setBackground(Color.decode("#6C74C6"));
 			
 			myLabel.add(button1);
 			myLabel.add(button2);
 			myLabel.add(button3);
 			myLabel.add(button4);
+			myLabel.add(button5);
+
 			
 			
 			ImageIcon image=new ImageIcon("src/resources/images/arcade1.png");
@@ -161,6 +171,16 @@ public class FirstFrame extends JFrame implements ActionListener{
 				modeSound.audioRestart();
 			}
 		}
+		if(e.getSource()==button5) {
+			u=new User();
+			Forma gf=new Forma(this);
+			gf.show();
+			setVisible(false);
+			
+			
+			
+		}
+
 	}
 
 

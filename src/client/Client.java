@@ -12,6 +12,7 @@ import javax.swing.*;
 
 import game.GameFrame;
 import game.GameMode;
+import gameInterface.FirstFrame;
 import gameInterface.Waiting;
 import packet.*;
 
@@ -78,7 +79,7 @@ public class Client extends KeyAdapter implements Runnable{
 	}
 		
 	private void sendInitPacket() throws IOException{
-			serverOutput.writeObject(new InitPacket(mode,"testuser"));
+			serverOutput.writeObject(new InitPacket(mode,FirstFrame.u.userName));
 			serverOutput.flush();
 
 	}

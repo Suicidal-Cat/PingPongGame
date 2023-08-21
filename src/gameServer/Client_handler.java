@@ -7,7 +7,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.Random;
+
+import javax.swing.JOptionPane;
 
 import game.GameFrame;
 import game.GameMode;
@@ -76,9 +81,8 @@ public class Client_handler extends Thread{
 			//update database
 			
 			if(game.panel.score.player1>=6 || game.panel.score.player2>=6) {
-			System.out.println("Username prvog: "+username+"\nUsername drugog "+opponent.username+
-					" \nRezultat prvog i drugog: "+game.panel.score.player1+": "
-					+game.panel.score.player2);
+				System.out.println("tu sam");
+			saveMatch(username, opponent.username, game.panel.score.player1, game.panel.score.player2);
 			}
 			
 			System.out.println("KRAJ IGRE "+playerNumber);
@@ -93,7 +97,25 @@ public class Client_handler extends Thread{
 
 					
 	}
-	
+	private void saveMatch(String user1,String user2,int score1, int score2) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/pingponggame","root","");
+			PreparedStatement ps=conn.prepareStatement("insert into matchhistory(UserName1,UserName2,Score1,Score2) values (?,?,?,?)");
+			ps.setString(1, user1);
+			ps.setString(2, user2);
+			ps.setInt(3, score1);
+			ps.setInt(4, score2);
+
+			ps.executeUpdate();
+			
+			
+			
+		}catch(Exception e1) {
+			System.out.println(e1);
+			
+		}
+	}
 	private void findGame() {// da li uvesti mutex ovde ? da samo jedan pristupa
 		if(Server.players.size()==1) {
 			return;
