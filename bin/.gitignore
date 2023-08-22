@@ -1,9 +1,12 @@
+/client/
+/game/
+/gameData/
+/gameInterface/
+/gameModeAdvanced/
 /gameModeClassic/
 /gameModePowers/
 /gameServer/
 /gameSound/
+/lib/
 /packet/
-/gameData/
-/gameInterface/
-/client/
-/game/
+/resources/

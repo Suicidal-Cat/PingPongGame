@@ -120,9 +120,12 @@ public class Forma extends JFrame {
 					int x=ps.executeUpdate();
 					if(x>0) {
 						JOptionPane.showMessageDialog(null,"Uspesno ste se registrovali!\nMolim vas prijavite se!");
+						username.setText("");
+						password.setText("");
+						gmail.setText("");
 					}else
 						JOptionPane.showMessageDialog(null,"Registracija nije uspela");
-
+					
 					
 					
 				}catch(Exception e1) {
@@ -152,7 +155,7 @@ public class Forma extends JFrame {
 						dispose();
 					}
 					else 
-						JOptionPane.showMessageDialog(null, "Korisnicko ime i/ili lozinka nije tačno");
+						JOptionPane.showMessageDialog(null, "Korisnicko ime i/ili lozinka nije tacno");
 
 				}catch(Exception e1) {
 					System.out.print(e1);

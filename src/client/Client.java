@@ -79,7 +79,10 @@ public class Client extends KeyAdapter implements Runnable{
 	}
 		
 	private void sendInitPacket() throws IOException{
-			serverOutput.writeObject(new InitPacket(mode,FirstFrame.u.userName));
+			if(FirstFrame.u==null || FirstFrame.u.userName==null) {
+				serverOutput.writeObject(new InitPacket(mode,"guest"));
+			}else 	
+				serverOutput.writeObject(new InitPacket(mode,FirstFrame.u.userName));		
 			serverOutput.flush();
 
 	}

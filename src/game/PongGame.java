@@ -32,7 +32,7 @@ public class PongGame{
 //		Intro intro=new Intro();
 		
 	//	new Thread(new Server()).start();
-		Intro intro=new Intro();
+	//	Intro intro=new Intro();
 	}
 }
 
