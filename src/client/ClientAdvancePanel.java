@@ -64,6 +64,9 @@ public class ClientAdvancePanel extends ClientPanel{
 		}	
 		score.player1=packet.p1Score;
 		score.player2=packet.p2Score;
+		
+		gif=packet.gifFlag;
+		
 		checkCollision();
 		repaint();
 		if(packet.p1Score>=6 || packet.p2Score>=6)throw new IOException("Kraj igre");
@@ -71,26 +74,26 @@ public class ClientAdvancePanel extends ClientPanel{
 	public void checkCollision() {
 		
 		if(effect!=null && paddle1.intersects(effect)) {
-			System.out.println("radi efekat1");
+//			System.out.println("radi efekat1");
 			if(!Intro.sound.isMute()) claimSound.audioRestart();
 			//ne radi
 		}
 		if(effect!=null && paddle2.intersects(effect)) {
-			System.out.println("radi efekat2");
+//			System.out.println("radi efekat2");
 			if(!Intro.sound.isMute()) claimSound.audioRestart();
 			//ne radi
 		}
 		if(barrier!=null && ball.intersects(barrier)) {
 			//radi
 			if(!Intro.sound.isMute()) {
-				System.out.println("barijera");
+//				System.out.println("barijera");
 				hitSound.audioRestart();
 			}
 		}
 		if(barrier1!=null && (ball.intersects(barrier1) || ball.intersects(barrier2))) {
 			//radi
 			if(!Intro.sound.isMute()) {
-				System.out.println("barijera");
+//				System.out.println("barijera");
 				hitSound.audioRestart();
 			}
 		}

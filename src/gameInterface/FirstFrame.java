@@ -169,6 +169,9 @@ public class FirstFrame extends JFrame implements ActionListener{
 			}
 		}
 		if(e.getSource()==button5) {
+			if(!Intro.sound.isMute()) {
+				modeSound.audioRestart();
+			}
 			u=new User();
 			Forma gf=new Forma(this);
 			gf.show();

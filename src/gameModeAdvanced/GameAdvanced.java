@@ -31,7 +31,6 @@ public class GameAdvanced extends GamePanel{
 	static final int BARRIER_WIDTH = 30;
 	static final int BARRIER_HEIGHT = 160;
 	static final int EFFECT_SIZE=30;
-	boolean gifFlag = false;
 	
 	public GameAdvanced(Client_handler p1,Client_handler p2){
 		super(p1,p2);
@@ -276,9 +275,12 @@ public class GameAdvanced extends GamePanel{
 				//posle 5 sekundi se vracamo na staro
 				ActionListener taskPerformer = new ActionListener() {
 		            public void actionPerformed(ActionEvent evt) {
-		            	barrier.y=GAME_HEIGHT/2-BARRIER_HEIGHT/2;
-						barrier.height=BARRIER_HEIGHT;
-						flag = false;
+		            	if(barrier!=null) {
+		            		barrier.y=GAME_HEIGHT/2-BARRIER_HEIGHT/2;
+							barrier.height=BARRIER_HEIGHT;
+							flag = false;
+		            	}
+		            	
 		            }
 		        };
 		        javax.swing.Timer timer = new javax.swing.Timer(5000, taskPerformer);
@@ -319,6 +321,8 @@ public class GameAdvanced extends GamePanel{
 			//	repaint();// poziva paint metodu
 				try {
 					updateClient();
+					////////
+					gifFlag=false;
 				}catch(IOException e) {
 					break;
 				}
