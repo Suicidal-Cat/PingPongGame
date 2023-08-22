@@ -31,8 +31,8 @@ public class PongGame{
 //		FirstFrame frame=new FirstFrame();
 //		Intro intro=new Intro();
 		
-	//	new Thread(new Server()).start();
-	//	Intro intro=new Intro();
+//		new Thread(new Server()).start();
+		Intro intro=new Intro();
 	}
 }
 

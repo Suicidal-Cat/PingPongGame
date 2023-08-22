@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public Score score;
 	protected int brojac1,brojac2;
 	protected Client_handler player1,player2;
-	boolean gifFlag=false;
+	protected boolean gifFlag=false;
 	
 	public GamePanel(Client_handler p1,Client_handler p2) {
 
@@ -165,13 +165,6 @@ public class GamePanel extends JPanel implements Runnable {
 		// scoring system
 		
 		if(ball.x <= 0) {
-//			if(!Intro.sound.isMute()) {
-//				ClientPanel.playSound("error.wav");
-//				System.out.println("error 1 zvuk");
-//			}//u ifu nece a ovako ispod hoce.....
-//			ClientPanel.playSound("error.wav");
-//			System.out.println("error 1 zvuk");
-			
 			if (brojac2<2) {
 				score.player2++;
 				brojac2++;
@@ -184,7 +177,7 @@ public class GamePanel extends JPanel implements Runnable {
 				newBall();
 				brojac2=0;
 //				addGif();
-//				ClientPanel.playGif=true;
+
 				gifFlag=true;
 				//kad da treci za redom(bez da ga drugi prekine dobice +2 umesto +1 
 			
@@ -194,14 +187,6 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		
 		if (ball.x >= GAME_WIDTH - BALL_DIAMETER) {
-//			if(!Intro.sound.isMute()) {
-//				ClientPanel.playSound("error.wav");
-//				System.out.println("error 2 zvuk");
-//			}//u ifu nece a ovako ispod hoce.....
-//			ClientPanel.playSound("error.wav");
-//			System.out.println("error 1 zvuk");
-			
-			
 		
 			if(brojac1<2) {
 				score.player1++;
@@ -215,7 +200,7 @@ public class GamePanel extends JPanel implements Runnable {
 				newBall();
 				brojac1=0;
 //				addGif();
-//				ClientPanel.playGif=true;
+
 				gifFlag=true;
 
 			}
