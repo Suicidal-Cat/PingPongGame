@@ -23,13 +23,16 @@ import javax.swing.JPasswordField;
 
 public class Forma extends JFrame {
 
+	
 	private JPanel contentPane;
 	private JTextField user;
 	private JTextField gmail;
 	private JTextField username;
 	private JPasswordField pass;
 	private JPasswordField password;
-	ImageIcon pozadinaArcade;
+	private ImageIcon pozadinaArcade;
+	private ImageIcon forma;
+
 	JLabel myLabel;
 	FirstFrame f;
 	
@@ -62,15 +65,20 @@ public class Forma extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 437, 480);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setResizable(false);
 		setLocationRelativeTo(null);
-		
+//		forma=new ImageIcon("src/resources/images/4736288.jpg");
+//		
+//		myLabel=new JLabel(forma);
+
 		
 		this.f=f;
 
+		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+//		contentPane.add(myLabel);
 		
 		JLabel lblNewLabel = new JLabel("PRIJAVA");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));

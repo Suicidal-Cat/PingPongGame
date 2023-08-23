@@ -36,19 +36,20 @@ public class FirstFrame extends JFrame implements ActionListener{
 	Sound modeSound = new Sound("gameMode.wav");
 	Icon iconSoundOff = new ImageIcon("src/resources/images/sound-off.png");
 	Icon iconSound = new ImageIcon("src/resources/images/sound.png");
+	Icon icon1 = new ImageIcon("src/resources/images/gamepad.png");
+    Icon icon2 = new ImageIcon("src/resources/images/arcade.png");
+    Icon icon3 = new ImageIcon("src/resources/images/magic-wand.png");
+    Icon forma = new ImageIcon("src/resources/images/user.png");
 	public static User u;
 	
 	 public FirstFrame() {
 	
 		 Intro.sound.audioLoop();
 		 
-		 pozadinaArcade=new ImageIcon("src/resources/images/arcadePozadina1.jpg");
+		 	pozadinaArcade=new ImageIcon("src/resources/images/arcadePozadina1.jpg");
 			myLabel=new JLabel(pozadinaArcade);
 			myLabel.setSize(getMaximumSize());
-		    Icon icon1 = new ImageIcon("src/resources/images/gamepad.png");
-		    Icon icon2 = new ImageIcon("src/resources/images/arcade.png");
-		    Icon icon3 = new ImageIcon("src/resources/images/magic-wand.png");
-		    Icon forma = new ImageIcon("src/resources/images/user.png");
+		    
 
 		    
 
@@ -70,7 +71,6 @@ public class FirstFrame extends JFrame implements ActionListener{
 			button1.setFocusable(false);//sklanja one isprekidane linije oko teksta
 			button1.setBackground(Color.decode("#6C74C6"));
 			button1.setHorizontalTextPosition(JButton.LEFT);
-			button1.setBorder(BorderFactory.createEtchedBorder());
 			button1.setFont(new Font("Arial", Font.BOLD, 20));
 			
 			
@@ -81,7 +81,6 @@ public class FirstFrame extends JFrame implements ActionListener{
 			button2.setFocusable(false);//sklanja one isprekidane linije oko teksta
 			button2.setBackground(Color.decode("#6C74C6"));
 			button2.setHorizontalTextPosition(JButton.LEFT);
-			button2.setBorder(BorderFactory.createEtchedBorder());
 			button2.setFont(new Font("Arial", Font.BOLD, 20));
 
 			
@@ -92,7 +91,6 @@ public class FirstFrame extends JFrame implements ActionListener{
 			button3.setFocusable(false);//sklanja one isprekidane linije oko teksta
 			button3.setBackground(Color.decode("#6C74C6"));
 			button3.setHorizontalTextPosition(SwingConstants.LEFT);
-			button3.setBorder(BorderFactory.createEtchedBorder());
 			button3.setFont(new Font("Arial", Font.BOLD, 20));
 			
 			
@@ -103,11 +101,10 @@ public class FirstFrame extends JFrame implements ActionListener{
 			button4.setFocusable(false);//sklanja one isprekidane linije oko teksta
 			button4.setBackground(Color.decode("#6C74C6"));
 			button4.setHorizontalTextPosition(JButton.LEFT);
-			button4.setBorder(BorderFactory.createEtchedBorder());
 			button4.setFont(new Font("Arial", Font.BOLD, 20));
 			
 			button5=new JButton(forma);
-			button5.setBounds(40,500,50,50);
+			button5.setBounds(50,480,55,55);
 			button5.addActionListener(this);
 			button5.setFocusable(false);//sklanja one isprekidane linije oko teksta
 			button5.setBackground(Color.decode("#6C74C6"));
