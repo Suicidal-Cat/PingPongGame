@@ -32,7 +32,7 @@ public class ClientFrame extends JFrame{
 	}
 	private ClientPanel getMode(GameMode mode) {
 		if(mode==GameMode.Classic)return new ClientPanel();
-		else if(mode==GameMode.Powers)return new ClientPanel();
+		else if(mode==GameMode.Powers)return new ClientPowerPanel();
 		else return new ClientAdvancePanel();
 	}
 }

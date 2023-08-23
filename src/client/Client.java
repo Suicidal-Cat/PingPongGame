@@ -55,7 +55,6 @@ public class Client extends KeyAdapter implements Runnable{
 	public void run() {	
 		try {
 			receiveInitPacket();
-			//	frame.panel.image=Toolkit.getDefaultToolkit().createImage(packet.data);
 //			f.dispose();
 			w.sound.audioStop();
 			w.dispose();
@@ -127,9 +126,17 @@ public class Client extends KeyAdapter implements Runnable{
 		public void keyPressed(KeyEvent e) {
 			try {
 				if(e.getKeyCode()==KeyEvent.VK_UP)
-				serverOutput.writeObject(new ClientPacket(ClientControl.UP_PRESSED,playerNumber));
+					serverOutput.writeObject(new ClientPacket(ClientControl.UP_PRESSED,playerNumber));
 				else if(e.getKeyCode()==KeyEvent.VK_DOWN)
 					serverOutput.writeObject(new ClientPacket(ClientControl.DOWN_PRESSED,playerNumber));
+				else if(mode==GameMode.Powers) {
+					if(e.getKeyCode() == KeyEvent.VK_Z)
+						serverOutput.writeObject(new ClientPacket(ClientControl.Z_PRESSED,playerNumber));
+					else if(e.getKeyCode() == KeyEvent.VK_X)
+						serverOutput.writeObject(new ClientPacket(ClientControl.X_PRESSED,playerNumber));	
+					else if(e.getKeyCode() == KeyEvent.VK_C)
+						serverOutput.writeObject(new ClientPacket(ClientControl.C_PRESSED,playerNumber));	
+				}
 			}catch(IOException ex) {
 				System.out.println("Greska pri slanju paketa");
 			}

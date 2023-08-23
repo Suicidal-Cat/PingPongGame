@@ -23,9 +23,8 @@ import gameSound.Sound;
 import packet.GamePacket;
 
 public class ClientPanel extends JPanel{
-	/**
-	 * 
-	 */
+
+	
 	private static final long serialVersionUID = 4096717905217397314L;
 	protected static final int GAME_WIDTH = 1100;
 	protected static final int GAME_HEIGHT = (int) (GAME_WIDTH * (0.5555));
@@ -43,7 +42,7 @@ public class ClientPanel extends JPanel{
 	protected Sound hitSound = new Sound("hit.wav");
 	protected Sound errorSound = new Sound("error.wav");
 	static Sound sound1;
-	public boolean gif;
+	protected boolean gif;
 	
 	public ClientPanel() {
 

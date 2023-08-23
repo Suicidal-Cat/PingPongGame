@@ -13,10 +13,15 @@ import game.GamePanel;
 import game.Paddle;
 import gameInterface.Intro;
 import gameServer.Client_handler;
+import packet.GamePowersPacket;
+@SuppressWarnings("serial")
 public class GamePowers extends GamePanel{
 		
 	public GamePowers(Client_handler p1,Client_handler p2){
 		super(p1,p2);
+		paddle1 = new PaddlePower(65, (GAME_HEIGHT / 2) - (PADDLE_HEIGHT / 2), PADDLE_WIDTH, PADDLE_HEIGHT, 1);
+		paddle2 = new PaddlePower(GAME_WIDTH - PADDLE_WIDTH-65, (GAME_HEIGHT / 2) - (PADDLE_HEIGHT / 2), PADDLE_WIDTH,
+				PADDLE_HEIGHT, 2);
 	}
 	@Override
 	public void newPaddles() {
@@ -25,23 +30,6 @@ public class GamePowers extends GamePanel{
 				PADDLE_HEIGHT, 2);
 
 	}
-	
-	/*@Override
-	public void draw(Graphics g) {
-		super.draw(g);
-	}
-	@Override
-	public void paint(Graphics g) {
-		try {
-			image = ImageIO.read(new File("src/resources/images/pozadinaPowers5.jpg"));
-			graphics = image.getGraphics();
-			draw(graphics);
-			g.drawImage(image, 0, 0, this);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}*/
 	
 	@Override
 	public void checkCollision() {
@@ -139,8 +127,6 @@ public class GamePowers extends GamePanel{
 			paddle1.resetPowers();
 			paddle2.resetPowers();
 			brojac2=0;
-//			addGif();
-			//kad da treci za redom(bez da ga drugi prekine dobice +2 umesto +1 
 			
 		}
 		}else if (brojac1>0)brojac2=0;
@@ -167,20 +153,45 @@ public class GamePowers extends GamePanel{
 				paddle1.resetPowers();
 				paddle2.resetPowers();
 				brojac1=0;
-//				addGif();
 
 			}
 		}else if (brojac2>0)brojac1=0;
 	}
-/*	public class AL extends KeyAdapter {
-		public void keyPressed(KeyEvent e) {
-			paddle1.keyPressed(e);
-			paddle2.keyPressed(e);
+	
+	public void run() {
+		// game loop
+		long lastTime = System.nanoTime();
+		double amountofTicks = 60.0;
+		double ns = 1000000000 / amountofTicks;
+		double delta = 0;
+		while (true) {
+			long now = System.nanoTime();
+			delta += (now - lastTime) / ns;
+			lastTime = now;
+			if (delta >= 1) {
+				move();
+				try {
+					updateClient();
+					////////
+					gifFlag=false;
+				}catch(IOException e) {
+					break;
+				}
+				if(score.player1>=6 || score.player2>=6)break;
+				checkCollision();
+				delta--;
+			}
 		}
-
-		public void keyReleased(KeyEvent e) {
-			paddle1.keyReleased(e);
-			paddle2.keyReleased(e);
-		}
-	}*/
+	
+	}
+	private void updateClient() throws IOException{
+		int []paddles= {paddle1.x,paddle1.y,paddle1.width,paddle1.height,
+				paddle2.x,paddle2.y,paddle2.width,paddle2.height};
+		int []ballscore= {ball.x,ball.y,score.player1,score.player2};
+		boolean []flags1= paddle1.getFlags();
+		boolean []flags2= paddle2.getFlags();
+		GamePowersPacket packet=new GamePowersPacket(paddles, ballscore, flags1, flags2, gifFlag);
+		player1.updatePlayer(packet);
+		player2.updatePlayer(packet);
+	}
 }

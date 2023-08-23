@@ -13,12 +13,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
+import client.ClientControl;
 import game.Paddle;
 import gameInterface.Intro;
 import gameSound.Sound;
 
 public class PaddlePower extends Paddle{
 	
+	private static final long serialVersionUID = 1604143271542518196L;
 	boolean cdSpeed;//ability is ready to use (cooldown)
 	boolean cdPush;
 	boolean cdBlock;
@@ -32,7 +34,7 @@ public class PaddlePower extends Paddle{
 	static final int POWER_POSITIONX=5;
 	static final int POWER_POSITIONY=40;
 	private static final int GAME_WIDTH=1100;
-	Sound powerSound=new Sound("powerOn.wav");
+	static Sound powerSound=new Sound("powerOn.wav");
 	
 	public PaddlePower(int x, int y, int PADDLE_WIDTH, int PADDLE_HEIGHT, int id) {
 		super(x, y, PADDLE_WIDTH, PADDLE_HEIGHT, id);
@@ -43,7 +45,7 @@ public class PaddlePower extends Paddle{
 		super.updatePaddle(null);
 	}
 	
-	public void keyPressed(KeyEvent e) {
+/*	public void keyPressed(KeyEvent e) {
 		
 		switch (id) {
 		case 1:
@@ -82,7 +84,18 @@ public class PaddlePower extends Paddle{
 			break;
 		}
 
+	}*/
+	
+	public void updatePaddle(ClientControl control) {
+		if(control==ClientControl.UP_PRESSED)setYDirection(-speed);
+		else if(control==ClientControl.DOWN_PRESSED)setYDirection(speed);
+		else if(control==ClientControl.UP_REALISED)setYDirection(0);
+		else if(control==ClientControl.DOWN_REALISED)setYDirection(0);
+		else if(!cdPush && control==ClientControl.Z_PRESSED)powerPush();
+		else if(!cdSpeed && !powerBlock && control==ClientControl.X_PRESSED)powerSpeed(speed);
+		else if(!cdBlock && control==ClientControl.C_PRESSED)powerBlock();
 	}
+	
 	public void move() {
 		y = y + yVelocity;
 	}
@@ -101,7 +114,7 @@ public class PaddlePower extends Paddle{
 
 	}
 	private void powerPush() {
-		if(!Intro.sound.isMute()) powerSound.audioStart();
+	//	if(!Intro.sound.isMute()) powerSound.audioStart();
 		powerPush=true;
 		cdPush=true;
 		Timer timer = new Timer(1000, null);
@@ -119,7 +132,7 @@ public class PaddlePower extends Paddle{
         timer.start();
 	}
 	private void powerSpeed(int ogSpeed) {
-		if(!Intro.sound.isMute()) powerSound.audioStart();
+	//	if(!Intro.sound.isMute()) powerSound.audioStart();
 		speed=15;
 		height=150;
 		cdSpeed=true;
@@ -142,7 +155,7 @@ public class PaddlePower extends Paddle{
         timer.start();
 	}
 	private void powerBlock() {
-		if(!Intro.sound.isMute()) powerSound.audioStart();
+	//	if(!Intro.sound.isMute()) powerSound.audioStart();
 		powerBlock=true;
 		y=0;
 		height=667;
@@ -161,30 +174,32 @@ public class PaddlePower extends Paddle{
         timer.addActionListener(taskPerformer);
         timer.start();
 	}
+	
 	public void resetPowers() {
 		powerPush=false;
 		powerBlock=false;
 		cdPush=false;
 		cdBlock=false;
 		cdSpeed=false;
-	}
+	}	
+	
 	private void initImages() {
 		 try {
-			 if(id==1) {
+		//	 if(id==1) {
 				 pushShow=ImageIO.read(new File("src/resources/images/90.png"));
 				 speedShow=ImageIO.read(new File("src/resources/images/shield.png"));
 				 blockShow=ImageIO.read(new File("src/resources/images/wall.png"));
 				 pushC=ImageIO.read(new File("src/resources/images/90On.png"));
 				 speedC=ImageIO.read(new File("src/resources/images/shieldOn.png"));
 				 blockC=ImageIO.read(new File("src/resources/images/wallOn.png"));
-			 }else {
+			/* }else {
 				 pushShow=ImageIO.read(new File("src/resources/images/90.png"));
 				 speedShow=ImageIO.read(new File("src/resources/images/shield.png"));
 				 blockShow=ImageIO.read(new File("src/resources/images/wall.png"));
 				 pushC=ImageIO.read(new File("src/resources/images/90On.png"));
 				 speedC=ImageIO.read(new File("src/resources/images/shieldOn.png"));
 				 blockC=ImageIO.read(new File("src/resources/images/wallOn.png"));
-			 }
+			 }*/
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -210,4 +225,14 @@ public class PaddlePower extends Paddle{
 		}
 		
 	}
+	public boolean[] getFlags(){
+		return new boolean[] {powerPush,powerBlock,cdPush,cdSpeed,cdBlock};
+	}
+	public void setFlags(boolean[]flags){
+		powerPush=flags[0];
+		powerBlock=flags[1];
+		cdPush=flags[2];
+		cdSpeed=flags[3];
+		cdBlock=flags[4];
+		};
 }

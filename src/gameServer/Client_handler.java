@@ -20,6 +20,7 @@ import game.GamePanel;
 import packet.ClientPacket;
 import packet.GameAdvancePacket;
 import packet.GamePacket;
+import packet.GamePowersPacket;
 import packet.InitPacket;
 
 public class Client_handler extends Thread{
@@ -172,5 +173,8 @@ public class Client_handler extends Thread{
 			clientOutput.writeObject(packet);
 			clientOutput.flush();
 	}
-
+	public void updatePlayer(GamePowersPacket packet) throws IOException{
+		clientOutput.writeObject(packet);
+		clientOutput.flush();
+	}
 }

@@ -1,4 +1,6 @@
-/game/
-/gameModeAdvanced/
+/gameSound/
+/packet/
 /client/
-/gameInterface/
+/gameModePowers/
+/gameServer/
+/game/

@@ -99,4 +99,6 @@ public class Paddle extends Rectangle {
 		width=r.width;
 		height=r.height;	
 	}
+	public boolean[] getFlags(){return new boolean[] {powerPush,powerBlock};};
+	public void setFlags(boolean[]flags){powerPush=flags[0];powerBlock=flags[1];};
 }
