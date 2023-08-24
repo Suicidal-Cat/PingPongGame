@@ -15,6 +15,7 @@ import javax.swing.*;
 import client.Client;
 import gameInterface.FirstFrame;
 import gameInterface.Intro;
+import gameInterface.MatchHistory.MatchHistory;
 import gameServer.Server;
 
 

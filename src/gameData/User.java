@@ -8,6 +8,7 @@ import java.sql.Statement;
 import game.Score;
 
 public class User {
+	
 	public String userName;
 	public String password;
 	

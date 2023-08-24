@@ -74,6 +74,7 @@ public class Forma extends JFrame {
 
 		
 		this.f=f;
+		f.setVisible(false);
 
 		
 		setContentPane(contentPane);
@@ -148,6 +149,7 @@ public class Forma extends JFrame {
 		
 		JButton btnNewButton_1 = new JButton("Prijavi se");
 		btnNewButton_1.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");
@@ -162,8 +164,12 @@ public class Forma extends JFrame {
 						f.setVisible(true);
 						dispose();
 					}
-					else 
+					else { 
 						JOptionPane.showMessageDialog(null, "Korisnicko ime i/ili lozinka nije tacno");
+						FirstFrame.u.userName=null;
+						FirstFrame.u.password=null;
+					}
+					con.close();
 
 				}catch(Exception e1) {
 					System.out.print(e1);
@@ -196,5 +202,6 @@ public class Forma extends JFrame {
 		password = new JPasswordField();
 		password.setBounds(203, 308, 112, 19);
 		contentPane.add(password);
+		this.setVisible(true);
 	}
 }

@@ -26,7 +26,9 @@ import gameData.User;
 import gameModeClassic.GameClassic;
 import gameSound.Sound;
 import gameInterface.*;
+import gameInterface.MatchHistory.MatchHistory;
 
+@SuppressWarnings("serial")
 public class FirstFrame extends JFrame implements ActionListener{
 
 	
@@ -45,7 +47,7 @@ public class FirstFrame extends JFrame implements ActionListener{
 	 public FirstFrame() {
 	
 		 Intro.sound.audioLoop();
-		 
+		 	u=new User();
 		 	pozadinaArcade=new ImageIcon("src/resources/images/arcadePozadina1.jpg");
 			myLabel=new JLabel(pozadinaArcade);
 			myLabel.setSize(getMaximumSize());
@@ -132,8 +134,6 @@ public class FirstFrame extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==button1) {
 			if(!Intro.sound.isMute()) modeSound.audioRestart();
-		//	GameFrame gf=new GameFrame(GameMode.Classic);
-		//	gf.show();//prikazuje frame za classic
 			new Thread(new Client(GameMode.Classic));
 			Intro.sound.audioStop();
 			dispose();//brise trenutni frame
@@ -141,16 +141,12 @@ public class FirstFrame extends JFrame implements ActionListener{
 		}
 		if (e.getSource()==button2) {
 			if(!Intro.sound.isMute()) modeSound.audioRestart();
-		//	GameFrame gf=new GameFrame(GameMode.Advanced);
-		//	gf.show();
 			new Thread(new Client(GameMode.Advanced));
 			Intro.sound.audioStop();
 			dispose();
 		}
 		if (e.getSource()==button3) {
 			if(!Intro.sound.isMute()) modeSound.audioRestart();
-		//	GameFrame gf=new GameFrame(GameMode.Powers);
-		//	gf.show();
 			new Thread(new Client(GameMode.Powers));
 			Intro.sound.audioStop();
 			dispose();
@@ -172,13 +168,13 @@ public class FirstFrame extends JFrame implements ActionListener{
 			if(!Intro.sound.isMute()) {
 				modeSound.audioRestart();
 			}
-			u=new User();
+			if(u.userName!=null && !u.userName.equals("") && !u.userName.equals("guest")) {
+				MatchHistory m=new MatchHistory(this);
+			//	m.setVisible(true);
+				return;
+			}
 			Forma gf=new Forma(this);
-			gf.show();
-			setVisible(false);
-			
-			
-			
+			//gf.setVisible(true);	
 		}
 
 	}
