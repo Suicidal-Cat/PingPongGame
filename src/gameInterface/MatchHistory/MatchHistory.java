@@ -79,7 +79,7 @@ public class MatchHistory extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        table = new TableDark();
+        table = new Table();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -138,6 +138,6 @@ public class MatchHistory extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private TableDark table;
+    private Table table;
     private Icon back = new ImageIcon("src/resources/images/backarrow.png");
 }

@@ -14,12 +14,12 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
-public class TableDark extends JTable {
+public class Table extends JTable {
 
     private TableDarkHeader header;
     private TableDarkCell cell;
 
-    public TableDark() {
+    public Table() {
         header = new TableDarkHeader();
         cell = new TableDarkCell();
         getTableHeader().setDefaultRenderer(header);
