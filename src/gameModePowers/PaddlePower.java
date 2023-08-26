@@ -36,6 +36,8 @@ public class PaddlePower extends Paddle{
 	private static final int GAME_WIDTH=1100;
 	static Sound powerSound=new Sound("powerOn.wav");
 	
+//	public boolean soundPower = false;
+	
 	public PaddlePower(int x, int y, int PADDLE_WIDTH, int PADDLE_HEIGHT, int id) {
 		super(x, y, PADDLE_WIDTH, PADDLE_HEIGHT, id);
 		initImages();
@@ -115,6 +117,8 @@ public class PaddlePower extends Paddle{
 	}
 	private void powerPush() {
 	//	if(!Intro.sound.isMute()) powerSound.audioStart();
+		soundPower = true;
+		
 		powerPush=true;
 		cdPush=true;
 		Timer timer = new Timer(1000, null);
@@ -133,6 +137,8 @@ public class PaddlePower extends Paddle{
 	}
 	private void powerSpeed(int ogSpeed) {
 	//	if(!Intro.sound.isMute()) powerSound.audioStart();
+		soundPower = true;
+		
 		speed=15;
 		height=150;
 		cdSpeed=true;
@@ -156,6 +162,8 @@ public class PaddlePower extends Paddle{
 	}
 	private void powerBlock() {
 	//	if(!Intro.sound.isMute()) powerSound.audioStart();
+		soundPower = true;
+		
 		powerBlock=true;
 		y=0;
 		height=667;
@@ -181,6 +189,8 @@ public class PaddlePower extends Paddle{
 		cdPush=false;
 		cdBlock=false;
 		cdSpeed=false;
+		
+		soundPower = false;
 	}	
 	
 	private void initImages() {

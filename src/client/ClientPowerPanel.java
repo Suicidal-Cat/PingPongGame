@@ -6,12 +6,18 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import gameInterface.Intro;
 import gameModePowers.PaddlePower;
+import gameSound.Sound;
 import packet.GamePowersPacket;
 
 public class ClientPowerPanel extends ClientPanel{
 
 
+	boolean sound1;
+	boolean sound2;
+	Sound soundP=new Sound("powerOn.wav");
+	
 	private static final long serialVersionUID = 2246181633594674603L;
 	public ClientPowerPanel() {
 		super();
@@ -41,6 +47,11 @@ public class ClientPowerPanel extends ClientPanel{
 		score.player1=packet.ballScore[2];
 		score.player2=packet.ballScore[3];
 		gif=packet.gifFlag;
+		
+		sound1=packet.soundPower1;
+		sound2=packet.soundPower2;
+		
+		checkCollision();
 		repaint();
 		if(score.player1>=6 || score.player2>=6)throw new IOException("Kraj igre");
 	}
@@ -54,6 +65,22 @@ public class ClientPowerPanel extends ClientPanel{
 		paddle2.y=paddles[5];
 		paddle2.width=paddles[6];
 		paddle2.height=paddles[7];
+	}
+	
+	public void checkCollision() {
+		if(sound1 || sound2)
+			if(!Intro.sound.isMute()) soundP.audioRestart();
+		
+		if(ball.x <= 65) {
+//			System.out.println("radi error1");
+			if(!Intro.sound.isMute()) errorSound.audioRestart();			
+		}
+		if (ball.x >= GAME_WIDTH - BALL_DIAMETER - 65) {
+//			System.out.println("radi error2");
+			if(!Intro.sound.isMute()) errorSound.audioRestart();
+		}
+		
+		super.checkCollision();
 	}
 	
 }

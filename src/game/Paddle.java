@@ -17,6 +17,7 @@ public class Paddle extends Rectangle {
 	public boolean powerPush;
 	public boolean powerBlock;
 	 
+	public boolean soundPower = false;
 	 
 
 	public Paddle(int x, int y, int PADDLE_WIDTH, int PADDLE_HEIGHT, int id) {

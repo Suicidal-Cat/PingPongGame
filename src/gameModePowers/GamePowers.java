@@ -17,6 +17,9 @@ import packet.GamePowersPacket;
 @SuppressWarnings("serial")
 public class GamePowers extends GamePanel{
 		
+	
+//	public boolean soundPower = false;
+	
 	public GamePowers(Client_handler p1,Client_handler p2){
 		super(p1,p2);
 		paddle1 = new PaddlePower(65, (GAME_HEIGHT / 2) - (PADDLE_HEIGHT / 2), PADDLE_WIDTH, PADDLE_HEIGHT, 1);
@@ -46,6 +49,9 @@ public class GamePowers extends GamePanel{
 		//	if(!Intro.sound.isMute()) hitSound.audioRestart();  !!!!!!!!
 
 			if(paddle1.powerPush) {
+//				soundPower=true;
+				paddle1.soundPower=true;
+				
 				ball.setXDirection(ball.getXVelocity()*(-1)+4);
 				ball.setYDirection(0);
 				paddle1.powerPush=false;
@@ -74,6 +80,8 @@ public class GamePowers extends GamePanel{
 		//	if(!Intro.sound.isMute()) hitSound.audioRestart();  !!!!!
 
 			if(paddle2.powerPush) {
+				paddle2.soundPower=true;
+				
 				ball.setXDirection(ball.getXVelocity()*(-1)-4);
 				ball.setYDirection(0);
 				paddle2.powerPush=false;
@@ -128,6 +136,8 @@ public class GamePowers extends GamePanel{
 			paddle2.resetPowers();
 			brojac2=0;
 			
+			gifFlag=true;
+			
 		}
 		}else if (brojac1>0)brojac2=0;
 		
@@ -153,6 +163,8 @@ public class GamePowers extends GamePanel{
 				paddle1.resetPowers();
 				paddle2.resetPowers();
 				brojac1=0;
+				
+				gifFlag=true;
 
 			}
 		}else if (brojac2>0)brojac1=0;
@@ -174,6 +186,8 @@ public class GamePowers extends GamePanel{
 					updateClient();
 					////////
 					gifFlag=false;
+					paddle1.soundPower=false;
+					paddle2.soundPower=false;
 				}catch(IOException e) {
 					break;
 				}
@@ -190,7 +204,7 @@ public class GamePowers extends GamePanel{
 		int []ballscore= {ball.x,ball.y,score.player1,score.player2};
 		boolean []flags1= paddle1.getFlags();
 		boolean []flags2= paddle2.getFlags();
-		GamePowersPacket packet=new GamePowersPacket(paddles, ballscore, flags1, flags2, gifFlag);
+		GamePowersPacket packet=new GamePowersPacket(paddles, ballscore, flags1, flags2, gifFlag, paddle1.soundPower, paddle2.soundPower);
 		player1.updatePlayer(packet);
 		player2.updatePlayer(packet);
 	}

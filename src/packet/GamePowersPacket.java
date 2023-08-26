@@ -11,11 +11,17 @@ public class GamePowersPacket implements Serializable{
 	public boolean []flagPaddle2;
 	public boolean gifFlag;
 	
-	public GamePowersPacket(int[]pads,int[]ballSc,boolean[]fl,boolean[]f2,boolean gif) {
+	public boolean soundPower1;
+	public boolean soundPower2;
+	
+	public GamePowersPacket(int[]pads,int[]ballSc,boolean[]fl,boolean[]f2,boolean gif,boolean sound1, boolean sound2) {
 		paddles=pads;
 		ballScore=ballSc;
 		flagPaddle1=fl;
 		flagPaddle2=f2;
 		gifFlag=gif;
+		
+		soundPower1=sound1;
+		soundPower2=sound2;
 	}
 }
