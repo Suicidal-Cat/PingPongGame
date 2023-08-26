@@ -67,7 +67,7 @@ public class Forma extends JFrame {
 		contentPane = new JPanel();
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setResizable(false);
-		setLocationRelativeTo(null);
+		setLocationRelativeTo(f);
 //		forma=new ImageIcon("src/resources/images/4736288.jpg");
 //		
 //		myLabel=new JLabel(forma);
@@ -161,6 +161,7 @@ public class Forma extends JFrame {
 					FirstFrame.u.password=pass.getText();
 					if(rs.next()) {
 						JOptionPane.showMessageDialog(null, "Uspesno ste se prijavili");
+						f.setLocationRelativeTo(contentPane);
 						f.setVisible(true);
 						dispose();
 					}

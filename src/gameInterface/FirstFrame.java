@@ -44,7 +44,7 @@ public class FirstFrame extends JFrame implements ActionListener{
     Icon forma = new ImageIcon("src/resources/images/user.png");
 	public static User u;
 	
-	 public FirstFrame() {
+	 public FirstFrame(Intro intro) {
 	
 		 Intro.sound.audioLoop();
 		 	u=new User();
@@ -62,7 +62,7 @@ public class FirstFrame extends JFrame implements ActionListener{
 			this.setResizable(false);
 			//this.setLayout(null);
 			this.setVisible(true);
-			this.setLocationRelativeTo(null);//da na centru ekrana bude prozor
+			this.setLocationRelativeTo(intro);//da na centru ekrana bude prozor
 			this.setTitle("Pong Game");
 
 			
@@ -134,20 +134,20 @@ public class FirstFrame extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==button1) {
 			if(!Intro.sound.isMute()) modeSound.audioRestart();
-			new Thread(new Client(GameMode.Classic));
+			new Thread(new Client(GameMode.Classic,this));
 			Intro.sound.audioStop();
 			dispose();//brise trenutni frame
 			
 		}
 		if (e.getSource()==button2) {
 			if(!Intro.sound.isMute()) modeSound.audioRestart();
-			new Thread(new Client(GameMode.Advanced));
+			new Thread(new Client(GameMode.Advanced,this));
 			Intro.sound.audioStop();
 			dispose();
 		}
 		if (e.getSource()==button3) {
 			if(!Intro.sound.isMute()) modeSound.audioRestart();
-			new Thread(new Client(GameMode.Powers));
+			new Thread(new Client(GameMode.Powers,this));
 			Intro.sound.audioStop();
 			dispose();
 		}

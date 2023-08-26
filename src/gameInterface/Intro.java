@@ -34,7 +34,7 @@ public class Intro extends JFrame{
 		this.setLocationRelativeTo(null);//da na centru ekrana bude prozor
 		this.setTitle("Pong Game");
 		Thread.sleep(5000);
-		FirstFrame first=new FirstFrame();
+		FirstFrame first=new FirstFrame(this);
 		dispose();
 	
 }

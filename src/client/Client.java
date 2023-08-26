@@ -27,23 +27,18 @@ public class Client extends KeyAdapter implements Runnable{
 	GameMode mode;
 	Thread client;
 	boolean isRunning;
-//	JFrame f;
 	Waiting w;
+	GameResultFrame endScreen;
 	
-	public Client(GameMode mode) {
+	public Client(GameMode mode,Component position) {
 		try {
 			this.mode=mode;
 			communicationSocket = new Socket("127.0.0.1",port);
-			//2a06:5b00:f0d:d500:d991:4a48:9698:2bf0
 			serverInput=new ObjectInputStream(communicationSocket.getInputStream());
 			serverOutput=new ObjectOutputStream(communicationSocket.getOutputStream());
 			
 			sendInitPacket();
-			//////////////
-//			addGif("waiting.gif");
-			w=new Waiting();
-			//AKO GA UGASI OVDE DOK CEKA, OBRADI
-			//cak i ovome koji se drugi prikljuci iskoci waiting na kratko, da li to ostaviti ili ugasiti nekako
+			w=new Waiting(position);
 			client=new Thread(this);
 			client.start();
 		}catch(IOException e) {
@@ -57,9 +52,10 @@ public class Client extends KeyAdapter implements Runnable{
 			receiveInitPacket();
 //			f.dispose();
 			w.sound.audioStop();
-			w.dispose();
 			////////////
 			frame=new ClientFrame(mode);
+			frame.setLocationRelativeTo(w);
+			w.dispose();
 			frame.panel.addKeyListener(new ClientInput());
 			isRunning=true;
 				while(isRunning) {
@@ -71,10 +67,23 @@ public class Client extends KeyAdapter implements Runnable{
 		}catch (IOException e) {
 			System.out.println("KRAJ IGRE");
 			isRunning=false;
-			if(frame!=null)frame.dispose();
 		}
 		try {communicationSocket.close();}
 		catch (IOException e) {}
+		
+		if(frame.panel.score.player1>=6 || frame.panel.score.player2>=6) {
+			ShowResultFrame(frame);
+		}
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(endScreen!=null)endScreen.close();
+		if(frame!=null) {
+			System.out.println("UGASIO SAM FRAME");
+			frame.dispose();
+		}
 	}
 		
 	private void sendInitPacket() throws IOException{
@@ -98,28 +107,6 @@ public class Client extends KeyAdapter implements Runnable{
 		}
 
 	}
-	
-//	public void addGif(String name) {
-//	    Icon icon = new ImageIcon("src/resources/images/"+name);
-//	    JLabel label = new JLabel(icon);
-//	 
-//	    f = new JFrame("Animation");
-//	    f.getContentPane().add(label);
-//	  	f.setUndecorated(true);
-//	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//	    f.pack();
-//	    f.setLocationRelativeTo(null);
-//	    f.setVisible(true);
-//	    //f.setTitle("Ostvarili ste bonus +1");
-//	    ImageIcon image=new ImageIcon("src/resources/images/arcade1.png");
-//	  	//f.setIconImage(image.getImage());
-////	    try {
-////			Thread.sleep(2000);
-////		} catch (InterruptedException e) {
-////			e.printStackTrace();
-////		}
-//	    
-//	}
 
 	//client inputs			
 	class ClientInput extends KeyAdapter {
@@ -152,5 +139,16 @@ public class Client extends KeyAdapter implements Runnable{
 				System.out.println("Greska pri slanju paketa");
 			}
 		}
+	}
+	
+	private void ShowResultFrame(JFrame f) {
+		if(playerNumber==1) {
+			if(frame.panel.score.player1>=6)endScreen=new GameResultFrame(1,f);
+			else endScreen=new GameResultFrame(0,f);
+		}
+		else {
+			if(frame.panel.score.player2>=6)endScreen=new GameResultFrame(1,f);
+			else endScreen=new GameResultFrame(0,f);
+		}				
 	}
 }			

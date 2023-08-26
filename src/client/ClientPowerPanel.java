@@ -11,9 +11,7 @@ import packet.GamePowersPacket;
 
 public class ClientPowerPanel extends ClientPanel{
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 2246181633594674603L;
 	public ClientPowerPanel() {
 		super();

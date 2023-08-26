@@ -11,9 +11,7 @@ import packet.GameAdvancePacket;
 
 public class ClientAdvancePanel extends ClientPanel{
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -4286596678546631810L;
 	Barrier barrier;
 	Barrier barrier1;
@@ -76,22 +74,18 @@ public class ClientAdvancePanel extends ClientPanel{
 		if(effect!=null && paddle1.intersects(effect)) {
 //			System.out.println("radi efekat1");
 			if(!Intro.sound.isMute()) claimSound.audioRestart();
-			//ne radi
 		}
 		if(effect!=null && paddle2.intersects(effect)) {
 //			System.out.println("radi efekat2");
 			if(!Intro.sound.isMute()) claimSound.audioRestart();
-			//ne radi
 		}
 		if(barrier!=null && ball.intersects(barrier)) {
-			//radi
 			if(!Intro.sound.isMute()) {
 //				System.out.println("barijera");
 				hitSound.audioRestart();
 			}
 		}
 		if(barrier1!=null && (ball.intersects(barrier1) || ball.intersects(barrier2))) {
-			//radi
 			if(!Intro.sound.isMute()) {
 //				System.out.println("barijera");
 				hitSound.audioRestart();

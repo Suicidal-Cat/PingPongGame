@@ -13,6 +13,7 @@ import javax.sound.sampled.Clip;
 import javax.swing.*;
 
 import client.Client;
+import client.GameResultFrame;
 import gameInterface.FirstFrame;
 import gameInterface.Intro;
 import gameInterface.MatchHistory.MatchHistory;

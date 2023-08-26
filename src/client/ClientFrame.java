@@ -9,9 +9,7 @@ import game.GameMode;
 
 public class ClientFrame extends JFrame{
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -1215308126292310466L;
 	ClientPanel panel;
 	

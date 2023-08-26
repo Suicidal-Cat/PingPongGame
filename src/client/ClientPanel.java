@@ -94,19 +94,19 @@ public class ClientPanel extends JPanel{
 		
 		checkCollision();
 		repaint();
-		if(packet.p1Score>=6 || packet.p2Score>=6)throw new IOException("Kraj igre");
+		if(packet.p1Score>=6 || packet.p2Score>=6) {
+			throw new IOException("Kraj igre");
+		}
 	}
 	public void checkCollision() {
 		//odavde radi Intro.sound.isMute() tj Intro.sound nije null
 		if (ball.intersects(paddle1)) {
-			//radi
 			if(!Intro.sound.isMute()) {
 //				System.out.println("hit --" + Intro.sound.isMute());
 				hitSound.audioRestart();
 			}
 		}
 		if (ball.intersects(paddle2)) {
-			//radi
 			if(!Intro.sound.isMute()) {
 //				System.out.println("hit --" + Intro.sound.isMute());
 				hitSound.audioRestart();
@@ -116,19 +116,11 @@ public class ClientPanel extends JPanel{
 		
 		if(ball.x <= 0) {
 //			System.out.println("radi error1");
-			if(!Intro.sound.isMute()) errorSound.audioRestart();
-			//radi
-			
-			//treba da se proveri, ako je taj koji igra igrac2 onda se pusta gif  
-			
-			
+			if(!Intro.sound.isMute()) errorSound.audioRestart();			
 		}
 		if (ball.x >= GAME_WIDTH - BALL_DIAMETER) {
 //			System.out.println("radi error2");
 			if(!Intro.sound.isMute()) errorSound.audioRestart();
-			//radi
-			
-			//treba da se proveri, ako je taj koji igra igrac1 onda se pusta gif  
 		}
 		
 //		System.out.println("2:gif = " + gif);
@@ -137,8 +129,6 @@ public class ClientPanel extends JPanel{
 		}
 		
 	}
-	
-	//ovo se prvo proverava pa onda u igrici checkCollision, mozda se ne okida onaj boolean za gif?
 	
 	public void addGif() {
 	    Icon icon = new ImageIcon("src/resources/images/minions.gif");
@@ -149,7 +139,7 @@ public class ClientPanel extends JPanel{
 	  	f.setUndecorated(true);
 	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    f.pack();
-	    f.setLocationRelativeTo(null);
+	    f.setLocationRelativeTo(this);
 	    f.setVisible(true);
 	    //f.setTitle("Ostvarili ste bonus +1");
 	    ImageIcon image=new ImageIcon("src/resources/images/arcade1.png");
@@ -165,18 +155,5 @@ public class ClientPanel extends JPanel{
 	//ZAKLJUCAK ------- sve mora da bude u okviru checkCollision ali ona mora da se pozove nekako ranije dok se u GamePanel.checkCollision() 
 	//ne napravi nova loptica ili postavi effect na null, ne moze static jer se onda ostatak buni
 	//najbolje da ide prvo checkCollision iz klijenta pa tek onda iz Game al ne znam gde je to
-	
-	public static void playSound(String name) {
-		//a odavde ne radi, Intro.sound je null ???????
-//		System.out.println("play s --" + Intro.sound.isMute());
-//		if(!Intro.sound.isMute()) {
-//			System.out.println("ZVUK");
-//			sound1 = new Sound(name);
-//			sound1.audioRestart();
-//		}
-//		System.out.println("ZVUK");
-//		sound1 = new Sound(name);
-//		sound1.audioRestart();
-	}
 	
 }
