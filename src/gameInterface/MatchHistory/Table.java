@@ -47,10 +47,10 @@ public class Table extends JTable {
     public void fixTable(JScrollPane scroll) {
         scroll.setVerticalScrollBar(new ScrollBar());
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(30, 30, 30)); //boja onog headera iznad scorlla
+        panel.setBackground(new Color(251, 160, 227)); //boja onog headera iznad scorlla
         scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, panel);
-        scroll.getViewport().setBackground(new Color(30, 30, 30));
-        scroll.setBorder(BorderFactory.createLineBorder(new Color(60, 60, 60), 2)); // border celog jtable
+        scroll.getViewport().setBackground(new Color(251, 160, 227));//ispod redova prostor
+        scroll.setBorder(BorderFactory.createLineBorder(new Color(251, 160, 227))); // border celog jtable
     }
 
     private class TableDarkHeader extends DefaultTableCellRenderer {
@@ -64,8 +64,8 @@ public class Table extends JTable {
         @Override
         public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
             Component com = super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
-            com.setBackground(new Color(30, 30, 30)); //pozadina headera
-            com.setForeground(new Color(200, 200, 200)); //boja slova
+            com.setBackground(new Color(251, 160, 227)); //pozadina headera
+            com.setForeground(new Color(128,0,128)); //boja slova
             com.setFont(com.getFont().deriveFont(Font.BOLD, 20));
             if (alignment.containsKey(i1)) {
                 setHorizontalAlignment(alignment.get(i1));
@@ -89,15 +89,15 @@ public class Table extends JTable {
             Component com = super.getTableCellRendererComponent(jtable, o, bln, bln1, row, column);
             if (isCellSelected(row, column)) {
                 if (row % 2 == 0) {
-                    com.setBackground(new Color(33, 103, 153));//redovi selektovani
+                    com.setBackground(new Color(147,112,219));//redovi selektovani
                 } else {
-                    com.setBackground(new Color(29, 86, 127));
+                    com.setBackground(new Color(65,105,225));
                 }
             } else {
             	if((int)jtable.getModel().getValueAt(row, 4)==1) {
-            		com.setBackground(Color.decode("#3969db")); //nisu selektovani a pobedili
+            		com.setBackground(Color.decode("#52B2BF")); //nisu selektovani a pobedili
             	}
-            	else com.setBackground(Color.decode("#db3951"));
+            	else com.setBackground(Color.decode("#9932CC"));
             }
             
             com.setForeground(new Color(200, 200, 200));// boja slova redova
