@@ -86,7 +86,7 @@ public class DesignScroll extends BasicScrollBarUI {
             x += 8;
             width -= 16;
         }
-        g2.setColor(new Color(11, 3, 133));//boja scrolla
+        g2.setColor(new Color(255,0,255));//boja scrolla
         g2.fillRoundRect(x, y, width, height, 10, 10);
     }
 
