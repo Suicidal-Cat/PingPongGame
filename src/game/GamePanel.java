@@ -73,51 +73,12 @@ public class GamePanel extends JPanel implements Runnable {
 
 	}
 
-/*	public void paint(Graphics g) {
-		try {
-			image = ImageIO.read(new File("src/resources/images/pozadinaIgrice.jpg"));
-			graphics = image.getGraphics();
-			draw(graphics);
-			g.drawImage(image, 0, 0, this);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void draw(Graphics g) {
-		paddle1.draw(g);
-		paddle2.draw(g);
-		ball.draw(g);
-		score.draw(g);
-	}*/
 
 	public void move() {
 		paddle1.move();
 		paddle2.move();
 		ball.move();
 	}
-//	public void addGif() {
-//	    Icon icon = new ImageIcon("src/resources/images/minions.gif");
-//	    JLabel label = new JLabel(icon);
-//	 
-//	    JFrame f = new JFrame("Animation");
-//	    f.getContentPane().add(label);
-//	  	f.setUndecorated(true);
-//	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//	    f.pack();
-//	    f.setLocationRelativeTo(null);
-//	    f.setVisible(true);
-//	    //f.setTitle("Ostvarili ste bonus +1");
-//	    ImageIcon image=new ImageIcon("src/resources/images/arcade1.png");
-//	  	//f.setIconImage(image.getImage());
-//	    try {
-//			Thread.sleep(2000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//	    f.dispose();
-//	}
 	public void checkCollision() {
 		// ball bouncing of edges
 		if (ball.y <= 0) {
@@ -239,16 +200,5 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 
-/*	public class AL extends KeyAdapter {
-		public void keyPressed(KeyEvent e) {
-			paddle1.keyPressed(e);
-			paddle2.keyPressed(e);
-		}
-
-		public void keyReleased(KeyEvent e) {
-			paddle1.keyReleased(e);
-			paddle2.keyReleased(e);
-		}
-	}*/
 
 }

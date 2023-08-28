@@ -34,6 +34,8 @@ public class Client extends KeyAdapter implements Runnable{
 		try {
 			this.mode=mode;
 			communicationSocket = new Socket("127.0.0.1",port);
+			//if you want to play on different devices connected to same network
+			//u can pass your public IP adress here instead of localhost
 			serverInput=new ObjectInputStream(communicationSocket.getInputStream());
 			serverOutput=new ObjectOutputStream(communicationSocket.getOutputStream());
 			

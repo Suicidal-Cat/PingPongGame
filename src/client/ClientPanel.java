@@ -152,8 +152,5 @@ public class ClientPanel extends JPanel{
 	    f.dispose();
 	}
 	
-	//ZAKLJUCAK ------- sve mora da bude u okviru checkCollision ali ona mora da se pozove nekako ranije dok se u GamePanel.checkCollision() 
-	//ne napravi nova loptica ili postavi effect na null, ne moze static jer se onda ostatak buni
-	//najbolje da ide prvo checkCollision iz klijenta pa tek onda iz Game al ne znam gde je to
 	
 }
