@@ -27,9 +27,16 @@ public class Match {
 	
 	public Object[] getDataMatch() {
 		int win=0;
-		if(FirstFrame.u.userName.equals(username1) && score1>score2)win=1;
-		else if(FirstFrame.u.userName.equals(username2) && score1<score2)win=1;
-		return new Object[] { gameMode,username1, score1+" : "+score2, username2,win};
+		if(FirstFrame.u.userName.equals(username1)) {
+			if(score1>score2)win=1;
+			return new Object[] { gameMode,username1, score1+" : "+score2, username2,win};
+		}
+		else if(FirstFrame.u.userName.equals(username2)) {
+			if(score1<score2)win=1;
+			return new Object[] { gameMode,username2, score2+" : "+score1, username1,win};
+		}
+		else return null;
+		
 	}
 	
 }
