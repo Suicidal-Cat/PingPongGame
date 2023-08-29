@@ -47,46 +47,6 @@ public class PaddlePower extends Paddle{
 		super.updatePaddle(null);
 	}
 	
-/*	public void keyPressed(KeyEvent e) {
-		
-		switch (id) {
-		case 1:
-			if (e.getKeyCode() == KeyEvent.VK_W) {
-				setYDirection(-speed);
-			}
-			if (e.getKeyCode() == KeyEvent.VK_S) {
-				setYDirection(speed);
-			}
-			if(!cdPush && e.getKeyCode() == KeyEvent.VK_J) {
-				powerPush();
-			}
-			if(!cdSpeed && !powerBlock && e.getKeyCode() == KeyEvent.VK_K) {
-				powerSpeed(speed);
-			}
-			if(!cdBlock && e.getKeyCode() == KeyEvent.VK_L) {
-				powerBlock();
-			}
-			break;
-		case 2:
-			if (e.getKeyCode() == KeyEvent.VK_UP) {
-				setYDirection(-speed);
-			}
-			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-				setYDirection(speed);
-			}
-			if(!cdPush && e.getKeyCode() == KeyEvent.VK_Z) {
-				powerPush();
-			}
-			if(!cdSpeed && !powerBlock && e.getKeyCode() == KeyEvent.VK_X) {
-				powerSpeed(speed);
-			}
-			if(!cdBlock && e.getKeyCode() == KeyEvent.VK_C) {
-				powerBlock();
-			}
-			break;
-		}
-
-	}*/
 	
 	public void updatePaddle(ClientControl control) {
 		if(control==ClientControl.UP_PRESSED)setYDirection(-speed);

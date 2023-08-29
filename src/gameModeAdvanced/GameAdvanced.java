@@ -88,18 +88,6 @@ public class GameAdvanced extends GamePanel{
 		
 	}
 	
-/*	@Override
-	public void draw(Graphics g) {
-		super.draw(g);
-		if(barrier!=null)
-			barrier.draw(g);
-		if(effect!=null)
-			effect.draw(g);
-		if(barrier1!=null && barrier2!=null) {
-			barrier1.draw(g);
-			barrier2.draw(g);
-		}
-	}*/
 	@Override
 	public void move() {
 		super.move();
@@ -334,11 +322,6 @@ public class GameAdvanced extends GamePanel{
 	
 	}
 	private void updateClient() throws IOException{
-	//	Rectangle barr=null,barr1=null,barr2=null;
-	//	if(effect!=null)eff=new Rectangle(effect.x,effect.y,effect.width,effect.height);
-	//	if(barrier!=null)barr=new Rectangle(barrier.x,barrier.y,barrier.width,barrier.height);
-	//	if(barrier1!=null)barr=new Rectangle(barrier1.x,barrier1.y,barrier1.width,barrier1.height);
-	//	if(barrier2!=null)barr=new Rectangle(barrier2.x,barrier2.y,barrier2.width,barrier2.height);
 		int []XY= {0,0,0,0,0,0,0,0,0,0,0};
 		if(effect!=null) {
 			XY[0]=effect.x;
