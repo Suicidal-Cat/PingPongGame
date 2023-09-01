@@ -31,34 +31,13 @@ public class Forma extends JFrame {
 	private JPasswordField pass;
 	private JPasswordField password;
 	private ImageIcon pozadinaArcade;
-	private ImageIcon forma;
+	private ImageIcon forma,image;
 
 	JLabel myLabel;
 	FirstFrame f;
 	
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Forma frame = new Forma();
-//					frame.setVisible(true);
-//					
-//					
-//					
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	
 	public Forma(FirstFrame f) {
 		
@@ -68,53 +47,56 @@ public class Forma extends JFrame {
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setResizable(false);
 		setLocationRelativeTo(f);
-//		forma=new ImageIcon("src/resources/images/4736288.jpg");
+		forma=new ImageIcon("src/resources/images/forma2.png");
+		image=new ImageIcon("src/resources/images/arcade1.png");
+		this.setIconImage(image.getImage());
+		setTitle("Pong Game");
 //		
-//		myLabel=new JLabel(forma);
-
+		myLabel=new JLabel(forma);
+		myLabel.getMaximumSize();
 		
 		this.f=f;
 		f.setVisible(false);
 
-		
+		contentPane.add(myLabel);
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
-//		contentPane.add(myLabel);
+		//contentPane.setLayout(null);
+		
 		
 		JLabel lblNewLabel = new JLabel("PRIJAVA");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel.setBounds(164, 10, 96, 16);
-		contentPane.add(lblNewLabel);
+		myLabel.add(lblNewLabel);
 		
 		user = new JTextField();
 		user.setBounds(203, 44, 112, 19);
-		contentPane.add(user);
+		myLabel.add(user);
 		user.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("korisnicko ime");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_1.setBounds(97, 47, 79, 13);
-		contentPane.add(lblNewLabel_1);
+		myLabel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("lozinka");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_1_1.setBounds(97, 82, 79, 13);
-		contentPane.add(lblNewLabel_1_1);
+		myLabel.add(lblNewLabel_1_1);
 		
 		JLabel lblRegistracija = new JLabel("REGISTRACIJA");
 		lblRegistracija.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblRegistracija.setBounds(128, 176, 174, 23);
-		contentPane.add(lblRegistracija);
+		myLabel.add(lblRegistracija);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("gmail");
 		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_1_1_1.setBounds(97, 226, 79, 13);
-		contentPane.add(lblNewLabel_1_1_1);
+		myLabel.add(lblNewLabel_1_1_1);
 		
 		gmail = new JTextField();
 		gmail.setColumns(10);
 		gmail.setBounds(203, 224, 112, 19);
-		contentPane.add(gmail);
+		myLabel.add(gmail);
 		
 		JButton btnNewButton = new JButton("Registruj se"); 
 		btnNewButton.addActionListener(new ActionListener() {
@@ -145,7 +127,7 @@ public class Forma extends JFrame {
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton.setBounds(150, 360, 125, 21);
-		contentPane.add(btnNewButton);
+		myLabel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Prijavi se");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -179,30 +161,30 @@ public class Forma extends JFrame {
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton_1.setBounds(138, 131, 125, 21);
-		contentPane.add(btnNewButton_1);
+		myLabel.add(btnNewButton_1);
 		
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("korisnicko ime");
 		lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_1_1_1_1.setBounds(97, 270, 79, 13);
-		contentPane.add(lblNewLabel_1_1_1_1);
+		myLabel.add(lblNewLabel_1_1_1_1);
 		
 		username = new JTextField();
 		username.setColumns(10);
 		username.setBounds(203, 268, 112, 19);
-		contentPane.add(username);
+		myLabel.add(username);
 		
 		JLabel lblNewLabel_1_1_1_2 = new JLabel("lozinka");
 		lblNewLabel_1_1_1_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_1_1_1_2.setBounds(97, 310, 79, 13);
-		contentPane.add(lblNewLabel_1_1_1_2);
+		myLabel.add(lblNewLabel_1_1_1_2);
 		
 		pass = new JPasswordField();
 		pass.setBounds(203, 80, 112, 19);
-		contentPane.add(pass);
+		myLabel.add(pass);
 		
 		password = new JPasswordField();
 		password.setBounds(203, 308, 112, 19);
-		contentPane.add(password);
+		myLabel.add(password);
 		this.setVisible(true);
 	}
 }
