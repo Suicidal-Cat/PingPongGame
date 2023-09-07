@@ -33,7 +33,7 @@ public class PongGame{
 		//to move paddles use W and S
 		//(controls for abilities in PowerMode are Z X C)
 
-	//	Intro intro=new Intro();
+		Intro intro=new Intro();
 	}
 }
 
