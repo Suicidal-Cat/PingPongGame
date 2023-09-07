@@ -29,10 +29,12 @@ public class Client extends KeyAdapter implements Runnable{
 	boolean isRunning;
 	Waiting w;
 	GameResultFrame endScreen;
+	JFrame game;
 	
-	public Client(GameMode mode,Component position) {
+	public Client(GameMode mode,JFrame position) {//ovde 
 		try {
 			this.mode=mode;
+			game=position;
 			communicationSocket = new Socket("127.0.0.1",port);
 			//if you want to play on different devices connected to same network
 			//u can pass your public IP adress here instead of localhost
@@ -52,9 +54,9 @@ public class Client extends KeyAdapter implements Runnable{
 	public void run() {	
 		try {
 			receiveInitPacket();
-//			f.dispose();
+			
 			w.sound.audioStop();
-			////////////
+			
 			frame=new ClientFrame(mode);
 			frame.setLocationRelativeTo(w);
 			w.dispose();
@@ -83,9 +85,9 @@ public class Client extends KeyAdapter implements Runnable{
 		}
 		if(endScreen!=null)endScreen.close();
 		if(frame!=null) {
-			System.out.println("UGASIO SAM FRAME");
 			frame.dispose();
 		}
+		game.setVisible(true);
 	}
 		
 	private void sendInitPacket() throws IOException{
