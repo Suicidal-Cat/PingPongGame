@@ -34,6 +34,8 @@ public class MatchHistory extends javax.swing.JFrame {
 
 	Database base=new Database();
 	FirstFrame frame;
+	ImageIcon image1=new ImageIcon("src/resources/images/arcade1.png");
+	
     public MatchHistory(FirstFrame f) {
     	frame=f;
     	f.setVisible(true);
@@ -42,6 +44,8 @@ public class MatchHistory extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setIconImage(image1.getImage());
+        this.setTitle("Pong Game");
         getContentPane().setBackground(Color.WHITE);
         table.fixTable(jScrollPane1);
         table.setColumnAlignment(0, JLabel.CENTER);
