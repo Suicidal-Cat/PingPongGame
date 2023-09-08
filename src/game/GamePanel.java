@@ -49,7 +49,6 @@ public class GamePanel extends JPanel implements Runnable {
 		newBall();
 		score = new Score(GAME_WIDTH, GAME_HEIGHT);
 		this.setFocusable(true);
-	//	this.addKeyListener(new AL());
 		this.setPreferredSize(SCREEN_SIZE);		
 	}
 	
@@ -181,8 +180,6 @@ public class GamePanel extends JPanel implements Runnable {
 			lastTime = now;
 			if (delta >= 1) {
 				move();
-//				checkCollision();
-			//	repaint();// poziva paint metodu
 				GamePacket packet=new GamePacket(paddle1.x,paddle1.y, paddle2.x,paddle2.y,
 						ball.x,ball.y, score.player1,score.player2,gifFlag);
 				try {

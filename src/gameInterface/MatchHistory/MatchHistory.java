@@ -38,7 +38,7 @@ public class MatchHistory extends javax.swing.JFrame {
 	
     public MatchHistory(FirstFrame f) {
     	frame=f;
-    	f.setVisible(true);
+    	f.setVisible(false);
     	setPreferredSize(new Dimension(1100, 611));
         initComponents();
         this.setResizable(false);
